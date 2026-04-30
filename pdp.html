@@ -1,0 +1,1603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LiverZen — 80% Standardised Silymarin</title>
+
+<!--
+  ====================================================================
+  LIVERZEN US PDP — v2
+  Fonts/colors/images pulled from rivodia.com/LiverZen/FR/sls
+  Editorial top half, ClickBank-style 3-tier offer block at bottom.
+  ALL imagery is currently the FRENCH SOURCE URL acting as a visual
+  placeholder so we can see the layout populated. Swap to US assets
+  before launch.
+  ====================================================================
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    /* Colors — pulled from French source */
+    --color-bg:           #FAF8F8;
+    --color-bg-cool:      #F2FCFF;
+    --color-bg-cream:     #F1F4F8;
+    --color-bg-soft:      #F9FCFF;
+    --color-ink:          #020817;
+    --color-ink-soft:     #2f2f2f;
+    --color-ink-mute:     #9B9B9B;
+    --color-accent:       #28a352;   /* primary brand green */
+    --color-accent-deep:  #247d43;   /* hover / deeper green */
+    --color-accent-soft:  #24A555;
+    --color-trust:        #4368E0;
+    --color-gold:         #FDCC5E;
+    --color-yellow:       #ffcc02;
+    --color-red:          #FF0000;
+    --color-rule:         #E5E7EB;
+
+    /* Type */
+    --font-heading: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+    --font-body:    'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+    --font-ui:      'Poppins', 'Helvetica Neue', Arial, sans-serif;
+
+    /* Spacing — tightened from v1 */
+    --space-xs: 0.5rem;
+    --space-sm: 1rem;
+    --space-md: 1.5rem;
+    --space-lg: 2.5rem;
+    --space-xl: 4rem;
+
+    /* Layout */
+    --content-width:      720px;
+    --content-width-wide: 1080px;
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 18px;
+    --radius-pill: 100px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--color-ink-soft);
+    background: var(--color-bg);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+img, video { max-width: 100%; height: auto; display: block; }
+a { color: inherit; }
+
+/* ========== Container ========== */
+.lz-container { max-width: var(--content-width); margin: 0 auto; padding: 0 var(--space-md); }
+.lz-container--wide { max-width: var(--content-width-wide); }
+
+/* ========== Image placeholder (when no asset is available) ========== */
+.lz-img-placeholder {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background: var(--color-bg-cream);
+    border: 1px dashed var(--color-rule);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-ink-mute);
+    font-family: var(--font-ui);
+    font-size: 12px;
+    text-align: center;
+    padding: var(--space-sm);
+    line-height: 1.4;
+    border-radius: var(--radius-md);
+}
+.lz-img-placeholder--ratio-16-9 { aspect-ratio: 16 / 9; }
+.lz-img-placeholder--ratio-4-5 { aspect-ratio: 4 / 5; }
+.lz-img-placeholder--ratio-3-2 { aspect-ratio: 3 / 2; }
+
+/* Image-from-source wrapper — labels imagery as French source */
+.lz-src-img {
+    position: relative;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background: #fff;
+}
+.lz-src-img img,
+.lz-src-img video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.lz-src-img::after {
+    content: "FR SOURCE";
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    background: rgba(2, 8, 23, 0.65);
+    color: #fff;
+    font-family: var(--font-ui);
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    padding: 3px 6px;
+    border-radius: 3px;
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* ========== Top promo strip ========== */
+.lz-promo-strip {
+    background: var(--color-ink);
+    color: #fff;
+    text-align: center;
+    padding: 8px 16px;
+    font-family: var(--font-ui);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+.lz-promo-strip strong { color: var(--color-yellow); font-weight: 700; }
+
+/* ========== Header ========== */
+.lz-header {
+    background: var(--color-bg);
+    padding: 14px 0;
+    border-bottom: 1px solid var(--color-rule);
+}
+.lz-header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-sm);
+}
+.lz-wordmark {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 22px;
+    letter-spacing: -0.01em;
+    color: var(--color-accent-deep);
+}
+.lz-wordmark span { color: var(--color-accent); }
+.lz-header__trust {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-ui);
+    font-size: 12px;
+    color: var(--color-ink-soft);
+}
+.lz-header__trust img { height: 22px; width: auto; }
+
+/* ========== Hero ========== */
+.lz-hero {
+    background: linear-gradient(180deg, var(--color-bg-cool) 0%, var(--color-bg) 100%);
+    padding: var(--space-md) 0 var(--space-lg);
+}
+.lz-hero__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+    align-items: center;
+}
+.lz-hero__media { width: 100%; }
+
+.lz-eyebrow {
+    font-family: var(--font-ui);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 10px;
+    display: inline-block;
+}
+.lz-eyebrow--badge {
+    background: var(--color-accent);
+    color: #fff;
+    padding: 5px 12px;
+    border-radius: var(--radius-pill);
+}
+
+.lz-h1 {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 30px;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    color: var(--color-ink);
+    margin-bottom: 12px;
+}
+.lz-h1 em {
+    font-style: italic;
+    font-weight: 700;
+    color: var(--color-accent-deep);
+}
+
+.lz-subhead {
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--color-ink-soft);
+    margin-bottom: var(--space-md);
+}
+
+.lz-stars {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 14px;
+    font-family: var(--font-ui);
+    font-size: 13px;
+    color: var(--color-ink-soft);
+}
+.lz-stars__icons { color: var(--color-yellow); letter-spacing: 1px; font-size: 15px; }
+.lz-stars strong { color: var(--color-ink); font-weight: 700; }
+
+/* Spec list */
+.lz-specs {
+    list-style: none;
+    border-top: 1px solid var(--color-rule);
+    margin-bottom: var(--space-md);
+}
+.lz-specs li {
+    border-bottom: 1px solid var(--color-rule);
+    padding: 12px 0;
+    font-size: 15px;
+    color: var(--color-ink);
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-family: var(--font-body);
+}
+.lz-specs li::before {
+    content: "✓";
+    color: var(--color-accent);
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+/* Hero price */
+.lz-hero-price {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: var(--space-sm);
+    font-family: var(--font-heading);
+}
+.lz-hero-price__now {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--color-ink);
+    letter-spacing: -0.01em;
+}
+.lz-hero-price__was {
+    font-size: 18px;
+    color: var(--color-ink-mute);
+    text-decoration: line-through;
+}
+.lz-hero-price__save {
+    background: var(--color-yellow);
+    color: var(--color-ink);
+    font-family: var(--font-ui);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    padding: 4px 10px;
+    border-radius: var(--radius-pill);
+    text-transform: uppercase;
+}
+
+/* CTA */
+.lz-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    background: linear-gradient(180deg, var(--color-accent) 0%, var(--color-accent-deep) 100%);
+    color: #fff;
+    font-family: var(--font-heading);
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    padding: 16px 24px;
+    border: none;
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: filter 0.15s ease, transform 0.15s ease;
+    box-shadow: 0 4px 14px rgba(40, 163, 82, 0.25);
+}
+.lz-cta:hover { filter: brightness(0.95); transform: translateY(-1px); }
+.lz-cta:active { transform: translateY(0); }
+.lz-cta::after { content: "→"; font-size: 18px; line-height: 1; }
+.lz-cta--block { display: flex; }
+
+.lz-trust-line {
+    margin-top: 10px;
+    font-family: var(--font-ui);
+    font-size: 12px;
+    color: var(--color-ink-soft);
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+.lz-trust-line img { height: 14px; }
+
+/* ========== Trust bar ========== */
+.lz-trustbar {
+    background: #fff;
+    border-top: 1px solid var(--color-rule);
+    border-bottom: 1px solid var(--color-rule);
+    padding: var(--space-sm) 0;
+}
+.lz-trustbar__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-sm);
+    align-items: center;
+    text-align: center;
+}
+.lz-trustbar__cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    font-family: var(--font-ui);
+    font-size: 11px;
+    color: var(--color-ink-mute);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+.lz-trustbar__cell img { height: 26px; width: auto; }
+.lz-trustbar__cell strong {
+    color: var(--color-ink);
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: none;
+    letter-spacing: 0;
+}
+
+/* ========== Bridge quote ========== */
+.lz-bridge {
+    padding: var(--space-lg) var(--space-md);
+    text-align: center;
+    background: var(--color-bg);
+}
+.lz-bridge__quote {
+    font-family: var(--font-heading);
+    font-style: italic;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 1.35;
+    color: var(--color-ink);
+    max-width: var(--content-width);
+    margin: 0 auto;
+    letter-spacing: -0.01em;
+}
+.lz-bridge__quote::before,
+.lz-bridge__quote::after {
+    content: "";
+    display: block;
+    width: 32px;
+    height: 2px;
+    background: var(--color-accent);
+    margin: 16px auto;
+}
+
+/* ========== Proof row ========== */
+.lz-proof {
+    background: var(--color-bg-cool);
+    padding: var(--space-md) 0;
+}
+.lz-proof__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px var(--space-md);
+}
+.lz-proof__cell {
+    font-family: var(--font-body);
+    font-size: 13px;
+    color: var(--color-ink);
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    line-height: 1.4;
+}
+.lz-check {
+    color: var(--color-accent);
+    font-weight: 700;
+    flex-shrink: 0;
+    font-size: 15px;
+    line-height: 1.4;
+}
+
+/* ========== Product video carousel ========== */
+.lz-videos {
+    padding: var(--space-lg) 0 var(--space-md);
+    background: var(--color-bg);
+}
+.lz-videos__head {
+    text-align: center;
+    margin-bottom: var(--space-md);
+}
+.lz-videos__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+}
+.lz-video-card {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: #000;
+    aspect-ratio: 9 / 16;
+    position: relative;
+    box-shadow: 0 6px 24px rgba(2, 8, 23, 0.08);
+}
+.lz-video-card video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.lz-video-card__caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.7) 100%);
+    color: #fff;
+    padding: 24px 14px 12px;
+    font-family: var(--font-ui);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+/* ========== Comparison ========== */
+.lz-compare { padding: var(--space-lg) 0; background: var(--color-bg-cream); }
+.lz-h2 {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 24px;
+    line-height: 1.2;
+    color: var(--color-ink);
+    margin-bottom: 10px;
+    letter-spacing: -0.01em;
+}
+.lz-h2--center { text-align: center; }
+.lz-h2 em { font-style: italic; color: var(--color-accent-deep); }
+.lz-h3 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--color-ink);
+    margin-bottom: 8px;
+}
+.lz-section-lede {
+    font-size: 15px;
+    color: var(--color-ink-soft);
+    margin-bottom: var(--space-md);
+    line-height: 1.6;
+}
+
+.lz-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    background: #fff;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(2, 8, 23, 0.04);
+}
+.lz-table th, .lz-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--color-rule);
+    vertical-align: top;
+    font-family: var(--font-body);
+}
+.lz-table thead th {
+    font-family: var(--font-ui);
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-ink-mute);
+    background: var(--color-bg-cool);
+}
+.lz-table thead th:last-child { color: var(--color-accent-deep); }
+.lz-table tbody th {
+    font-weight: 600;
+    color: var(--color-ink-soft);
+    width: 38%;
+}
+.lz-table tbody td:last-child {
+    color: var(--color-accent-deep);
+    font-weight: 700;
+}
+.lz-table tbody tr:last-child th,
+.lz-table tbody tr:last-child td { border-bottom: none; }
+
+/* ========== Mechanism cards ========== */
+.lz-mechanism { padding: var(--space-lg) 0; background: var(--color-bg); }
+.lz-mech-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+    margin-top: var(--space-md);
+}
+.lz-mech-card {
+    background: #fff;
+    border: 1px solid var(--color-rule);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+.lz-mech-card__media { aspect-ratio: 4 / 3; }
+.lz-mech-card__body { padding: var(--space-sm) var(--space-md) var(--space-md); }
+.lz-mech-card__step {
+    font-family: var(--font-ui);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 6px;
+}
+.lz-mech-card__title {
+    font-family: var(--font-heading);
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--color-ink);
+    margin-bottom: 6px;
+}
+.lz-mech-card__copy {
+    font-size: 14px;
+    color: var(--color-ink-soft);
+    line-height: 1.55;
+}
+
+/* ========== Testimonials ========== */
+.lz-testimonials { padding: var(--space-lg) 0; background: var(--color-bg-cool); }
+.lz-testimonials__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+    margin-top: var(--space-md);
+}
+.lz-testimonial {
+    background: #fff;
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+    border: 1px solid var(--color-rule);
+}
+.lz-testimonial__head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+.lz-testimonial__avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--color-bg-cream);
+    flex-shrink: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-ink-mute);
+    font-size: 9px;
+    font-family: var(--font-ui);
+    border: 1px solid var(--color-rule);
+}
+.lz-testimonial__avatar img { width: 100%; height: 100%; object-fit: cover; }
+.lz-testimonial__meta { display: flex; flex-direction: column; gap: 2px; }
+.lz-testimonial__name {
+    font-family: var(--font-heading);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-ink);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.lz-testimonial__verified {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    font-family: var(--font-ui);
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--color-trust);
+    background: rgba(67, 104, 224, 0.1);
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+.lz-testimonial__location {
+    font-family: var(--font-ui);
+    font-size: 11px;
+    color: var(--color-ink-mute);
+}
+.lz-testimonial__stars {
+    color: var(--color-yellow);
+    font-size: 13px;
+    letter-spacing: 1px;
+}
+.lz-testimonial__text {
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--color-ink);
+    line-height: 1.55;
+    font-style: italic;
+}
+.lz-testimonial__photo {
+    margin-top: 12px;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+}
+
+/* ========== Press logos ========== */
+.lz-press {
+    padding: var(--space-md) 0;
+    background: #fff;
+    border-top: 1px solid var(--color-rule);
+    border-bottom: 1px solid var(--color-rule);
+    text-align: center;
+}
+.lz-press__label {
+    font-family: var(--font-ui);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-ink-mute);
+    margin-bottom: 12px;
+}
+.lz-press__logos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    align-items: center;
+    justify-items: center;
+    max-width: 600px;
+    margin: 0 auto;
+}
+.lz-press__logos img {
+    height: 26px;
+    width: auto;
+    max-width: 100%;
+    filter: grayscale(100%);
+    opacity: 0.65;
+    object-fit: contain;
+}
+
+/* ========== Guarantee ========== */
+.lz-guarantee {
+    background: var(--color-bg-cream);
+    padding: var(--space-lg) 0;
+}
+.lz-guarantee__inner {
+    background: #fff;
+    border: 1px solid var(--color-rule);
+    border-left: 4px solid var(--color-accent);
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+    align-items: center;
+}
+.lz-guarantee__shield {
+    width: 96px;
+    height: 96px;
+    margin: 0 auto;
+}
+.lz-guarantee__shield img { width: 100%; height: 100%; object-fit: contain; }
+.lz-guarantee__body {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--color-ink-soft);
+    margin: 8px 0 var(--space-sm);
+}
+.lz-guarantee__body strong { color: var(--color-ink); }
+
+/* ========== FAQ ========== */
+.lz-faq { padding: var(--space-lg) 0; background: var(--color-bg); }
+.lz-faq__list { margin-top: var(--space-md); border-top: 1px solid var(--color-rule); }
+.lz-faq details {
+    border-bottom: 1px solid var(--color-rule);
+}
+.lz-faq summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 16px 32px 16px 0;
+    font-family: var(--font-heading);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--color-ink);
+    position: relative;
+    line-height: 1.4;
+}
+.lz-faq summary::-webkit-details-marker { display: none; }
+.lz-faq summary::after {
+    content: "+";
+    position: absolute;
+    right: 0;
+    top: 14px;
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--color-accent);
+    line-height: 1;
+}
+.lz-faq details[open] summary::after { content: "−"; }
+.lz-faq__answer {
+    padding: 0 0 18px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--color-ink-soft);
+}
+
+/* ========================================================
+   CLICKBANK-STYLE 3-TIER OFFER BLOCK
+   ======================================================== */
+.lz-offer-cb {
+    background: linear-gradient(180deg, var(--color-bg-cool) 0%, var(--color-bg) 60%);
+    padding: var(--space-lg) 0 var(--space-xl);
+    position: relative;
+    overflow: hidden;
+}
+.lz-offer-cb__head { text-align: center; margin-bottom: var(--space-md); }
+.lz-offer-cb__pretitle {
+    font-family: var(--font-ui);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-red);
+    margin-bottom: 8px;
+}
+.lz-offer-cb__title {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 26px;
+    line-height: 1.15;
+    color: var(--color-ink);
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+}
+.lz-offer-cb__title em { color: var(--color-accent-deep); font-style: italic; }
+.lz-offer-cb__sub {
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--color-ink-soft);
+    max-width: 540px;
+    margin: 0 auto;
+}
+.lz-offer-cb__sub strong { color: var(--color-red); font-weight: 700; }
+
+.lz-tiers {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+    margin-top: var(--space-md);
+    align-items: stretch;
+}
+
+.lz-tier {
+    background: #fff;
+    border: 2px solid var(--color-rule);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.lz-tier:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(2, 8, 23, 0.08); }
+
+.lz-tier__ribbon {
+    position: absolute;
+    top: 12px;
+    right: -32px;
+    transform: rotate(35deg);
+    background: var(--color-yellow);
+    color: var(--color-ink);
+    font-family: var(--font-ui);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 4px 36px;
+    z-index: 2;
+}
+
+.lz-tier__topbadge {
+    background: var(--color-accent);
+    color: #fff;
+    text-align: center;
+    padding: 8px;
+    font-family: var(--font-ui);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+.lz-tier__topbadge--gold { background: var(--color-gold); color: var(--color-ink); }
+
+.lz-tier__media {
+    background: var(--color-bg-cool);
+    padding: var(--space-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 4 / 3;
+    position: relative;
+}
+.lz-tier__media img { max-height: 100%; width: auto; max-width: 100%; object-fit: contain; }
+.lz-tier__media .lz-img-placeholder { aspect-ratio: 4 / 3; background: transparent; border: none; }
+
+.lz-tier__body {
+    padding: var(--space-md);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex: 1;
+}
+.lz-tier__qty {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 22px;
+    color: var(--color-ink);
+    letter-spacing: -0.01em;
+}
+.lz-tier__qty span {
+    display: block;
+    font-family: var(--font-ui);
+    font-weight: 500;
+    font-size: 12px;
+    color: var(--color-ink-mute);
+    letter-spacing: 0;
+    text-transform: none;
+    margin-top: 2px;
+}
+
+.lz-tier__price-row {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+.lz-tier__price {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 30px;
+    color: var(--color-accent-deep);
+    letter-spacing: -0.02em;
+    line-height: 1;
+}
+.lz-tier__price-was {
+    font-family: var(--font-heading);
+    font-size: 16px;
+    color: var(--color-ink-mute);
+    text-decoration: line-through;
+}
+.lz-tier__per {
+    font-family: var(--font-ui);
+    font-size: 12px;
+    color: var(--color-ink-soft);
+}
+.lz-tier__per strong { color: var(--color-ink); }
+
+.lz-tier__save {
+    background: var(--color-yellow);
+    color: var(--color-ink);
+    font-family: var(--font-ui);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 4px 10px;
+    border-radius: var(--radius-pill);
+    text-transform: uppercase;
+    align-self: flex-start;
+}
+
+.lz-tier__bonuses {
+    list-style: none;
+    border-top: 1px solid var(--color-rule);
+    padding-top: 12px;
+    margin-top: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+.lz-tier__bonuses li {
+    font-family: var(--font-body);
+    font-size: 13px;
+    color: var(--color-ink);
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    line-height: 1.4;
+}
+.lz-tier__bonuses li::before {
+    content: "✓";
+    color: var(--color-accent);
+    font-weight: 700;
+    flex-shrink: 0;
+}
+.lz-tier__bonuses .lz-bonus-gift {
+    color: var(--color-accent-deep);
+    font-weight: 700;
+}
+
+.lz-tier__cta {
+    margin-top: auto;
+}
+
+.lz-tier__shipping {
+    font-family: var(--font-ui);
+    font-size: 11px;
+    color: var(--color-ink-mute);
+    text-align: center;
+    margin-top: 6px;
+}
+
+/* MOST POPULAR (middle tier) */
+.lz-tier--popular {
+    border-color: var(--color-accent);
+    transform: scale(1.0);
+    box-shadow: 0 12px 32px rgba(40, 163, 82, 0.18);
+}
+
+/* Trust strip below tiers */
+.lz-offer-cb__trust {
+    margin-top: var(--space-md);
+    background: #fff;
+    border: 1px solid var(--color-rule);
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+    text-align: center;
+}
+.lz-offer-cb__trust-cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    font-family: var(--font-body);
+    font-size: 12px;
+    color: var(--color-ink-soft);
+}
+.lz-offer-cb__trust-cell img { height: 38px; width: auto; }
+.lz-offer-cb__trust-cell strong {
+    color: var(--color-ink);
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 13px;
+}
+
+/* ========== Footer ========== */
+.lz-footer {
+    background: var(--color-ink);
+    color: #B6BDC6;
+    padding: var(--space-lg) 0 var(--space-md);
+    text-align: center;
+    font-family: var(--font-ui);
+    font-size: 13px;
+}
+.lz-footer .lz-wordmark { color: #fff; margin-bottom: var(--space-sm); }
+.lz-footer__lines { line-height: 1.9; margin-bottom: var(--space-md); }
+.lz-footer__lines a { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+.lz-footer__legal {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: var(--space-sm);
+    font-size: 11px;
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto;
+    color: #8A93A0;
+}
+
+/* ========== Sticky mobile CTA ========== */
+.lz-sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255,255,255,0.96);
+    border-top: 1px solid var(--color-rule);
+    padding: 10px 14px;
+    z-index: 100;
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.lz-sticky-cta__price {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 18px;
+    color: var(--color-ink);
+    flex-shrink: 0;
+}
+.lz-sticky-cta__price small {
+    display: block;
+    font-family: var(--font-ui);
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--color-ink-mute);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+.lz-sticky-cta .lz-cta {
+    flex: 1;
+    padding: 12px 14px;
+    font-size: 13px;
+    box-shadow: none;
+}
+
+/* ========== Desktop ========== */
+@media (min-width: 760px) {
+    body { font-size: 17px; }
+
+    .lz-h1 { font-size: 40px; }
+    .lz-h2 { font-size: 30px; }
+    .lz-bridge__quote { font-size: 28px; }
+    .lz-offer-cb__title { font-size: 36px; }
+
+    .lz-hero__grid {
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-lg);
+        align-items: center;
+    }
+
+    .lz-trustbar__grid { grid-template-columns: repeat(4, 1fr); }
+    .lz-proof__grid { grid-template-columns: repeat(4, 1fr); }
+    .lz-press__logos { grid-template-columns: repeat(6, 1fr); }
+    .lz-press__logos img { height: 32px; }
+
+    .lz-videos__grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--space-md);
+    }
+
+    .lz-mech-grid { grid-template-columns: repeat(3, 1fr); }
+
+    .lz-testimonials__grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--space-md);
+    }
+
+    .lz-guarantee__inner {
+        grid-template-columns: 100px 1fr;
+        gap: var(--space-md);
+        padding: var(--space-md) var(--space-lg);
+    }
+    .lz-guarantee__shield { width: 100px; height: 100px; }
+    .lz-guarantee__body { margin-top: 0; }
+
+    .lz-tiers {
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: var(--space-md);
+    }
+    .lz-tier--popular { transform: scale(1.04); }
+    .lz-tier--popular:hover { transform: scale(1.04) translateY(-2px); }
+
+    .lz-offer-cb__trust { grid-template-columns: repeat(4, 1fr); padding: var(--space-md) var(--space-lg); }
+
+    .lz-cta { width: auto; min-width: 280px; }
+    .lz-cta--block { width: 100%; }
+    .lz-tier__cta .lz-cta { width: 100%; }
+
+    .lz-sticky-cta { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ Promo strip ============ -->
+<div class="lz-promo-strip">
+    Free US shipping · <strong>60-day empty-bottle guarantee</strong> · Save up to 43%
+</div>
+
+<!-- ============ Header ============ -->
+<header class="lz-header">
+    <div class="lz-container lz-container--wide">
+        <div class="lz-header__inner">
+            <div class="lz-wordmark">Liver<span>Zen</span></div>
+            <div class="lz-header__trust">
+                <img src="https://img.funnelish.com/19578/364178/1718096445-1686053807-TrustPilot.webp" alt="TrustPilot 4.9">
+                <span><strong style="color:#020817">4.9</strong> · 9,897 reviews</span>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main>
+
+    <!-- ============ Hero ============ -->
+    <section class="lz-hero">
+        <div class="lz-container lz-container--wide">
+            <div class="lz-hero__grid">
+
+                <div class="lz-hero__media">
+                    <div class="lz-src-img" style="aspect-ratio: 1/1;">
+                        <img src="https://img.funnelish.com/95804/0/1770308868-LiverZen%20NLBE.gif" alt="LiverZen bottle (FR source asset — replace with US shot)">
+                    </div>
+                </div>
+
+                <div class="lz-hero__body">
+                    <span class="lz-eyebrow lz-eyebrow--badge">Daily Liver Support</span>
+                    <h1 class="lz-h1">The <em>80% silymarin</em> milk thistle most pharmacies don't carry.</h1>
+                    <p class="lz-subhead">Standardised to the concentration used in published clinical research. The version your doctor probably takes.</p>
+
+                    <div class="lz-stars">
+                        <span class="lz-stars__icons">★★★★★</span>
+                        <span><strong>4.9 / 5</strong> from 9,897 verified buyers</span>
+                    </div>
+
+                    <ul class="lz-specs">
+                        <li>80% silymarin standardisation</li>
+                        <li>240mg extract per capsule</li>
+                        <li>60 capsules · 30-day supply</li>
+                        <li>Made in a US GMP-certified facility</li>
+                    </ul>
+
+                    <div class="lz-hero-price">
+                        <span class="lz-hero-price__now">$49</span>
+                        <span class="lz-hero-price__was">$69</span>
+                        <span class="lz-hero-price__save">Save 29%</span>
+                    </div>
+
+                    <a href="#offer" class="lz-cta lz-cta--block">Add to Cart — Free US Shipping</a>
+
+                    <div class="lz-trust-line">
+                        <img src="https://img.funnelish.com/81597/855042/1751817873-checkmark.png" alt="">
+                        <span>60-day money-back guarantee. Empty bottles included.</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ Trust bar ============ -->
+    <section class="lz-trustbar">
+        <div class="lz-container lz-container--wide">
+            <div class="lz-trustbar__grid">
+                <div class="lz-trustbar__cell">
+                    <strong>9,897+</strong>
+                    <span>Bottles delivered</span>
+                </div>
+                <div class="lz-trustbar__cell">
+                    <strong>80%</strong>
+                    <span>Silymarin standardised</span>
+                </div>
+                <div class="lz-trustbar__cell">
+                    <strong>60 days</strong>
+                    <span>Empty-bottle refund</span>
+                </div>
+                <div class="lz-trustbar__cell">
+                    <strong>USA</strong>
+                    <span>GMP-certified facility</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ Bridge quote ============ -->
+    <section class="lz-bridge">
+        <p class="lz-bridge__quote">If you've read this far, you already know why most milk thistle does nothing. This is the version that does.</p>
+    </section>
+
+    <!-- ============ Proof row ============ -->
+    <section class="lz-proof">
+        <div class="lz-container lz-container--wide">
+            <div class="lz-proof__grid">
+                <div class="lz-proof__cell"><span class="lz-check" aria-hidden="true">✓</span><span>80% silymarin standardisation</span></div>
+                <div class="lz-proof__cell"><span class="lz-check" aria-hidden="true">✓</span><span>Concentration used in research</span></div>
+                <div class="lz-proof__cell"><span class="lz-check" aria-hidden="true">✓</span><span>Third-party tested</span></div>
+                <div class="lz-proof__cell"><span class="lz-check" aria-hidden="true">✓</span><span>Made in a US GMP-certified facility</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ Product video carousel ============ -->
+    <section class="lz-videos">
+        <div class="lz-container lz-container--wide">
+            <div class="lz-videos__head">
+                <span class="lz-eyebrow">See it for yourself</span>
+                <h2 class="lz-h2 lz-h2--center">A capsule, with breakfast. <em>That's it.</em></h2>
+            </div>
+            <div class="lz-videos__grid">
+                <div class="lz-video-card">
+                    <video src="https://videos.funnelish.com/70722/1772643358-2ca635e7-d1f3-4f6b-bef0-ddda33926247.mp4" autoplay loop muted playsinline disablepictureinpicture></video>
+                    <div class="lz-video-card__caption">The bottle (FR source)</div>
+                </div>
+                <div class="lz-video-card">
+                    <video src="https://videos.funnelish.com/70722/1772643363-85f56fcc-2761-49f7-8e13-2ed77d705410.mp4" autoplay loop muted playsinline disablepictureinpicture></video>
+                    <div class="lz-video-card__caption">80% silymarin extract</div>
+                </div>
+                <div class="lz-video-card">
+                    <video src="https://videos.funnelish.com/70722/1772643369-6fe0570f-4ce1-4153-a025-e21cac7e8b56.mp4" autoplay loop muted playsinline disablepictureinpicture></video>
+                    <div class="lz-video-card__caption">Daily routine</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ Comparison ============ -->
+    <section class="lz-compare">
+        <div class="lz-container">
+            <h2 class="lz-h2">Why this works when the pharmacy version <em>didn't.</em></h2>
+            <p class="lz-section-lede">The active compound in milk thistle is silymarin. The clinical research is run on extract standardised to 80%. Most pharmacy and supermarket bottles use 30–50%, or aren't standardised at all.</p>
+
+            <table class="lz-table">
+                <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Typical pharmacy bottle</th>
+                        <th scope="col">LiverZen</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><th scope="row">Silymarin %</th><td>30–50% (or unstated)</td><td>80%</td></tr>
+                    <tr><th scope="row">Standardised</th><td>Often no</td><td>Yes</td></tr>
+                    <tr><th scope="row">Extract per capsule</th><td>175mg average</td><td>240mg</td></tr>
+                    <tr><th scope="row">Form</th><td>Powder or unspecified</td><td>Standardised extract</td></tr>
+                    <tr><th scope="row">3rd-party tested</th><td>Rarely</td><td>Every batch</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- ============ Mechanism / How it works ============ -->
+    <section class="lz-mechanism">
+        <div class="lz-container lz-container--wide">
+            <span class="lz-eyebrow" style="display:block;text-align:center;">How it works</span>
+            <h2 class="lz-h2 lz-h2--center">Three weeks in, the afternoon fog goes first.</h2>
+
+            <div class="lz-mech-grid">
+                <div class="lz-mech-card">
+                    <div class="lz-mech-card__media">
+                        <div class="lz-src-img" style="height:100%;">
+                            <img src="https://img.funnelish.com/70722/0/1767345121-Process%20Template%20%2830%29.png" alt="Step 1 (FR source)">
+                        </div>
+                    </div>
+                    <div class="lz-mech-card__body">
+                        <div class="lz-mech-card__step">Weeks 1–2</div>
+                        <div class="lz-mech-card__title">The work is internal.</div>
+                        <p class="lz-mech-card__copy">Most men feel nothing the first two weeks. That's not the product failing — that's silymarin doing its job at the cellular level before you can see it.</p>
+                    </div>
+                </div>
+                <div class="lz-mech-card">
+                    <div class="lz-mech-card__media">
+                        <div class="lz-src-img" style="height:100%;">
+                            <img src="https://img.funnelish.com/86918/0/1766990879-Process%20Template%20%2814%29.png" alt="Step 2 (FR source)">
+                        </div>
+                    </div>
+                    <div class="lz-mech-card__body">
+                        <div class="lz-mech-card__step">Weeks 3–5</div>
+                        <div class="lz-mech-card__title">The 3pm fog quietly stops.</div>
+                        <p class="lz-mech-card__copy">The afternoon wall most men blame on coffee, age, or their desk just isn't there anymore. Mornings get sharper. Skin tone settles.</p>
+                    </div>
+                </div>
+                <div class="lz-mech-card">
+                    <div class="lz-mech-card__media">
+                        <div class="lz-src-img" style="height:100%;">
+                            <img src="https://img.funnelish.com/70722/0/1773852583-image%20%284%29.webp" alt="Step 3 (FR source)">
+                        </div>
+                    </div>
+                    <div class="lz-mech-card__body">
+                        <div class="lz-mech-card__step">Weeks 6–8</div>
+                        <div class="lz-mech-card__title">A different bloodwork conversation.</div>
+                        <p class="lz-mech-card__copy">Numbers your doctor flagged six months ago start trending the other direction — same evening drink, nothing else changed.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ Press / As seen on ============ -->
+    <section class="lz-press">
+        <div class="lz-container lz-container--wide">
+            <div class="lz-press__label">As featured in</div>
+            <div class="lz-press__logos">
+                <img src="https://img.funnelish.com/58288/774370/1744732675-BA_logo.png" alt="BA (FR source)">
+                <img src="https://img.funnelish.com/58288/774370/1744732680-Fugues.png" alt="Fugues (FR source)">
+                <img src="https://img.funnelish.com/58288/774370/1744732692-Coup_de_pouce_logo.jpg" alt="Coup de Pouce (FR source)">
+                <img src="https://img.funnelish.com/58288/774370/1744732662-images%20%2839%29.jpg" alt="Press logo (FR source)">
+                <img src="https://img.funnelish.com/58288/774370/1744732686-images%20%2838%29.jpg" alt="Press logo (FR source)">
+                <img src="https://img.funnelish.com/58288/774370/1744732697-images%20%2819%29.png" alt="Press logo (FR source)">
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ Testimonials ============ -->
+    <section class="lz-testimonials">
+        <div class="lz-container lz-container--wide">
+            <span class="lz-eyebrow" style="display:block;text-align:center;">Verified reviews</span>
+            <h2 class="lz-h2 lz-h2--center">What guys like you have written in.</h2>
+
+            <div class="lz-testimonials__grid">
+
+                <div class="lz-testimonial">
+                    <div class="lz-testimonial__head">
+                        <div class="lz-testimonial__avatar">[AVATAR]</div>
+                        <div class="lz-testimonial__meta">
+                            <div class="lz-testimonial__name">Tom B., 56
+                                <span class="lz-testimonial__verified">✓ Verified</span>
+                            </div>
+                            <div class="lz-testimonial__location">Cleveland, OH</div>
+                            <div class="lz-testimonial__stars">★★★★★</div>
+                        </div>
+                    </div>
+                    <p class="lz-testimonial__text">"Doc flagged my numbers in March. Started this in May. Numbers were back in normal range by my July follow-up. Same evening drink, nothing else changed."</p>
+                    <div class="lz-testimonial__photo">
+                        <div class="lz-src-img" style="aspect-ratio: 16/9;">
+                            <img src="https://img.funnelish.com/41389/818791/1748268350-1735550075-1732552829-1712330420-review%20%2814%29-2.webp" alt="Tom B. review (FR source placeholder)">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lz-testimonial">
+                    <div class="lz-testimonial__head">
+                        <div class="lz-testimonial__avatar">[AVATAR]</div>
+                        <div class="lz-testimonial__meta">
+                            <div class="lz-testimonial__name">Dave R., 51
+                                <span class="lz-testimonial__verified">✓ Verified</span>
+                            </div>
+                            <div class="lz-testimonial__location">Charlotte, NC</div>
+                            <div class="lz-testimonial__stars">★★★★★</div>
+                        </div>
+                    </div>
+                    <p class="lz-testimonial__text">"I'd been writing off milk thistle for years because the CVS bottle did nothing. The standardisation thing nobody told me about. Different product entirely."</p>
+                    <div class="lz-testimonial__photo">
+                        <div class="lz-img-placeholder lz-img-placeholder--ratio-16-9">[VERIFIED REVIEW SCREENSHOT — 16:9]</div>
+                    </div>
+                </div>
+
+                <div class="lz-testimonial">
+                    <div class="lz-testimonial__head">
+                        <div class="lz-testimonial__avatar">[AVATAR]</div>
+                        <div class="lz-testimonial__meta">
+                            <div class="lz-testimonial__name">Mike R., 54
+                                <span class="lz-testimonial__verified">✓ Verified</span>
+                            </div>
+                            <div class="lz-testimonial__location">Indianapolis, IN</div>
+                            <div class="lz-testimonial__stars">★★★★★</div>
+                        </div>
+                    </div>
+                    <p class="lz-testimonial__text">"I'm not the supplement guy in my house. My wife is. But this is the one I take without her reminding me."</p>
+                    <div class="lz-testimonial__photo">
+                        <div class="lz-img-placeholder lz-img-placeholder--ratio-16-9">[VERIFIED REVIEW SCREENSHOT — 16:9]</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ Guarantee ============ -->
+    <section class="lz-guarantee">
+        <div class="lz-container">
+            <div class="lz-guarantee__inner">
+                <div class="lz-guarantee__shield">
+                    <img src="https://img.funnelish.com/59287/847559/1751014991-65de5f112dbd7f7bdfc2fb03_guarantee.svg" alt="60-day guarantee">
+                </div>
+                <div>
+                    <h2 class="lz-h2" style="margin-bottom:6px;">60 days. <em>Empty bottles.</em> No questions.</h2>
+                    <p class="lz-guarantee__body">Take it for two months. If you don't feel a difference — if your wife doesn't tell you you look like yourself again, if your next bloodwork doesn't surprise you — send the bottles back. <strong>Empty ones too.</strong> We refund the order. We pay return shipping. There's no survey, no upsell call, no hold music.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ FAQ ============ -->
+    <section class="lz-faq">
+        <div class="lz-container">
+            <h2 class="lz-h2">What men your age <em>actually ask</em> before ordering.</h2>
+            <div class="lz-faq__list">
+                <details>
+                    <summary>Can I still drink while taking this?</summary>
+                    <div class="lz-faq__answer"><p>Yes. This is built around the assumption that you're not going to quit, and that you shouldn't have to. Silymarin supports your liver's normal function while it does its daily work — including processing alcohol. Most men in this category drink 1–3 a day and have for decades. The product is designed for that reality, not against it.</p></div>
+                </details>
+                <details>
+                    <summary>How is this different from the milk thistle at CVS or Costco?</summary>
+                    <div class="lz-faq__answer"><p>Concentration. The clinical research on milk thistle is almost entirely run on extract standardised to 80% silymarin. Most pharmacy and warehouse bottles use 30–50%, or aren't standardised at all, which means the active compound concentration can vary wildly bottle to bottle. Below 80%, the supportive effect drops off sharply.</p></div>
+                </details>
+                <details>
+                    <summary>When will I feel a difference?</summary>
+                    <div class="lz-faq__answer"><p>Most men notice changes between week 3 and week 6 — usually the afternoon fog lifting first, then the morning puffiness. The work happens at the cellular level, so the first two weeks tend to feel like nothing. That's not the product failing. That's the product doing what it's supposed to do, internally, before you can see it.</p></div>
+                </details>
+                <details>
+                    <summary>Is it safe to take with my medications?</summary>
+                    <div class="lz-faq__answer"><p>Milk thistle is one of the most studied supplements in this category and is generally considered safe. That said, if you take prescription medication — especially statins, blood thinners, or anything for blood sugar — talk to your doctor before adding any new supplement. We are not your doctor and this is not medical advice.</p></div>
+                </details>
+                <details>
+                    <summary>How many bottles should I order?</summary>
+                    <div class="lz-faq__answer"><p>The 3-bottle option is what most men start with. A noticeable response usually takes 6–8 weeks, and ordering one bottle puts you in the position of running out right when things are starting to work. The 3-bottle option also works out to $20 less per bottle.</p></div>
+                </details>
+                <details>
+                    <summary>When should I take it?</summary>
+                    <div class="lz-faq__answer"><p>With food, in the morning. One capsule. That's it. Same time every day so you don't have to think about it.</p></div>
+                </details>
+                <details>
+                    <summary>What if it doesn't work for me?</summary>
+                    <div class="lz-faq__answer"><p>Send the bottles back. Empty ones included. We refund the order, pay return shipping, and don't put you on any retention call list. The 60-day window starts when your order arrives.</p></div>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ ClickBank-style 3-tier offer ============ -->
+    <section class="lz-offer-cb" id="offer">
+        <div class="lz-container lz-container--wide">
+            <div class="lz-offer-cb__head">
+                <div class="lz-offer-cb__pretitle">⏱ Limited inventory · today's allocation</div>
+                <h2 class="lz-offer-cb__title">Choose your supply. <em>Save up to 43%.</em></h2>
+                <p class="lz-offer-cb__sub">A noticeable response usually takes <strong>6–8 weeks</strong>. The 3-bottle option is what most men start with — and it works out to $20 less per bottle.</p>
+            </div>
+
+            <div class="lz-tiers">
+
+                <!-- Tier 1: 1 Bottle -->
+                <div class="lz-tier">
+                    <div class="lz-tier__topbadge">Try It</div>
+                    <div class="lz-tier__media">
+                        <img src="https://img.funnelish.com/95497/0/1768871460-Product.png" alt="LiverZen 1 bottle (FR source)">
+                    </div>
+                    <div class="lz-tier__body">
+                        <div class="lz-tier__qty">1 Bottle <span>30-day supply</span></div>
+                        <div class="lz-tier__price-row">
+                            <span class="lz-tier__price">$69</span>
+                            <span class="lz-tier__price-was">$89</span>
+                        </div>
+                        <div class="lz-tier__per">$69 / bottle</div>
+                        <span class="lz-tier__save">Save 22%</span>
+                        <ul class="lz-tier__bonuses">
+                            <li>60-day empty-bottle guarantee</li>
+                            <li>Free US shipping</li>
+                            <li>Tracked delivery</li>
+                        </ul>
+                        <div class="lz-tier__cta">
+                            <button type="button" class="lz-cta lz-cta--block" data-tier="1">Add to Cart</button>
+                            <div class="lz-tier__shipping">Ships within 24 hrs · USPS</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tier 2: 3 Bottles - MOST POPULAR -->
+                <div class="lz-tier lz-tier--popular">
+                    <div class="lz-tier__ribbon">Most Popular</div>
+                    <div class="lz-tier__topbadge">Best Results</div>
+                    <div class="lz-tier__media">
+                        <img src="https://img.funnelish.com/95497/0/1768871458-Product%20%281%29.png" alt="LiverZen 3 bottles (FR source)">
+                    </div>
+                    <div class="lz-tier__body">
+                        <div class="lz-tier__qty">3 Bottles <span>90-day supply</span></div>
+                        <div class="lz-tier__price-row">
+                            <span class="lz-tier__price">$147</span>
+                            <span class="lz-tier__price-was">$267</span>
+                        </div>
+                        <div class="lz-tier__per"><strong>$49</strong> / bottle</div>
+                        <span class="lz-tier__save">Save $120</span>
+                        <ul class="lz-tier__bonuses">
+                            <li>60-day empty-bottle guarantee</li>
+                            <li>Free US shipping</li>
+                            <li class="lz-bonus-gift">+ Free e-book: <em>The Bourbon Drinker's Liver Manual</em> ($19 value)</li>
+                            <li>Priority delivery</li>
+                        </ul>
+                        <div class="lz-tier__cta">
+                            <button type="button" class="lz-cta lz-cta--block" data-tier="3">Add to Cart</button>
+                            <div class="lz-tier__shipping">Ships within 24 hrs · USPS Priority</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tier 3: 6 Bottles - BEST VALUE -->
+                <div class="lz-tier">
+                    <div class="lz-tier__ribbon" style="background:var(--color-accent);color:#fff;">Best Value</div>
+                    <div class="lz-tier__topbadge lz-tier__topbadge--gold">Save Most</div>
+                    <div class="lz-tier__media">
+                        <img src="https://img.funnelish.com/95497/0/1768871457-Product%20%282%29.png" alt="LiverZen 6 bottles (FR source)">
+                    </div>
+                    <div class="lz-tier__body">
+                        <div class="lz-tier__qty">6 Bottles <span>180-day supply</span></div>
+                        <div class="lz-tier__price-row">
+                            <span class="lz-tier__price">$234</span>
+                            <span class="lz-tier__price-was">$534</span>
+                        </div>
+                        <div class="lz-tier__per"><strong>$39</strong> / bottle</div>
+                        <span class="lz-tier__save">Save $300</span>
+                        <ul class="lz-tier__bonuses">
+                            <li>60-day empty-bottle guarantee</li>
+                            <li>Free US shipping</li>
+                            <li class="lz-bonus-gift">+ Free e-book: <em>The Bourbon Drinker's Liver Manual</em></li>
+                            <li class="lz-bonus-gift">+ Free wallet card: <em>Doctor's Bloodwork Tracker</em></li>
+                            <li>Priority delivery</li>
+                        </ul>
+                        <div class="lz-tier__cta">
+                            <button type="button" class="lz-cta lz-cta--block" data-tier="6">Add to Cart</button>
+                            <div class="lz-tier__shipping">Ships within 24 hrs · USPS Priority</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Trust strip below tiers -->
+            <div class="lz-offer-cb__trust">
+                <div class="lz-offer-cb__trust-cell">
+                    <img src="https://img.funnelish.com/59287/847559/1751014991-65de5f112dbd7f7bdfc2fb03_guarantee.svg" alt="">
+                    <strong>60-Day Guarantee</strong>
+                    <span>Empty bottles refunded</span>
+                </div>
+                <div class="lz-offer-cb__trust-cell">
+                    <img src="https://img.funnelish.com/19578/364178/1718096445-1686053807-TrustPilot.webp" alt="">
+                    <strong>4.9 / 5 TrustPilot</strong>
+                    <span>9,897+ reviews</span>
+                </div>
+                <div class="lz-offer-cb__trust-cell">
+                    <img src="https://img.funnelish.com/10101/169449/1700523011-verify%20%285%29.png" alt="">
+                    <strong>3rd-Party Tested</strong>
+                    <span>Every batch</span>
+                </div>
+                <div class="lz-offer-cb__trust-cell">
+                    <img src="https://img.funnelish.com/19578/371440/1719121997-1704871407-Customer%20Service%20-%20Funnelish.webp" alt="">
+                    <strong>US Customer Care</strong>
+                    <span>Mon–Fri, 9–5 CT</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+</main>
+
+<!-- ============ Footer ============ -->
+<footer class="lz-footer">
+    <div class="lz-container lz-container--wide">
+        <div class="lz-wordmark">Liver<span style="color:#28a352">Zen</span></div>
+        <div class="lz-footer__lines">
+            <div><a href="mailto:support@liverzen.com">support@liverzen.com</a></div>
+            <div>Mon–Fri, 9am–5pm Central</div>
+            <div style="margin-top:8px;font-size:11px;color:#8A93A0;">© 2026 LiverZen · All rights reserved</div>
+        </div>
+        <div class="lz-footer__legal">
+            These statements have not been evaluated by the FDA. This product is not intended to diagnose, treat, cure, or prevent any disease. Always consult your physician before adding any supplement to your routine, especially if you take prescription medication.
+        </div>
+    </div>
+</footer>
+
+<!-- ============ Sticky mobile CTA ============ -->
+<div class="lz-sticky-cta">
+    <div class="lz-sticky-cta__price">
+        $49<small>/bottle · 3-pack</small>
+    </div>
+    <a href="#offer" class="lz-cta">Add to Cart</a>
+</div>
+
+<script>
+// Minimal: scroll-to-offer on tier buttons; cart wiring TBD on Funnelish step.
+document.querySelectorAll('[data-tier]').forEach(function (btn) {
+    btn.addEventListener('click', function (e) {
+        var tier = btn.getAttribute('data-tier');
+        // Wire the cart endpoint here when the funnel checkout step is ready.
+        // Example: window.location.href = '/checkout?qty=' + tier;
+        console.log('Add to cart:', tier, 'bottle(s)');
+    });
+});
+</script>
+
+</body>
+</html>

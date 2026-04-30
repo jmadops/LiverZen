@@ -1,0 +1,3222 @@
+<!DOCTYPE html>
+<!--
+  TEMPLATE: Funnelish landing-page skeleton, tokenized from Restural's
+  white-medical variant. See README.md for the full token glossary.
+  Copy is intentionally LEFT IN PLACE so structure & word counts are
+  visible -- overwrite the prose with your own when populating.
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{PAGE_TITLE}}</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap');
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      /* Core brand — dialed for medical authority + warmth */
+      --lp-navy: #0E1F5A;
+      --lp-navy-deep: #081640;
+      --lp-navy-mid: #1B3173;
+      --lp-navy-light: #E8ECF7;
+      --lp-green: #2E8B3E;
+      --lp-green-dark: #226E30;
+      --lp-green-light: #E8F5EA;
+      /* White-variant overrides: cream/offwhite repurposed to white+grey */
+      --lp-cream: #F5F5F5;
+      --lp-cream-deep: #EFEFEF;
+      --lp-offwhite: #FFFFFF;
+      --lp-white: #FFFFFF;
+      --lp-gold: #E0A832;
+      --lp-coral: #FF6660;
+      --lp-coral-dark: #E84A44;
+      --lp-red: #FF6660;
+      --lp-text: #14131A;
+      --lp-text-soft: #2A2A33;
+      --lp-text-mid: #4A4A50;
+      --lp-text-light: #7A7A80;
+      --lp-text-on-dark: #FFFFFF;
+      --lp-border: #E5E5E5;
+      --lp-border-light: #ECECEC;
+      /* White-medical reskin additions */
+      --lp-grey-soft: #F5F5F5;
+      --lp-grey-mid: #999999;
+      --lp-grey-border: #E5E5E5;
+      --lp-charcoal: #232324;
+      --lp-cta-black: #1A1A1A;
+
+      --lp-font: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --lp-max-width: 1140px;
+      --lp-radius: 12px;
+      --lp-radius-sm: 8px;
+      --lp-radius-lg: 20px;
+
+      /* Dot pattern tiles */
+      --lp-dots-dark: radial-gradient(circle, rgba(255,255,255,0.06) 1.2px, transparent 1.5px);
+      --lp-dots-light: radial-gradient(circle, rgba(14,31,90,0.08) 1.1px, transparent 1.4px);
+      --lp-dots-cream: none;
+    }
+
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+    body {
+      font-family: var(--lp-font);
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--lp-text);
+      background: var(--lp-white);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    img { max-width: 100%; height: auto; display: block; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ===== IMAGE PLACEHOLDERS ===== */
+    .lp-img-ph {
+      background: linear-gradient(135deg, #E4EAE0, #F0E9D4);
+      border: 2px dashed #BFB896;
+      border-radius: var(--lp-radius);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 20px 16px; gap: 6px;
+      color: #8B8564;
+      text-align: center; min-height: 180px; width: 100%;
+    }
+    .lp-img-ph--arch { border-radius: 240px 240px 24px 24px; min-height: 480px; }
+    .lp-img-ph--circle { border-radius: 50%; min-height: 0; width: 120px; height: 120px; padding: 12px; flex-shrink: 0; }
+    .lp-img-ph--small { min-height: 56px; width: 56px; height: 56px; border-radius: 50%; padding: 6px; }
+    .lp-img-ph--avatar { min-height: 34px; width: 34px; height: 34px; border-radius: 50%; padding: 0; font-size: 0.5rem; border-width: 1px; gap: 0; display: inline-flex; }
+    .lp-img-ph--square { aspect-ratio: 4/3; min-height: 0; }
+    .lp-img-ph--tall { aspect-ratio: 3/4; min-height: 0; }
+    .lp-img-ph--wide { aspect-ratio: 16/7; min-height: 0; }
+    .lp-img-ph-icon { font-size: 1.8rem; opacity: 0.45; }
+    .lp-img-ph-label { font-size: 0.65rem; font-family: var(--lp-font); opacity: 0.75; word-break: break-word; line-height: 1.3; }
+    .lp-img-ph--circle .lp-img-ph-icon { font-size: 1.2rem; }
+    .lp-img-ph--circle .lp-img-ph-label { font-size: 0.55rem; }
+    .lp-img-ph--small .lp-img-ph-icon { font-size: 0.9rem; }
+    .lp-img-ph--small .lp-img-ph-label { display: none; }
+    .lp-img-ph--avatar .lp-img-ph-icon { font-size: 0.6rem; }
+    .lp-img-ph--avatar .lp-img-ph-label { display: none; }
+    .lp-img-ph--on-dark {
+      background: var(--lp-grey-soft);
+      border-color: var(--lp-grey-border);
+      color: var(--lp-grey-mid);
+    }
+    /* When a real image is dropped in, kill the dashed placeholder look */
+    .lp-img-ph--loaded {
+      background: var(--lp-grey-soft);
+      border: none;
+      padding: 0;
+      overflow: hidden;
+    }
+    .lp-img-ph--loaded .lp-img-ph-icon,
+    .lp-img-ph--loaded .lp-img-ph-label { display: none; }
+    .lp-img-ph--loaded > img,
+    .lp-img-ph--loaded > video {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center;
+      display: block;
+      border-radius: inherit;
+    }
+    .lp-img-ph--loaded.lp-img-ph--on-dark { background: rgba(255,255,255,0.04); }
+
+    /* ===== TOPBAR ===== */
+    .lp-topbar {
+      background: var(--lp-charcoal);
+      color: var(--lp-text-on-dark);
+      padding: 10px 20px;
+      display: flex; align-items: center; justify-content: center;
+      gap: 14px; font-size: 0.88rem; font-weight: 600;
+      flex-wrap: wrap;
+    }
+    .lp-topbar-offer {
+      color: var(--lp-coral); font-weight: 800;
+      letter-spacing: 0.04em; text-transform: uppercase;
+      font-size: 0.78rem;
+    }
+    .lp-topbar-divider {
+      width: 1px; height: 16px; background: rgba(255,255,255,0.22);
+      display: inline-block;
+    }
+    .lp-topbar-label {
+      text-transform: uppercase; letter-spacing: 0.08em;
+      font-size: 0.72rem; opacity: 0.82;
+    }
+    .lp-topbar-timer { display: inline-flex; gap: 6px; }
+    .lp-topbar-timer-block {
+      background: rgba(255,255,255,0.1);
+      padding: 4px 10px; border-radius: 6px;
+      font-variant-numeric: tabular-nums; font-weight: 700;
+      font-size: 0.92rem; min-width: 48px; text-align: center;
+    }
+    .lp-topbar-timer-label {
+      font-size: 0.56rem; text-transform: uppercase; letter-spacing: 0.08em;
+      opacity: 0.55; display: block;
+    }
+
+    /* ===== NAV ===== */
+    .lp-nav {
+      background: var(--lp-white);
+      padding: 14px 24px;
+      position: sticky; top: 0; z-index: 100;
+      border-bottom: 1px solid var(--lp-grey-border);
+    }
+    .lp-nav-inner {
+      max-width: var(--lp-max-width); margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .lp-nav-logo {
+      font-size: 1.5rem; font-weight: 800;
+      color: var(--lp-navy); letter-spacing: -0.02em;
+    }
+    .lp-nav-sub {
+      display: block; font-size: 0.62rem; font-weight: 500;
+      color: var(--lp-text-light); letter-spacing: 0.08em;
+      text-transform: uppercase; margin-top: -2px;
+    }
+    .lp-nav-links { display: flex; gap: 26px; list-style: none; align-items: center; }
+    .lp-nav-links a { font-size: 0.86rem; font-weight: 500; color: var(--lp-text-mid); transition: color 0.2s; }
+    .lp-nav-links a:hover { color: var(--lp-navy); }
+    .lp-nav-cart {
+      background: var(--lp-grey-soft); border: 1px solid var(--lp-grey-border);
+      padding: 6px 14px; border-radius: 20px; font-size: 0.8rem;
+      display: inline-flex; gap: 6px; align-items: center; font-weight: 600;
+    }
+
+    /* ===== FLASH STRIP ===== */
+    .lp-flash-strip {
+      background: var(--lp-green);
+      color: var(--lp-white);
+      padding: 10px 20px; text-align: center;
+      font-weight: 700; font-size: 0.85rem;
+      text-transform: uppercase; letter-spacing: 0.08em;
+    }
+
+    /* ===== HERO ===== */
+    .lp-hero {
+      background: var(--lp-white);
+      color: var(--lp-text);
+      padding: 48px 24px 40px;
+      overflow: hidden; position: relative;
+    }
+    .lp-hero::before {
+      content: '';
+      position: absolute;
+      top: -120px; right: -100px;
+      width: 480px; height: 480px;
+      background: radial-gradient(circle, rgba(46,139,62,0.06) 0%, transparent 65%);
+      pointer-events: none; z-index: 0;
+    }
+    .lp-hero::after {
+      content: '';
+      position: absolute;
+      bottom: -160px; left: -120px;
+      width: 420px; height: 420px;
+      background: radial-gradient(circle, rgba(255,102,96,0.05) 0%, transparent 65%);
+      pointer-events: none; z-index: 0;
+    }
+    .lp-hero-inner {
+      max-width: var(--lp-max-width); margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr;
+      grid-template-areas:
+        "navbar navbar"
+        "menu menu"
+        "top image"
+        "bottom image";
+      column-gap: 48px; row-gap: 10px;
+      align-items: center; position: relative; z-index: 1;
+    }
+    .lp-hero-eyebrow {
+      display: inline-block;
+      background: var(--lp-green-light); border: 1px solid var(--lp-green);
+      color: var(--lp-green-dark); font-size: 0.72rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.14em;
+      padding: 6px 14px; border-radius: 20px; margin-bottom: 20px;
+    }
+    .lp-hero h1 {
+      font-size: 2.8rem; font-weight: 800;
+      line-height: 1.08; margin-bottom: 18px;
+      letter-spacing: -0.02em;
+      hyphens: none; -webkit-hyphens: none;
+      overflow-wrap: break-word; word-break: normal;
+    }
+    .lp-hero h1 em { font-style: normal; color: var(--lp-coral); font-weight: 800; }
+    .lp-hero-sub {
+      font-size: 1.05rem; line-height: 1.6;
+      color: var(--lp-text-mid);
+      margin-bottom: 14px; max-width: 460px;
+      font-weight: 400;
+    }
+    .lp-hero-proof {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 12px; flex-wrap: wrap;
+    }
+    .lp-hero-avatars { display: flex; }
+    .lp-hero-stars { color: var(--lp-green); font-size: 1rem; letter-spacing: 1px; margin-left: 6px; }
+    .lp-hero-rating-text { font-size: 0.85rem; color: var(--lp-text-mid); font-weight: 500; }
+
+    .lp-cta-primary {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      background: var(--lp-green); color: var(--lp-white);
+      font-family: var(--lp-font); font-size: 0.98rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.06em;
+      padding: 16px 38px;
+      border-radius: var(--lp-radius-sm); border: none; cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      box-shadow: 0 4px 18px rgba(46,139,62,0.35), inset 0 1px 0 rgba(255,255,255,0.2);
+    }
+    .lp-cta-primary:hover {
+      background: var(--lp-green-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(46,139,62,0.45), inset 0 1px 0 rgba(255,255,255,0.2);
+    }
+
+    .lp-hero-badges {
+      display: flex; gap: 20px; flex-wrap: wrap; margin-top: 14px;
+    }
+    .lp-hero-badge {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.82rem; font-weight: 700; opacity: 1;
+      color: var(--lp-text);
+      text-transform: uppercase; letter-spacing: 0.08em;
+    }
+    .lp-hero-badge-icon {
+      color: var(--lp-green); font-size: 1rem; font-weight: 900;
+      text-decoration: none;
+    }
+
+    .lp-hero-image-col {
+      grid-area: image;
+      position: relative; display: flex; justify-content: center; align-items: center;
+      align-self: center; padding-top: 0;
+    }
+    .lp-hero-content-top { grid-area: top; }
+    .lp-hero-content-bottom { grid-area: bottom; }
+    .lp-hero-badge-float {
+      position: absolute; top: 24px; right: -14px;
+      background: var(--lp-coral); color: var(--lp-white);
+      width: 124px; height: 124px;
+      border-radius: 50%;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; line-height: 1;
+      box-shadow:
+        0 0 0 5px var(--lp-green),
+        0 0 0 8px var(--lp-coral-dark),
+        0 12px 32px rgba(0,0,0,0.32),
+        inset 0 2px 0 rgba(255,255,255,0.2);
+      transform: rotate(10deg); z-index: 3;
+      font-family: var(--lp-font);
+      animation: rlp-badge-glow 3.2s ease-in-out infinite;
+    }
+    .lp-hero-badge-float::before {
+      content: ''; position: absolute;
+      top: -5px; left: 50%; transform: translateX(-50%);
+      width: 0; height: 0;
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+      border-bottom: 10px solid var(--lp-green);
+    }
+    .lp-hero-badge-float-num {
+      font-size: 1.9rem; font-weight: 900;
+      color: var(--lp-white);
+      letter-spacing: -0.04em;
+      text-decoration: underline;
+      text-decoration-thickness: 2px;
+      text-underline-offset: 2px;
+      text-shadow: 0 1px 0 rgba(0,0,0,0.18);
+    }
+    .lp-hero-badge-float-day {
+      font-size: 0.66rem; font-weight: 800;
+      text-transform: uppercase; letter-spacing: 0.22em;
+      margin-top: 2px; color: rgba(255,255,255,0.95);
+    }
+    .lp-hero-badge-float-txt {
+      font-size: 0.55rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.12em;
+      margin-top: 6px; padding-top: 5px;
+      line-height: 1.25;
+      border-top: 1px solid rgba(255,255,255,0.4);
+      width: 78%; color: rgba(255,255,255,0.92);
+    }
+    @keyframes rlp-badge-glow {
+      0%, 100% {
+        box-shadow:
+          0 0 0 5px var(--lp-green),
+          0 0 0 8px var(--lp-coral-dark),
+          0 12px 32px rgba(0,0,0,0.32),
+          inset 0 2px 0 rgba(255,255,255,0.2);
+      }
+      50% {
+        box-shadow:
+          0 0 0 5px var(--lp-green),
+          0 0 0 8px var(--lp-coral-dark),
+          0 12px 32px rgba(0,0,0,0.32),
+          0 0 38px rgba(46,139,62,0.45),
+          inset 0 2px 0 rgba(255,255,255,0.2);
+      }
+    }
+
+    /* Hero testimonial carousel */
+    .lp-hero-carousel {
+      margin-top: 16px; max-width: 480px;
+      background: var(--lp-grey-soft);
+      border: 1px solid var(--lp-grey-border);
+      border-radius: var(--lp-radius);
+      padding: 16px 18px;
+      position: relative; overflow: hidden;
+      min-height: 108px;
+    }
+    .lp-hero-carousel-track {
+      display: flex; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .lp-hero-carousel-item {
+      flex: 0 0 100%;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .lp-hero-carousel-item .lp-img-ph--small { flex-shrink: 0; border-color: var(--lp-grey-border); background: var(--lp-white); }
+    .lp-hero-carousel-quote {
+      font-size: 0.86rem; line-height: 1.5; color: var(--lp-text-soft);
+      font-style: italic; margin-bottom: 6px;
+    }
+    .lp-hero-carousel-name {
+      font-size: 0.78rem; font-weight: 600; color: var(--lp-text);
+      display: flex; align-items: center; gap: 6px;
+    }
+    .lp-hero-carousel-stars { color: var(--lp-green); font-size: 0.76rem; letter-spacing: 1px; }
+    .lp-hero-carousel-dots {
+      display: flex; justify-content: center; gap: 6px;
+      margin-top: 10px;
+    }
+    .lp-hero-carousel-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: rgba(20,19,26,0.2); transition: background 0.2s;
+      border: none; cursor: pointer; padding: 0;
+    }
+    .lp-hero-carousel-dot--active { background: var(--lp-green); width: 18px; border-radius: 3px; }
+
+    /* ===== MARQUEE ===== */
+    .lp-marquee {
+      background: var(--lp-charcoal);
+      color: var(--lp-white);
+      padding: 11px 0; overflow: hidden; white-space: nowrap;
+      border-top: 1px solid var(--lp-grey-border);
+      border-bottom: 1px solid var(--lp-grey-border);
+    }
+    .lp-marquee-track { display: inline-flex; animation: rlp-scroll 22s linear infinite; }
+    .lp-marquee-item {
+      display: inline-flex; align-items: center; gap: 16px; padding: 0 32px;
+      font-weight: 800; font-size: 0.88rem;
+      text-transform: uppercase; letter-spacing: 0.08em;
+    }
+    .lp-marquee-dot {
+      width: 6px; height: 6px; background: var(--lp-white);
+      border-radius: 50%;
+    }
+    @keyframes rlp-scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+    /* ===== FULL-BLEED (breaks out of Funnelish container) ===== */
+    .lp-topbar,
+    .lp-flash-strip,
+    .lp-marquee,
+    .lp-footer {
+      position: relative;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+      width: 100vw;
+      max-width: 100vw;
+    }
+
+
+    /* ===== UTILITIES ===== */
+    .lp-container { max-width: var(--lp-max-width); margin: 0 auto; padding: 0 24px; }
+    .lp-eyebrow-label {
+      display: inline-block;
+      background: var(--lp-green-light); color: var(--lp-green-dark);
+      font-size: 0.72rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.14em;
+      padding: 6px 14px; border-radius: 20px;
+      margin-bottom: 16px;
+    }
+    .lp-eyebrow-label--on-dark {
+      background: var(--lp-green-light);
+      color: var(--lp-green-dark);
+      border: 1px solid var(--lp-green);
+    }
+    .lp-section-heading {
+      font-size: 2.1rem; font-weight: 700; line-height: 1.18;
+      color: var(--lp-navy); text-align: center;
+      margin-bottom: 14px; letter-spacing: -0.02em;
+    }
+    .lp-section-heading--light { color: var(--lp-navy); }
+    .lp-section-heading em { font-style: normal; color: var(--lp-coral); font-weight: 700; }
+    .lp-section-heading-sub {
+      text-align: center; color: var(--lp-text-mid);
+      max-width: 640px; margin: 0 auto 36px; font-size: 1rem; line-height: 1.65;
+    }
+    .lp-section-heading-sub--light { color: var(--lp-text-mid); }
+    .lp-divider {
+      width: 56px; height: 3px; background: var(--lp-green);
+      margin: 0 auto 26px; border-radius: 2px;
+    }
+    .lp-divider--left { margin: 0 0 26px 0; }
+
+    /* ===== TESTIMONIALS STRIP ===== */
+    .lp-testimonials { padding: 56px 24px; background: var(--lp-offwhite); }
+    .lp-testimonials-grid {
+      max-width: var(--lp-max-width); margin: 0 auto;
+      display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px;
+    }
+    .lp-testimonial-card {
+      background: var(--lp-white);
+      border: 1px solid var(--lp-border-light);
+      border-radius: var(--lp-radius);
+      padding: 22px 16px; text-align: center;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .lp-testimonial-card:hover {
+      border-color: var(--lp-green);
+      transform: translateY(-2px);
+    }
+    .lp-testimonial-stars { color: var(--lp-green); font-size: 0.84rem; letter-spacing: 1px; margin-bottom: 8px; }
+    .lp-testimonial-quote { font-size: 0.84rem; color: var(--lp-text-mid); line-height: 1.55; margin-bottom: 10px; font-style: italic; }
+    .lp-testimonial-name { font-size: 0.76rem; font-weight: 700; color: var(--lp-navy); }
+
+    /* ===== PROBLEM (white) ===== */
+    .lp-problem {
+      background: var(--lp-white);
+      color: var(--lp-text);
+      padding: 76px 24px; position: relative; overflow: hidden;
+    }
+    .lp-problem::before {
+      content: '';
+      position: absolute;
+      top: 10%; right: -100px;
+      width: 320px; height: 320px;
+      background: radial-gradient(circle, rgba(255,102,96,0.05) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .lp-problem-inner { max-width: var(--lp-max-width); margin: 0 auto; position: relative; z-index: 1; }
+    .lp-problem-row {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 44px;
+      align-items: center; margin-bottom: 44px;
+    }
+    .lp-problem-row--reverse { direction: rtl; }
+    .lp-problem-row--reverse > * { direction: ltr; }
+    .lp-problem p { font-size: 1.02rem; line-height: 1.75; margin-bottom: 16px; color: var(--lp-text-soft); }
+    .lp-problem strong {
+      color: var(--lp-text); font-weight: 700;
+    }
+    .lp-problem em { color: var(--lp-coral); font-style: italic; }
+    .lp-problem em.lp-problem-quote {
+      color: var(--lp-coral);
+      font-style: normal;
+      font-weight: 700;
+    }
+    .lp-problem-callout {
+      background: var(--lp-green-light);
+      border-left: 3px solid var(--lp-green);
+      padding: 22px 26px; margin: 24px 0;
+      border-radius: 0 var(--lp-radius-sm) var(--lp-radius-sm) 0;
+      font-size: 1.02rem; font-weight: 500; opacity: 1; line-height: 1.65;
+      color: var(--lp-text);
+    }
+
+    /* ===== CTA BLOCK ===== */
+    .lp-cta-block {
+      padding: 48px 24px; text-align: center;
+      background: var(--lp-grey-soft);
+      color: var(--lp-text);
+    }
+    .lp-cta-block p {
+      font-size: 1.3rem; font-weight: 600; margin-bottom: 20px;
+      max-width: 640px; margin-left: auto; margin-right: auto;
+    }
+    .lp-cta-block-mini {
+      font-size: 0.82rem; font-weight: 500;
+      opacity: 0.65; margin-top: 14px !important; letter-spacing: 0.04em;
+    }
+
+    /* ===== BELIEF ===== */
+    .lp-belief {
+      padding: 76px 24px; background: var(--lp-cream);
+      background-image: var(--lp-dots-cream);
+      background-size: 28px 28px;
+      border-top: 1px solid var(--lp-border);
+      border-bottom: 1px solid var(--lp-border);
+      position: relative;
+    }
+    .lp-belief-inner {
+      max-width: 1040px; margin: 0 auto;
+      display: grid; grid-template-columns: 1.15fr 1fr;
+      gap: 56px; align-items: center;
+    }
+    .lp-belief-quote {
+      font-size: 1.5rem; font-weight: 600; line-height: 1.45;
+      color: var(--lp-navy); margin-bottom: 22px;
+      letter-spacing: -0.01em;
+    }
+    .lp-belief-quote em { font-style: normal; color: var(--lp-coral); }
+    .lp-belief p {
+      font-size: 1rem; line-height: 1.75; color: var(--lp-text-mid);
+      margin-bottom: 16px;
+    }
+    .lp-belief-image-stack {
+      position: relative; padding: 20px;
+    }
+    .lp-belief-image-stack .lp-img-ph--main {
+      border-radius: var(--lp-radius-lg);
+      aspect-ratio: 4/5; min-height: 0; max-width: 340px;
+      margin-left: auto; border-width: 2px;
+      box-shadow: 0 14px 40px rgba(14,31,90,0.15);
+    }
+    .lp-belief-image-accent {
+      position: absolute; bottom: 10px; left: 0;
+      width: 160px; aspect-ratio: 1;
+      border-radius: var(--lp-radius);
+      overflow: hidden;
+      border: 5px solid var(--lp-cream);
+      box-shadow: 0 10px 28px rgba(14,31,90,0.2);
+    }
+    .lp-belief-image-accent .lp-img-ph {
+      border-radius: var(--lp-radius-sm); min-height: 0;
+      width: 100%; height: 100%; aspect-ratio: unset;
+    }
+    .lp-belief-sticker {
+      position: absolute; top: -4px; right: 8px;
+      background: var(--lp-green); color: var(--lp-white);
+      font-size: 0.72rem; font-weight: 800;
+      padding: 10px 14px; border-radius: 50%;
+      width: 82px; height: 82px;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; line-height: 1.15;
+      transform: rotate(10deg); z-index: 2;
+      text-transform: uppercase; letter-spacing: 0.04em;
+      box-shadow: 0 6px 18px rgba(46,139,62,0.35);
+    }
+    .lp-belief-scribble {
+      display: inline-block;
+      color: var(--lp-coral);
+    }
+
+    /* ===== ARTICLE INLINE IMAGES + PULL-QUOTE ===== */
+    .lp-article-inline-img {
+      margin: 36px -20px;
+      border-radius: var(--lp-radius-lg);
+      position: relative;
+    }
+    .lp-article-inline-img .lp-img-ph {
+      overflow: hidden;
+    }
+    .lp-article-inline-img .lp-img-ph {
+      aspect-ratio: 16/9; min-height: 0;
+      border-radius: var(--lp-radius-lg);
+    }
+    .lp-article-inline-img-caption {
+      font-size: 0.82rem; color: var(--lp-text-light);
+      font-style: italic; margin-top: 12px; text-align: center;
+      padding: 0 16px;
+    }
+    .lp-article-inline-img-sticker {
+      position: absolute; top: 12px; right: 12px;
+      background: var(--lp-green); color: var(--lp-white);
+      font-size: 0.68rem; font-weight: 800;
+      padding: 8px 14px; border-radius: 20px;
+      text-transform: uppercase; letter-spacing: 0.06em;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+      z-index: 2;
+    }
+    .lp-article-pullquote {
+      font-size: 1.35rem; font-weight: 600; line-height: 1.4;
+      color: var(--lp-navy); margin: 40px 0;
+      padding: 28px 30px 28px 36px;
+      border-left: 4px solid var(--lp-green);
+      background: var(--lp-cream);
+      border-radius: 0 var(--lp-radius) var(--lp-radius) 0;
+      font-style: italic;
+      position: relative;
+    }
+    .lp-article-pullquote::before {
+      content: '\201C';
+      position: absolute; top: 0; left: 18px;
+      font-size: 3rem; color: rgba(46,139,62,0.35);
+      font-family: Georgia, serif; font-style: normal; line-height: 1;
+    }
+    .lp-article-pullquote em { color: var(--lp-coral); font-style: italic; }
+    .lp-article-pullquote-cite {
+      display: block; font-size: 0.82rem; font-weight: 500;
+      color: var(--lp-text-light); font-style: normal; margin-top: 10px;
+      letter-spacing: 0.04em;
+    }
+
+    /* ===== PRICING CARD GALLERY (big main + small click-to-swap thumbs) ===== */
+    .lp-pricing-card-main {
+      width: 100%; aspect-ratio: 4/3;
+      border-radius: var(--lp-radius-sm);
+      overflow: hidden;
+      background: var(--lp-grey-soft);
+      border: 1px solid var(--lp-grey-border);
+      margin: 0 0 12px;
+    }
+    .lp-pricing-card-main img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    .lp-pricing-card-thumbs {
+      display: flex; justify-content: center; gap: 8px;
+      margin: 0 auto 22px; flex-wrap: wrap; max-width: 100%;
+    }
+    .lp-pricing-card-thumb {
+      width: 50px; height: 50px; padding: 0;
+      border: 2px solid var(--lp-border); border-radius: 6px;
+      background: var(--lp-white); cursor: pointer; overflow: hidden;
+      transition: border-color 0.15s, transform 0.15s, box-shadow 0.15s;
+    }
+    .lp-pricing-card-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .lp-pricing-card-thumb:hover { transform: translateY(-2px); border-color: var(--lp-green); }
+    .lp-pricing-card-thumb--active {
+      border-color: var(--lp-green);
+      box-shadow: 0 0 0 2px rgba(46,139,62,0.25);
+    }
+
+    /* ===== WHO FOR HERO IMAGE ===== */
+    .lp-whofor-hero-image {
+      max-width: 780px; margin: 0 auto 38px;
+      border-radius: var(--lp-radius-lg);
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 10px 32px rgba(14,31,90,0.1);
+    }
+    .lp-whofor-hero-image .lp-img-ph {
+      aspect-ratio: 16/6; min-height: 0;
+      border-radius: var(--lp-radius-lg);
+    }
+
+    /* ===== FINAL CTA IMAGE ===== */
+    .lp-final-cta-image {
+      width: 180px; height: 180px; margin: 0 auto 24px;
+      position: relative;
+    }
+    .lp-final-cta-image .lp-img-ph {
+      border-radius: 50%; min-height: 0;
+      width: 100%; height: 100%; aspect-ratio: 1;
+      border-color: rgba(255,255,255,0.25);
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.5);
+    }
+    .lp-final-cta-image-badge {
+      position: absolute; top: -6px; right: -10px;
+      background: var(--lp-green); color: var(--lp-white);
+      font-size: 0.64rem; font-weight: 800;
+      width: 64px; height: 64px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; line-height: 1.15;
+      transform: rotate(10deg);
+      text-transform: uppercase; letter-spacing: 0.04em;
+      box-shadow: 0 6px 18px rgba(46,139,62,0.4);
+    }
+
+    /* ===== ARTICLE ===== */
+    .lp-article {
+      padding: 76px 24px;
+      background: var(--lp-white);
+    }
+    .lp-article-inner { max-width: 780px; margin: 0 auto; }
+    .lp-article-byline {
+      text-align: center; font-size: 0.88rem;
+      color: var(--lp-text-light); margin-bottom: 44px;
+      padding-bottom: 24px; border-bottom: 1px solid var(--lp-border-light);
+    }
+    .lp-article-byline strong { color: var(--lp-navy); font-weight: 600; }
+    .lp-article h3 {
+      font-size: 1.45rem; font-weight: 700;
+      color: var(--lp-navy); margin: 44px 0 14px;
+      letter-spacing: -0.01em;
+    }
+    .lp-article p { margin-bottom: 16px; font-size: 1rem; line-height: 1.8; color: var(--lp-text-mid); }
+    .lp-article strong { color: var(--lp-text); }
+    .lp-article-stat {
+      background: var(--lp-grey-soft);
+      border: 1px solid var(--lp-grey-border);
+      border-radius: var(--lp-radius);
+      padding: 30px; margin: 32px 0; text-align: center;
+      color: var(--lp-text); position: relative; overflow: hidden;
+    }
+    .lp-article-stat-number {
+      font-size: 3rem; font-weight: 900;
+      color: var(--lp-coral); line-height: 1; margin-bottom: 6px;
+      letter-spacing: -0.03em;
+    }
+    .lp-article-stat-label { font-size: 0.94rem; font-weight: 500; color: var(--lp-text-mid); }
+
+    /* Compact inline variant — sits with body copy, not a shout */
+    .lp-article-stat--inline {
+      display: flex; align-items: center; gap: 22px;
+      text-align: left; padding: 20px 26px; margin: 24px 0;
+      border-left: 4px solid var(--lp-green);
+      border-radius: 6px;
+    }
+    .lp-article-stat--inline .lp-article-stat-number {
+      font-size: 2.6rem; margin: 0; flex-shrink: 0;
+    }
+    .lp-article-stat--inline .lp-article-stat-label {
+      font-size: 0.92rem; line-height: 1.5;
+    }
+
+    /* Unified trial-results panel */
+    .lp-article-stats-panel {
+      background: var(--lp-grey-soft);
+      border: 1px solid var(--lp-grey-border);
+      border-radius: var(--lp-radius);
+      padding: 34px 32px; margin: 32px 0;
+      color: var(--lp-text); position: relative; overflow: hidden;
+    }
+    .lp-article-stats-panel-head {
+      text-align: center; margin-bottom: 24px;
+      padding-bottom: 18px; border-bottom: 1px solid var(--lp-grey-border);
+    }
+    .lp-article-stats-panel-head .lp-eyebrow-label {
+      margin-bottom: 8px;
+    }
+    .lp-article-stats-panel-head p {
+      font-size: 0.95rem; margin: 0; color: var(--lp-text-mid);
+    }
+    .lp-article-stats-panel-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 22px 30px;
+    }
+    .lp-article-stats-panel-item {
+      display: flex; align-items: center; gap: 16px;
+    }
+    .lp-article-stats-panel-num {
+      font-size: 2.2rem; font-weight: 900;
+      color: var(--lp-coral); line-height: 1;
+      letter-spacing: -0.03em; flex-shrink: 0;
+      min-width: 66px;
+    }
+    .lp-article-stats-panel-lbl {
+      font-size: 0.88rem; line-height: 1.45;
+      font-weight: 500; color: var(--lp-text-mid);
+    }
+
+    /* ===== TIMELINE ===== */
+    .lp-timeline {
+      padding: 76px 24px;
+      background: var(--lp-cream);
+      background-image: var(--lp-dots-cream);
+      background-size: 28px 28px;
+    }
+    .lp-timeline-list {
+      max-width: 900px; margin: 44px auto 0;
+      position: relative;
+    }
+    .lp-timeline-list::before {
+      content: '';
+      position: absolute; left: 50%; top: 8px; bottom: 8px;
+      width: 2px; transform: translateX(-50%);
+      background: linear-gradient(to bottom,
+        rgba(46,139,62,0.15) 0%,
+        var(--lp-green) 8%,
+        var(--lp-green) 92%,
+        rgba(46,139,62,0.15) 100%);
+    }
+    .lp-timeline-item {
+      position: relative;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 64px;
+      margin-bottom: 32px;
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 560ms ease, transform 560ms ease;
+    }
+    .lp-timeline-item.is-visible { opacity: 1; transform: translateY(0); }
+    .lp-timeline-item:nth-child(1) { transition-delay: 0ms; }
+    .lp-timeline-item:nth-child(2) { transition-delay: 80ms; }
+    .lp-timeline-item:nth-child(3) { transition-delay: 160ms; }
+    .lp-timeline-item:nth-child(4) { transition-delay: 240ms; }
+    .lp-timeline-item:nth-child(5) { transition-delay: 320ms; }
+    .lp-timeline-item:nth-child(6) { transition-delay: 400ms; }
+    .lp-timeline-item--right { grid-template-areas: ". card"; }
+    .lp-timeline-item--left  { grid-template-areas: "card ."; }
+    .lp-timeline-card { grid-area: card; }
+    .lp-timeline-item::after {
+      content: '';
+      position: absolute; top: 30px; left: 50%;
+      width: 14px; height: 14px; transform: translateX(-50%);
+      background: var(--lp-green);
+      border: 3px solid var(--lp-cream);
+      border-radius: 50%;
+      box-shadow: 0 0 0 2px var(--lp-navy);
+      z-index: 1;
+    }
+    .lp-timeline-card {
+      position: relative;
+      background: var(--lp-white);
+      border: 2px solid var(--lp-navy);
+      border-radius: 16px;
+      padding: 24px 26px;
+      box-shadow: 0 6px 20px rgba(14,31,90,0.08);
+      transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+    }
+    .lp-timeline-card:hover {
+      transform: translateY(-4px) scale(1.015);
+      box-shadow: 0 16px 36px rgba(14,31,90,0.16);
+      border-color: var(--lp-green);
+    }
+    .lp-timeline-item--left .lp-timeline-card::after,
+    .lp-timeline-item--right .lp-timeline-card::before {
+      content: '';
+      position: absolute; top: 34px;
+      width: 32px; height: 2px;
+      background: var(--lp-green);
+    }
+    .lp-timeline-item--left .lp-timeline-card::after { right: -32px; }
+    .lp-timeline-item--right .lp-timeline-card::before { left: -32px; }
+    .lp-timeline-badge {
+      display: inline-block;
+      background: var(--lp-green); color: var(--lp-white);
+      font-size: 0.7rem; font-weight: 800;
+      text-transform: uppercase; letter-spacing: 0.12em;
+      padding: 5px 12px; border-radius: 20px;
+      margin-bottom: 12px;
+    }
+    .lp-timeline-card h3 {
+      font-size: 1.15rem; font-weight: 700;
+      color: var(--lp-navy); margin-bottom: 6px;
+    }
+    .lp-timeline-card p {
+      font-size: 0.95rem; color: var(--lp-text-mid); line-height: 1.6;
+    }
+
+    /* ===== HOW TO USE ===== */
+    .lp-howto { padding: 76px 24px; background: var(--lp-white); }
+    .lp-howto-steps {
+      max-width: 980px; margin: 36px auto 0;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px;
+    }
+    .lp-howto-step {
+      text-align: center; background: var(--lp-offwhite);
+      border: 1px solid var(--lp-border-light);
+      border-radius: var(--lp-radius);
+      padding: 28px 20px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .lp-howto-step:hover { border-color: var(--lp-green); transform: translateY(-3px); }
+    .lp-howto-step .lp-img-ph { border-radius: var(--lp-radius-sm); margin-bottom: 18px; }
+    .lp-howto-step-number {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 40px; height: 40px; background: var(--lp-green);
+      color: var(--lp-white); border-radius: 50%;
+      font-weight: 800; font-size: 1.05rem;
+      margin-bottom: 14px;
+      box-shadow: 0 3px 10px rgba(46,139,62,0.3);
+    }
+    .lp-howto-step h3 {
+      font-size: 1.08rem; font-weight: 700;
+      color: var(--lp-navy); margin-bottom: 6px;
+    }
+    .lp-howto-step p { font-size: 0.9rem; color: var(--lp-text-mid); line-height: 1.6; }
+
+    /* ===== MECHANISM COMPARISON ===== */
+    .lp-comparison {
+      padding: 76px 24px;
+      background: var(--lp-white);
+      color: var(--lp-text);
+      position: relative; overflow: hidden;
+    }
+    .lp-comparison::before {
+      content: '';
+      position: absolute;
+      top: -100px; left: -100px; width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(46,139,62,0.04) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .lp-comparison-inner { max-width: var(--lp-max-width); margin: 0 auto; position: relative; z-index: 1; }
+    .lp-comparison-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;
+      margin-top: 8px;
+    }
+    @media (max-width: 1040px) {
+      .lp-comparison-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    .lp-comparison-card {
+      background: var(--lp-white);
+      border: 1px solid var(--lp-grey-border);
+      border-radius: 14px;
+      overflow: hidden;
+      display: flex; flex-direction: column;
+      box-shadow: 0 4px 14px rgba(20,19,26,0.06);
+      transition: transform 220ms ease, box-shadow 220ms ease;
+    }
+    .lp-comparison-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(20,19,26,0.1);
+    }
+    .lp-comparison-card-top {
+      background: var(--lp-charcoal);
+      color: var(--lp-white);
+      padding: 12px 16px;
+      display: flex; align-items: center; gap: 10px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .lp-comparison-card-abbr {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-width: 36px; height: 28px; padding: 0 8px;
+      background: var(--lp-green); color: var(--lp-white);
+      font-size: 0.72rem; font-weight: 800;
+      letter-spacing: 0.06em; border-radius: 6px;
+    }
+    .lp-comparison-card-title {
+      font-size: 0.82rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--lp-white);
+    }
+    .lp-comparison-card-mid {
+      background: var(--lp-grey-soft);
+      padding: 20px;
+      display: flex; align-items: center; justify-content: center;
+      aspect-ratio: 4 / 3;
+    }
+    .lp-comparison-card-mid img {
+      display: block; width: 100%; height: 100%;
+      object-fit: contain; max-height: 220px;
+    }
+    .lp-comparison-card-bot {
+      background: var(--lp-green);
+      color: var(--lp-white);
+      padding: 14px 18px;
+      display: flex; flex-direction: column; align-items: flex-start; gap: 2px;
+    }
+    .lp-comparison-card-stat {
+      font-size: 1.9rem; font-weight: 900; line-height: 1;
+      letter-spacing: -0.02em;
+    }
+    .lp-comparison-card-stat-unit {
+      font-size: 1.15rem; font-weight: 800;
+    }
+    .lp-comparison-card-claim {
+      font-size: 0.82rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      color: var(--lp-white);
+    }
+
+    /* ===== MANUFACTURING ===== */
+    .lp-manufacturing {
+      padding: 76px 24px; background: var(--lp-offwhite); text-align: center;
+    }
+    .lp-manufacturing-inner { max-width: 880px; margin: 0 auto; }
+    .lp-manufacturing-image-wrap {
+      position: relative; margin: 0 auto 28px; max-width: 720px;
+    }
+    .lp-manufacturing-image-wrap .lp-img-ph {
+      border-radius: var(--lp-radius); aspect-ratio: 16/9; min-height: 0;
+    }
+    .lp-manufacturing-play {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: 72px; height: 72px; border-radius: 50%;
+      background: rgba(14,31,90,0.92);
+      color: var(--lp-white);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.8rem; box-shadow: 0 6px 22px rgba(0,0,0,0.3);
+      pointer-events: none;
+    }
+    .lp-manufacturing p {
+      font-size: 1rem; line-height: 1.75;
+      margin-bottom: 14px; color: var(--lp-text-mid);
+    }
+    .lp-manufacturing-badges {
+      display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; margin-top: 24px;
+    }
+    .lp-manufacturing-badge {
+      background: var(--lp-white); border: 1.5px solid var(--lp-border);
+      padding: 10px 20px; border-radius: 40px;
+      font-size: 0.78rem; font-weight: 700;
+      color: var(--lp-navy); text-transform: uppercase; letter-spacing: 0.08em;
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .lp-manufacturing-badge::before { content: '✓'; color: var(--lp-green); font-weight: 800; }
+
+    /* ===== SCARCITY ===== */
+    .lp-scarcity { padding: 40px 24px; background: var(--lp-white); }
+    .lp-scarcity-box {
+      max-width: 820px; margin: 0 auto;
+      display: grid; grid-template-columns: 4px 1fr auto; gap: 20px;
+      align-items: center;
+      background: var(--lp-grey-soft);
+      border: 1px solid var(--lp-green);
+      border-radius: 12px;
+      padding: 18px 22px;
+      box-shadow: 0 4px 16px rgba(20,19,26,0.06);
+    }
+    .lp-scarcity-rule {
+      width: 4px; height: 56px;
+      background: linear-gradient(to bottom, var(--lp-green), var(--lp-coral));
+      border-radius: 2px;
+    }
+    .lp-scarcity-chip {
+      display: inline-block;
+      background: var(--lp-coral-dark); color: var(--lp-white);
+      font-size: 0.66rem; font-weight: 800;
+      text-transform: uppercase; letter-spacing: 0.16em;
+      padding: 4px 10px; border-radius: 4px;
+      margin-right: 10px;
+      vertical-align: middle;
+    }
+    .lp-scarcity-body p {
+      display: inline;
+      font-size: 0.94rem; color: var(--lp-navy); font-weight: 500; line-height: 1.55;
+    }
+    .lp-scarcity-thumb {
+      width: 64px; height: 64px;
+      border-radius: 10px; overflow: hidden;
+      background: var(--lp-offwhite);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: inset 0 0 0 1px rgba(14,31,90,0.08);
+    }
+    .lp-scarcity-thumb img { width: 100%; height: 100%; object-fit: cover; }
+    @media (max-width: 640px) {
+      .lp-scarcity-box { grid-template-columns: 4px 1fr; gap: 16px; }
+      .lp-scarcity-thumb { display: none; }
+    }
+
+    /* ===== SOCIAL PROOF (cream, carries the rhythm the old Real-People section held) ===== */
+    .lp-social-proof {
+      padding: 72px 24px; background: var(--lp-cream);
+      background-image: var(--lp-dots-cream);
+      background-size: 28px 28px;
+    }
+    .lp-social-proof-grid {
+      max-width: 720px; margin: 36px auto 0;
+      display: flex; flex-direction: column; gap: 24px;
+    }
+    .lp-social-proof-card {
+      background: var(--lp-white);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(14,31,90,0.08);
+      transition: transform 220ms ease, box-shadow 220ms ease;
+    }
+    .lp-social-proof-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 36px rgba(14,31,90,0.14);
+    }
+    .lp-social-proof-card img {
+      display: block; width: 100%; height: auto;
+    }
+    @media (max-width: 640px) {
+      .lp-social-proof-grid { gap: 16px; padding: 0 12px; }
+    }
+
+    /* ===== WHO FOR / NOT FOR ===== */
+    .lp-whofor {
+      padding: 76px 24px; background: var(--lp-white);
+    }
+    .lp-whofor-grid {
+      max-width: 980px; margin: 36px auto 0;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 22px;
+    }
+    .lp-whofor-card {
+      border-radius: var(--lp-radius); padding: 32px 30px;
+      border: 2px solid var(--lp-border-light);
+    }
+    .lp-whofor-card--for {
+      background: var(--lp-green-light);
+      border-color: var(--lp-green);
+    }
+    .lp-whofor-card--not {
+      background: #FBF0EE;
+      border-color: var(--lp-coral);
+    }
+    .lp-whofor-card h3 {
+      font-size: 1.25rem; font-weight: 700; margin-bottom: 16px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .lp-whofor-card--for h3 { color: var(--lp-green-dark); }
+    .lp-whofor-card--not h3 { color: var(--lp-coral-dark); }
+    .lp-whofor-card h3 .lp-whofor-icon {
+      width: 32px; height: 32px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; font-weight: 800;
+    }
+    .lp-whofor-card--for .lp-whofor-icon { background: var(--lp-green); color: var(--lp-white); }
+    .lp-whofor-card--not .lp-whofor-icon { background: var(--lp-coral); color: var(--lp-white); }
+    .lp-whofor-card ul { list-style: none; }
+    .lp-whofor-card li {
+      font-size: 0.94rem; line-height: 1.55; padding: 8px 0;
+      color: var(--lp-text); display: flex; align-items: flex-start; gap: 10px;
+      border-bottom: 1px dashed rgba(14,31,90,0.08);
+    }
+    .lp-whofor-card li:last-child { border-bottom: none; }
+    .lp-whofor-card--for li::before { content: '✓'; color: var(--lp-green); font-weight: 800; min-width: 14px; }
+    .lp-whofor-card--not li::before { content: '✕'; color: var(--lp-coral); font-weight: 800; min-width: 14px; }
+
+    /* ===== FOUNDER ===== */
+    .lp-founder {
+      background: var(--lp-white);
+      color: var(--lp-text);
+      padding: 76px 24px;
+      position: relative; overflow: hidden;
+    }
+    .lp-founder::before {
+      content: '';
+      position: absolute;
+      bottom: -120px; right: -80px;
+      width: 380px; height: 380px;
+      background: radial-gradient(circle, rgba(46,139,62,0.05) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .lp-founder-inner {
+      max-width: 980px; margin: 0 auto;
+      display: grid; grid-template-columns: 320px 1fr; gap: 48px;
+      align-items: start; position: relative; z-index: 1;
+    }
+    .lp-founder h2 {
+      font-size: 1.95rem; font-weight: 700; margin-bottom: 8px;
+      letter-spacing: -0.01em;
+    }
+    .lp-founder p {
+      font-size: 1rem; line-height: 1.8; margin-bottom: 16px; color: var(--lp-text-soft);
+    }
+    .lp-founder strong {
+      color: var(--lp-text); font-weight: 700;
+    }
+    .lp-founder em { color: var(--lp-coral); font-style: italic; }
+    .lp-founder-ingredients {
+      display: flex; flex-wrap: wrap; align-items: stretch;
+      margin: 24px 0 14px;
+      padding: 12px 6px;
+      background: var(--lp-green-light);
+      border: 1px solid var(--lp-green);
+      border-radius: 8px;
+    }
+    .lp-founder-ingredient {
+      display: flex; align-items: center; gap: 10px;
+      padding: 6px 16px;
+      position: relative;
+      background: transparent; border: none;
+      text-align: left;
+    }
+    .lp-founder-ingredient + .lp-founder-ingredient::before {
+      content: ''; position: absolute; left: 0; top: 20%; bottom: 20%;
+      width: 1px; background: var(--lp-green);
+    }
+    .lp-founder-ingredient-icon {
+      width: 26px; height: 26px;
+      color: var(--lp-green);
+      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0;
+    }
+    .lp-founder-ingredient-icon svg {
+      width: 100%; height: 100%;
+      stroke: currentColor; fill: none;
+      stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round;
+    }
+    .lp-founder-ingredient-name {
+      font-size: 0.74rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      color: var(--lp-green-dark);
+      margin: 0;
+    }
+
+    /* ===== MAGIC HAPPENS ===== */
+    .lp-magic {
+      padding: 0; position: relative; overflow: hidden;
+      min-height: 360px;
+      background: var(--lp-navy-deep);
+    }
+    .lp-magic .lp-img-ph--wide {
+      aspect-ratio: unset; min-height: 360px;
+      border-radius: 0; background: linear-gradient(135deg, #1B3173, #081640);
+      border: none; color: rgba(255,255,255,0.15);
+    }
+    .lp-magic-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(160deg, rgba(8,22,64,0.82) 0%, rgba(14,31,90,0.65) 100%);
+      background-image: var(--lp-dots-dark);
+      background-size: 26px 26px, 100% 100%;
+      display: flex; align-items: center; justify-content: center;
+      padding: 40px 24px; text-align: center;
+    }
+    .lp-magic-overlay-inner { max-width: 780px; color: var(--lp-text-on-dark); }
+    .lp-magic h2 {
+      font-size: 2.4rem; font-weight: 800; line-height: 1.15;
+      margin-bottom: 12px; letter-spacing: -0.02em;
+    }
+    .lp-magic h2 em {
+      font-style: normal; color: var(--lp-white);
+      text-decoration: underline;
+      text-decoration-thickness: 3px;
+      text-underline-offset: 5px;
+    }
+    .lp-magic p {
+      font-size: 1.05rem; line-height: 1.6; opacity: 0.85;
+      max-width: 580px; margin: 0 auto;
+    }
+
+    /* ===== BADGES ===== */
+    .lp-badges {
+      padding: 72px 24px; background: var(--lp-cream);
+      background-image: var(--lp-dots-cream);
+      background-size: 28px 28px;
+    }
+    .lp-badges-grid {
+      max-width: 920px; margin: 8px auto 0;
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 24px; text-align: center;
+    }
+    .lp-badge-item {
+      background: transparent; border: none; padding: 0;
+      display: flex; flex-direction: column; align-items: center; gap: 14px;
+      transition: transform 220ms ease;
+    }
+    .lp-badge-item:hover { transform: translateY(-4px); }
+    .lp-badge-icon {
+      width: 120px; height: 120px;
+      border-radius: 50%;
+      overflow: hidden;
+      background: var(--lp-white);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 6px 20px rgba(14,31,90,0.12);
+    }
+    .lp-badge-icon img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    .lp-badge-label {
+      font-size: 0.88rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      color: var(--lp-navy);
+      max-width: 160px; line-height: 1.35;
+    }
+
+    /* ===== PRICING ===== */
+    .lp-pricing {
+      padding: 76px 24px;
+      background: var(--lp-grey-soft);
+      color: var(--lp-text); position: relative;
+    }
+    .lp-pricing-timer { text-align: center; margin-bottom: 32px; }
+    .lp-pricing-timer-label {
+      font-size: 0.86rem; color: var(--lp-text-mid); margin-bottom: 12px;
+      text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600;
+    }
+    .lp-pricing-countdown { display: inline-flex; gap: 8px; }
+    .lp-pricing-countdown-block {
+      background: var(--lp-white);
+      border: 1px solid var(--lp-grey-border);
+      padding: 12px 16px; border-radius: var(--lp-radius-sm);
+      text-align: center; min-width: 72px;
+    }
+    .lp-pricing-countdown-number {
+      font-size: 1.7rem; font-weight: 800; display: block;
+      font-variant-numeric: tabular-nums; color: var(--lp-text);
+    }
+    .lp-pricing-countdown-label {
+      font-size: 0.6rem; text-transform: uppercase;
+      letter-spacing: 0.1em; color: var(--lp-text-mid); font-weight: 600;
+    }
+    .lp-pricing-counter {
+      text-align: center; font-size: 0.84rem; color: var(--lp-text-mid);
+      margin-top: 10px;
+    }
+    .lp-pricing-counter strong {
+      color: var(--lp-text); font-weight: 700;
+    }
+    .lp-pricing-cards {
+      max-width: 1040px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 28px; align-items: start;
+    }
+    .lp-pricing-card {
+      background: var(--lp-white);
+      border: 2px solid var(--lp-border);
+      border-radius: var(--lp-radius);
+      padding: 124px 30px 36px; text-align: center;
+      color: var(--lp-text); position: relative;
+      overflow: visible;
+    }
+    .lp-pricing-card-banner {
+      position: absolute; top: 0; left: 0; right: 0;
+      padding: 26px 22px;
+      font-weight: 900;
+      text-transform: uppercase; letter-spacing: 0.04em;
+      line-height: 1.15;
+      color: var(--lp-white);
+      border-radius: calc(var(--lp-radius) - 2px) calc(var(--lp-radius) - 2px) 0 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 6px;
+      text-align: center; white-space: normal;
+      z-index: 2;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+    }
+    .lp-pricing-card-banner-main { font-size: 1.55rem; }
+    .lp-pricing-card-banner-sub { font-size: 1.25rem; opacity: 0.95; }
+    .lp-pricing-card-banner--popular {
+      background: linear-gradient(90deg, var(--lp-green), var(--lp-green-dark));
+    }
+    .lp-pricing-card-banner--save {
+      background: linear-gradient(90deg, var(--lp-charcoal), #3A3A3C);
+    }
+    .lp-pricing-card--featured {
+      border-color: var(--lp-green);
+      box-shadow: 0 14px 44px rgba(14,31,90,0.24);
+      transform: scale(1.03);
+    }
+    .lp-pricing-card--featured::before {
+      content: ''; position: absolute;
+      top: -2px; left: -2px; right: -2px; height: 4px;
+      background: linear-gradient(90deg, var(--lp-green), var(--lp-coral), var(--lp-green));
+      border-radius: var(--lp-radius) var(--lp-radius) 0 0;
+      z-index: 1;
+    }
+    .lp-pricing-card-corner {
+      position: absolute; top: 14px; right: -6px;
+      background: var(--lp-coral); color: var(--lp-white);
+      font-size: 0.72rem; font-weight: 800; letter-spacing: 0.06em;
+      padding: 6px 12px; border-radius: 4px;
+      box-shadow: 0 4px 12px rgba(255,102,96,0.4);
+      text-transform: uppercase; z-index: 2;
+    }
+    .lp-pricing-card-corner::after {
+      content: ''; position: absolute;
+      top: 100%; right: 0;
+      border: 3px solid var(--lp-coral-dark);
+      border-bottom-color: transparent; border-right-color: transparent;
+    }
+    .lp-pricing-card-badge {
+      position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+      background: var(--lp-green); color: var(--lp-white);
+      font-size: 0.7rem; font-weight: 800;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      padding: 6px 22px; border-radius: 20px; white-space: nowrap;
+    }
+    .lp-pricing-card-title {
+      font-size: 1.25rem; font-weight: 700;
+      color: var(--lp-navy); margin-bottom: 4px;
+    }
+    .lp-pricing-card-subtitle {
+      font-size: 0.82rem; color: var(--lp-text-light); margin-bottom: 18px;
+    }
+    .lp-pricing-card-price-wrap { margin-bottom: 18px; }
+    .lp-pricing-card-price-old {
+      font-size: 1.05rem; color: var(--lp-text-light);
+      text-decoration: line-through; margin-right: 6px;
+    }
+    .lp-pricing-card-price-new {
+      font-size: 2.4rem; font-weight: 900;
+      color: var(--lp-navy); letter-spacing: -0.02em;
+    }
+    .lp-pricing-card-price-per {
+      font-size: 0.82rem; color: var(--lp-text-light);
+      display: block; margin-top: 2px;
+    }
+    .lp-pricing-card-perks { list-style: none; text-align: left; margin: 0 0 22px; padding: 0; }
+    .lp-pricing-card-perks li {
+      font-size: 0.92rem; padding: 6px 0;
+      display: flex; align-items: flex-start; gap: 10px;
+      color: var(--lp-text);
+      font-weight: 500;
+    }
+    .lp-pricing-card-perks li::before {
+      content: '✓'; flex-shrink: 0;
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 20px; height: 20px;
+      background: var(--lp-green); color: var(--lp-white);
+      border-radius: 50%; font-size: 0.72rem; font-weight: 800;
+      box-shadow: 0 2px 4px rgba(46,139,62,0.3);
+    }
+    .lp-pricing-card .lp-cta-primary {
+      width: 100%; padding: 20px 24px;
+      font-size: 1.12rem; letter-spacing: 0.08em;
+      box-shadow: 0 6px 22px rgba(46,139,62,0.4), inset 0 1px 0 rgba(255,255,255,0.2);
+    }
+    .lp-pricing-card .lp-cta-secondary {
+      padding: 18px 22px;
+      font-size: 1.02rem;
+    }
+    .lp-pricing-card-ships {
+      font-size: 0.78rem; color: var(--lp-green-dark);
+      font-weight: 700; margin-bottom: 10px;
+      text-transform: uppercase; letter-spacing: 0.06em;
+    }
+    .lp-pricing-card-ships::before {
+      content: '🚚 ';
+    }
+    .lp-pricing-card-trust {
+      margin-top: 14px; padding-top: 14px;
+      border-top: 1px dashed var(--lp-border-light);
+      display: flex; flex-direction: column; gap: 6px;
+    }
+    .lp-pricing-card-trust-item {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.78rem; color: var(--lp-text-mid);
+      font-weight: 500;
+    }
+    .lp-pricing-card-trust-item::before {
+      content: '✓'; flex-shrink: 0;
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 16px; height: 16px;
+      background: var(--lp-green); color: var(--lp-white);
+      border-radius: 50%; font-size: 0.58rem; font-weight: 800;
+    }
+    .lp-pricing-flash {
+      max-width: 520px; margin: 0 auto 24px;
+      background: linear-gradient(135deg, var(--lp-coral), var(--lp-coral-dark));
+      color: var(--lp-white);
+      padding: 12px 22px; border-radius: var(--lp-radius-sm);
+      text-align: center; font-weight: 800;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      font-size: 0.88rem;
+      box-shadow: 0 6px 20px rgba(255,102,96,0.35), inset 0 1px 0 rgba(255,255,255,0.2);
+      border: 2px solid var(--lp-green);
+    }
+    .lp-pricing-flash strong {
+      color: var(--lp-white); font-weight: 800;
+      text-decoration: underline;
+      text-decoration-thickness: 2px;
+      text-underline-offset: 2px;
+    }
+    .lp-cta-secondary {
+      display: block; width: 100%; text-align: center;
+      background: transparent; color: var(--lp-navy);
+      font-family: var(--lp-font); font-size: 0.96rem; font-weight: 700;
+      padding: 15px 20px; border-radius: var(--lp-radius-sm);
+      border: 2px solid var(--lp-navy);
+      cursor: pointer; text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+      text-transform: uppercase; letter-spacing: 0.06em;
+    }
+    .lp-cta-secondary:hover { background: var(--lp-navy); color: var(--lp-white); }
+    .lp-pricing-guarantee {
+      text-align: center; margin-top: 32px;
+      font-size: 0.88rem; color: var(--lp-text-mid);
+    }
+    .lp-pricing-guarantee strong {
+      color: var(--lp-text); font-weight: 800;
+    }
+
+    /* ===== TRUSTPILOT ===== */
+    .lp-trustpilot {
+      padding: 76px 24px; background: var(--lp-offwhite);
+    }
+    .lp-trustpilot-summary {
+      max-width: var(--lp-max-width); margin: 0 auto 40px;
+      display: grid; grid-template-columns: 280px 1fr;
+      gap: 40px; align-items: center;
+      background: var(--lp-white);
+      border: 1px solid var(--lp-border-light);
+      border-radius: var(--lp-radius);
+      padding: 32px 36px;
+    }
+    .lp-trustpilot-score { text-align: center; }
+    .lp-trustpilot-score-number {
+      font-size: 3.4rem; font-weight: 900; color: var(--lp-navy);
+      line-height: 1; letter-spacing: -0.03em;
+    }
+    .lp-trustpilot-score-number-sub {
+      font-size: 1.5rem; color: var(--lp-text-light); font-weight: 600;
+    }
+    .lp-trustpilot-score-stars {
+      color: var(--lp-green); font-size: 1.4rem;
+      letter-spacing: 2px; margin: 6px 0;
+    }
+    .lp-trustpilot-score-count {
+      font-size: 0.82rem; color: var(--lp-text-light);
+      font-weight: 500;
+    }
+    .lp-trustpilot-bars { display: flex; flex-direction: column; gap: 6px; }
+    .lp-trustpilot-bar {
+      display: grid; grid-template-columns: 42px 1fr 48px;
+      gap: 12px; align-items: center;
+    }
+    .lp-trustpilot-bar-label { font-size: 0.84rem; font-weight: 600; color: var(--lp-text-mid); }
+    .lp-trustpilot-bar-track {
+      height: 10px; background: var(--lp-grey-soft);
+      border-radius: 5px; overflow: hidden;
+    }
+    .lp-trustpilot-bar-fill {
+      height: 100%; background: var(--lp-green);
+      border-radius: 5px;
+    }
+    .lp-trustpilot-bar-pct { font-size: 0.84rem; color: var(--lp-text-mid); text-align: right; }
+
+    .lp-trustpilot-tabs {
+      max-width: var(--lp-max-width); margin: 0 auto 20px;
+      display: flex; gap: 8px; flex-wrap: wrap;
+      padding-bottom: 16px; border-bottom: 1px solid var(--lp-border-light);
+    }
+    .lp-trustpilot-tab {
+      background: var(--lp-white); border: 1px solid var(--lp-border);
+      padding: 8px 16px; border-radius: 18px;
+      font-size: 0.8rem; font-weight: 500; color: var(--lp-text-mid);
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+      user-select: none;
+    }
+    .lp-trustpilot-tab:hover { border-color: var(--lp-navy); color: var(--lp-navy); }
+    .lp-trustpilot-tab--active {
+      background: var(--lp-navy); color: var(--lp-white);
+      border-color: var(--lp-navy); font-weight: 600;
+    }
+    .lp-trustpilot-tab--active:hover { color: var(--lp-white); }
+    .lp-trustpilot-reviews {
+      max-width: var(--lp-max-width); margin: 0 auto;
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px;
+    }
+    .lp-trustpilot-review {
+      background: var(--lp-white);
+      border: 1px solid var(--lp-border-light);
+      border-radius: var(--lp-radius);
+      padding: 22px 24px;
+    }
+    .lp-trustpilot-review-header {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 10px; padding-bottom: 10px;
+      border-bottom: 1px dashed var(--lp-border-light);
+    }
+    .lp-trustpilot-review-avatar {
+      width: 42px; height: 42px; border-radius: 50%;
+      object-fit: cover; background: var(--lp-border-light);
+      flex-shrink: 0;
+    }
+    .lp-trustpilot-review-meta { flex: 1; line-height: 1.3; }
+    .lp-trustpilot-review-name {
+      font-size: 0.92rem; font-weight: 700; color: var(--lp-navy);
+    }
+    .lp-trustpilot-review-subline {
+      font-size: 0.74rem; color: var(--lp-text-light); margin-top: 2px;
+    }
+    .lp-trustpilot-review-stars { color: var(--lp-green); font-size: 0.9rem; letter-spacing: 1px; }
+    .lp-trustpilot-review-title {
+      font-size: 0.98rem; font-weight: 700;
+      color: var(--lp-text); margin-bottom: 6px;
+    }
+    .lp-trustpilot-review-body {
+      font-size: 0.9rem; line-height: 1.65; color: var(--lp-text-mid);
+      display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .lp-trustpilot-review--expanded .lp-trustpilot-review-body {
+      -webkit-line-clamp: unset; overflow: visible; display: block;
+    }
+    .lp-trustpilot-review-photos {
+      display: flex; gap: 6px; margin-top: 12px; flex-wrap: wrap;
+    }
+    .lp-trustpilot-review-photos a {
+      display: block; line-height: 0;
+    }
+    .lp-trustpilot-review-photos img {
+      width: 72px; height: 72px; object-fit: cover;
+      border-radius: 8px; cursor: pointer;
+      border: 1px solid var(--lp-border-light);
+      transition: transform 0.15s, border-color 0.15s;
+    }
+    .lp-trustpilot-review-photos img:hover {
+      transform: scale(1.04); border-color: var(--lp-navy);
+    }
+    .lp-trustpilot-review-actions {
+      display: flex; justify-content: flex-end; gap: 8px;
+      margin-top: 12px; padding-top: 10px;
+      border-top: 1px dashed var(--lp-border-light);
+      flex-wrap: wrap;
+    }
+    .lp-trustpilot-review-btn {
+      background: transparent; border: 1px solid var(--lp-border);
+      border-radius: 16px; padding: 6px 12px;
+      font-family: var(--lp-font); font-size: 0.78rem; font-weight: 600;
+      color: var(--lp-navy); cursor: pointer;
+      transition: background 0.15s, border-color 0.15s, color 0.15s;
+    }
+    .lp-trustpilot-review-btn:hover {
+      background: var(--lp-navy); color: var(--lp-white);
+      border-color: var(--lp-navy);
+    }
+    .lp-trustpilot-review-btn.is-voted {
+      background: var(--lp-green-light); color: var(--lp-green-dark);
+      border-color: var(--lp-green-light); cursor: default;
+    }
+    .lp-trustpilot-review-btn.is-voted:hover {
+      background: var(--lp-green-light); color: var(--lp-green-dark);
+      border-color: var(--lp-green-light);
+    }
+
+    /* ===== FAQ ===== */
+    .lp-faq {
+      padding: 76px 24px; background: var(--lp-white);
+    }
+    .lp-faq-list { max-width: 760px; margin: 0 auto; }
+    .lp-faq-item {
+      border-bottom: 1px solid var(--lp-border-light);
+    }
+    .lp-faq-question {
+      width: 100%; background: none; border: none; padding: 20px 0;
+      font-family: var(--lp-font); font-size: 1rem; font-weight: 600;
+      color: var(--lp-navy); text-align: left; cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center; gap: 14px;
+    }
+    .lp-faq-question:hover { color: var(--lp-green); }
+    .lp-faq-toggle {
+      font-size: 1.3rem; font-weight: 300;
+      transition: transform 0.2s;
+      min-width: 22px; text-align: center; color: var(--lp-green);
+    }
+    .lp-faq-item--open .lp-faq-toggle { transform: rotate(45deg); }
+    .lp-faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+    .lp-faq-item--open .lp-faq-answer { max-height: 500px; padding-bottom: 20px; }
+    .lp-faq-answer p {
+      font-size: 0.94rem; color: var(--lp-text-mid); line-height: 1.7;
+    }
+
+    /* ===== FINAL CTA ===== */
+    .lp-final-cta {
+      padding: 84px 24px;
+      background: var(--lp-white);
+      color: var(--lp-text); text-align: center;
+      position: relative; overflow: hidden;
+      border-top: 1px solid var(--lp-grey-border);
+    }
+    .lp-final-cta::before {
+      content: '';
+      position: absolute; top: -100px; right: -80px;
+      width: 360px; height: 360px;
+      background: radial-gradient(circle, rgba(46,139,62,0.05) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .lp-final-cta-inner { max-width: 680px; margin: 0 auto; position: relative; z-index: 1; }
+    .lp-final-cta h2 {
+      font-size: 2.3rem; font-weight: 800;
+      margin-bottom: 16px; letter-spacing: -0.02em; line-height: 1.15;
+      color: var(--lp-navy);
+    }
+    .lp-final-cta h2 span {
+      color: var(--lp-coral);
+    }
+    .lp-final-cta p {
+      font-size: 1.04rem; color: var(--lp-text-mid); margin-bottom: 26px;
+    }
+
+    /* ===== FOOTER ===== */
+    .lp-footer {
+      background: var(--lp-charcoal); color: var(--lp-text-on-dark);
+      padding: 48px 24px 28px;
+    }
+    .lp-footer-inner {
+      max-width: var(--lp-max-width); margin: 0 auto; text-align: center;
+    }
+    .lp-footer-logo {
+      font-size: 1.3rem; font-weight: 800; margin-bottom: 14px;
+      letter-spacing: -0.02em;
+    }
+    .lp-footer-links {
+      display: flex; justify-content: center; gap: 20px;
+      flex-wrap: wrap; margin-bottom: 18px;
+    }
+    .lp-footer-links a {
+      color: rgba(255,255,255,0.55); font-size: 0.8rem;
+      transition: color 0.2s;
+    }
+    .lp-footer-links a:hover { color: var(--lp-white); }
+    .lp-footer-contact {
+      font-size: 0.8rem; color: rgba(255,255,255,0.4);
+      margin-bottom: 18px; line-height: 1.6;
+    }
+    .lp-footer-disclaimer {
+      font-size: 0.7rem; color: rgba(255,255,255,0.25); line-height: 1.6;
+      max-width: 720px; margin: 0 auto;
+      padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    /* ===== STICKY BOTTOM BAR (mobile + desktop, shows after hero) ===== */
+    .lp-sticky-bar {
+      position: fixed; left: 0; right: 0; bottom: 0;
+      background: var(--lp-charcoal);
+      border-top: 2px solid var(--lp-green);
+      padding: 10px 16px;
+      display: flex;
+      align-items: center; gap: 12px;
+      z-index: 99;
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.25);
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+    }
+    .lp-sticky-bar-inner {
+      max-width: var(--lp-max-width);
+      margin: 0 auto; width: 100%;
+      display: flex; align-items: center; gap: 16px;
+    }
+    .lp-sticky-bar--visible { transform: translateY(0); }
+    .lp-sticky-bar-copy {
+      flex: 1; color: var(--lp-white); line-height: 1.2;
+    }
+    .lp-sticky-bar-line1 {
+      font-size: 0.78rem; font-weight: 800;
+      text-transform: uppercase; letter-spacing: 0.06em;
+      color: var(--lp-white);
+      text-decoration: underline;
+      text-decoration-thickness: 1.5px;
+      text-underline-offset: 2px;
+    }
+    .lp-sticky-bar-line2 {
+      font-size: 0.68rem; opacity: 0.75; margin-top: 1px;
+    }
+    .lp-sticky-bar .lp-cta-primary {
+      padding: 11px 20px; font-size: 0.82rem; box-shadow: none;
+    }
+    body.lp-sticky-active { padding-bottom: 76px; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .lp-topbar {
+        font-size: 0.7rem; gap: 6px; flex-wrap: wrap;
+        justify-content: center; padding: 8px 12px;
+      }
+      .lp-topbar-timer-block {
+        padding: 3px 7px; font-size: 0.78rem; min-width: 38px;
+      }
+      .lp-nav { padding: 12px 16px; }
+      .lp-nav-links { display: none; }
+      .lp-nav-cart { font-size: 0.72rem; padding: 5px 10px; }
+      .lp-flash-strip { font-size: 0.68rem; padding: 8px 12px; letter-spacing: 0.06em; }
+
+      .lp-hero { padding: 32px 16px 28px; }
+      .lp-hero::before, .lp-hero::after { display: none; }
+      .lp-hero-inner {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 14px;
+        text-align: center;
+        width: 100%; max-width: 100%;
+      }
+      .lp-hero-menu { order: 1; }
+      .lp-hero-content-top { order: 2; }
+      .lp-hero-image-col { order: 3; }
+      .lp-hero-content-bottom { order: 4; }
+      .lp-hero-navbar { display: none; }
+      .lp-topbar { padding-left: 56px; padding-right: 16px; }
+      .lp-topbar-burger {
+        display: inline-flex !important;
+        position: absolute;
+        left: 10px; top: 50%; transform: translateY(-50%);
+        width: 30px; height: 30px;
+      }
+      .lp-topbar-burger span { width: 16px; }
+      .lp-hero-navbar { flex-direction: row-reverse; }
+      .lp-hero-inner > * { min-width: 0; max-width: 100%; }
+      .lp-hero-content-top,
+      .lp-hero-content-bottom {
+        justify-self: stretch; width: 100%;
+        text-align: center;
+        display: flex; flex-direction: column; align-items: stretch;
+      }
+      .lp-hero-content-top > *,
+      .lp-hero-content-bottom > * { width: 100%; max-width: 100%; }
+      .lp-hero-carousel-track { max-width: 100%; }
+      .lp-hero h1 {
+        font-size: 1.7rem;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        hyphens: auto;
+        text-align: center;
+      }
+      .lp-hero-eyebrow { font-size: 0.62rem; }
+      .lp-hero-sub { margin: 0 auto 12px; font-size: 0.94rem; overflow-wrap: break-word; text-align: center; max-width: 420px; }
+      .lp-hero-proof { justify-content: center; width: 100%; }
+      .lp-hero-badges { justify-content: center; gap: 14px; width: 100%; }
+      .lp-hero-badge { font-size: 0.66rem; }
+      .lp-hero-image-col {
+        padding-top: 0;
+        width: 100%;
+        max-width: 380px;
+        margin-left: auto; margin-right: auto;
+        justify-self: center;
+      }
+      .lp-hero-badge-float { top: 8px; right: 8px; width: 112px; height: 112px; box-shadow: 0 0 0 3px var(--lp-green), 0 0 0 5px var(--lp-coral-dark), 0 8px 22px rgba(0,0,0,0.3), inset 0 2px 0 rgba(255,255,255,0.2); animation: none; }
+      .lp-hero-badge-float-num { font-size: 1.6rem; }
+      .lp-hero-badge-float-day { font-size: 0.62rem; letter-spacing: 0.18em; }
+      .lp-hero-badge-float-txt { font-size: 0.52rem; padding-top: 4px; margin-top: 4px; width: 86%; }
+      .lp-hero-carousel { margin: 20px auto 0; width: 100%; max-width: 480px; box-sizing: border-box; }
+      .lp-img-ph--arch { min-height: 380px; max-width: 100%; width: 100%; margin: 0 auto; border-radius: 200px 200px 18px 18px; }
+      .lp-cta-primary { width: 100%; max-width: 360px; padding: 16px 20px; font-size: 0.95rem; box-sizing: border-box; margin: 0 auto; }
+
+      .lp-testimonials { padding: 40px 20px; }
+      .lp-testimonials-grid { grid-template-columns: 1fr; }
+
+      .lp-section-heading { font-size: 1.6rem; }
+      .lp-section-heading-sub { font-size: 0.92rem; }
+
+      .lp-problem { padding: 56px 20px; }
+      .lp-problem-row { grid-template-columns: 1fr; gap: 24px; margin-bottom: 28px; }
+      .lp-problem-row--reverse { direction: ltr; }
+
+      .lp-cta-block { padding: 36px 20px; }
+      .lp-cta-block p { font-size: 1.08rem; }
+
+      .lp-belief { padding: 56px 20px; }
+      .lp-belief-inner { grid-template-columns: 1fr; gap: 32px; text-align: center; }
+      .lp-belief-quote { font-size: 1.2rem; }
+      .lp-belief-image-stack { padding: 16px; max-width: 320px; margin: 0 auto; }
+      .lp-belief-image-stack .lp-img-ph--main { max-width: 100%; }
+      .lp-belief-image-accent { width: 120px; bottom: 0; left: -6px; border-width: 4px; }
+      .lp-belief-sticker { width: 68px; height: 68px; font-size: 0.6rem; top: -2px; right: 2px; }
+
+      .lp-article { padding: 56px 20px; }
+      .lp-article h3 { font-size: 1.2rem; }
+      .lp-article-stat-number { font-size: 2.4rem; }
+      .lp-article-stat--inline { flex-direction: row; gap: 16px; padding: 18px 20px; }
+      .lp-article-stat--inline .lp-article-stat-number { font-size: 2rem; }
+      .lp-article-stats-panel { padding: 26px 22px; }
+      .lp-article-stats-panel-grid { grid-template-columns: 1fr; gap: 18px; }
+      .lp-article-stats-panel-num { font-size: 1.9rem; min-width: 56px; }
+      .lp-article-inline-img { margin: 28px 0; }
+      .lp-article-inline-img .lp-img-ph { aspect-ratio: 4/3; }
+      .lp-article-inline-img-sticker { font-size: 0.58rem; padding: 6px 10px; }
+      .lp-article-pullquote { font-size: 1.08rem; padding: 22px 22px 22px 28px; margin: 30px 0; }
+
+      .lp-timeline { padding: 56px 20px; }
+      .lp-timeline-list::before { left: 14px; transform: none; }
+      .lp-timeline-item,
+      .lp-timeline-item--left,
+      .lp-timeline-item--right { grid-template-columns: 1fr; grid-template-areas: "card"; gap: 0; padding-left: 36px; margin-bottom: 22px; }
+      .lp-timeline-item::after { left: 14px; top: 28px; transform: translate(-50%, 0); }
+      .lp-timeline-item--left .lp-timeline-card::after,
+      .lp-timeline-item--right .lp-timeline-card::before { display: none; }
+      .lp-timeline-item--right .lp-timeline-card,
+      .lp-timeline-item--left .lp-timeline-card { text-align: left; }
+      .lp-timeline-card { padding: 18px 20px; }
+      .lp-timeline-card:hover { transform: none; }
+      .lp-timeline-card:active { transform: scale(0.99); }
+
+      .lp-howto { padding: 56px 20px; }
+      .lp-howto-steps { grid-template-columns: 1fr; gap: 18px; }
+
+      .lp-comparison { padding: 56px 20px; }
+      .lp-comparison-grid { grid-template-columns: 1fr; }
+
+      .lp-manufacturing { padding: 56px 20px; }
+      .lp-manufacturing-image-wrap .lp-img-ph { aspect-ratio: 4/3; }
+
+      .lp-social-proof { padding: 56px 20px; }
+
+      .lp-whofor { padding: 56px 20px; }
+      .lp-whofor-grid { grid-template-columns: 1fr; gap: 16px; }
+      .lp-whofor-card { padding: 26px 22px; }
+      .lp-whofor-hero-image .lp-img-ph { aspect-ratio: 4/3; }
+
+      .lp-pricing-card-main { aspect-ratio: 4/3; margin-bottom: 10px; }
+      .lp-pricing-card-thumb { width: 40px; height: 40px; border-width: 1.5px; border-radius: 5px; }
+      .lp-pricing-card-thumbs { gap: 6px; margin-bottom: 18px; }
+      .lp-final-cta-image { width: 140px; height: 140px; margin-bottom: 20px; }
+      .lp-final-cta-image-badge { width: 54px; height: 54px; font-size: 0.56rem; }
+
+      .lp-founder { padding: 56px 20px; }
+      .lp-founder-inner { grid-template-columns: 1fr; text-align: center; gap: 28px; }
+      .lp-founder-ingredients {
+        flex-direction: column;
+        padding: 6px 8px;
+        gap: 0;
+      }
+      .lp-founder-ingredient {
+        padding: 12px 14px;
+        flex: 1 1 100%;
+        width: 100%;
+        justify-content: flex-start;
+        text-align: left;
+      }
+      .lp-founder-ingredient + .lp-founder-ingredient::before {
+        left: 14px; right: 14px; top: 0;
+        width: auto; height: 1px;
+        background: rgba(46,139,62,0.2);
+      }
+      .lp-founder-ingredient-name { font-size: 0.78rem; letter-spacing: 0.06em; }
+      .lp-founder .lp-divider--left { margin: 0 auto 22px; }
+
+      .lp-magic { min-height: 260px; }
+      .lp-magic .lp-img-ph--wide { min-height: 260px; }
+      .lp-magic h2 { font-size: 1.7rem; }
+      .lp-magic p { font-size: 0.94rem; }
+
+      .lp-badges { padding: 56px 20px; }
+      .lp-badges-grid { grid-template-columns: repeat(2, 1fr); }
+
+      .lp-pricing { padding: 56px 20px; }
+      .lp-pricing-countdown-block { min-width: 60px; padding: 10px 12px; }
+      .lp-pricing-countdown-number { font-size: 1.4rem; }
+      .lp-pricing-cards { grid-template-columns: 1fr; }
+      .lp-pricing-card--featured { transform: none; order: -1; }
+
+      .lp-trustpilot { padding: 56px 20px; }
+      .lp-trustpilot-summary { grid-template-columns: 1fr; gap: 20px; padding: 26px 22px; }
+      .lp-trustpilot-reviews { grid-template-columns: 1fr; }
+
+      .lp-faq { padding: 56px 20px; }
+      .lp-faq-question { font-size: 0.92rem; }
+
+      .lp-final-cta { padding: 60px 20px; }
+      .lp-final-cta h2 { font-size: 1.7rem; }
+
+      body.lp-sticky-active { padding-bottom: 68px; }
+    }
+
+    /* Hero: navbar + burger menu */
+    .lp-hero-navbar {
+      grid-area: navbar;
+      display: flex; align-items: center; justify-content: space-between;
+      padding-bottom: 4px;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+    }
+    .lp-hero-logo {
+      font-family: var(--lp-font);
+      font-size: 1.4rem; font-weight: 800; letter-spacing: -0.02em;
+      color: var(--lp-white); line-height: 1;
+    }
+    .lp-hero-logo-sub {
+      display: block; font-size: 0.62rem; font-weight: 500;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: rgba(255,255,255,0.6); margin-top: 4px;
+    }
+    .lp-hero-burger {
+      display: inline-flex; flex-direction: column; justify-content: center;
+      gap: 4px; width: 34px; height: 34px; padding: 0;
+      background: transparent; border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 8px; cursor: pointer;
+    }
+    .lp-hero-burger span {
+      display: block; height: 2px; width: 18px; margin: 0 auto;
+      background: var(--lp-white); border-radius: 2px;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+    .lp-hero-burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .lp-hero-burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+    .lp-hero-burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+    .lp-topbar-burger { display: none; }
+    .lp-hero-menu {
+      grid-area: menu;
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+    .lp-hero-menu--open { max-height: 560px; }
+    .lp-hero-menu ul {
+      list-style: none; margin: 0; padding: 12px 0 6px;
+      display: flex; flex-wrap: wrap; gap: 8px 18px; justify-content: center;
+      border-bottom: 1px solid var(--lp-grey-border);
+    }
+    .lp-hero-menu a {
+      font-size: 0.88rem; font-weight: 600; color: var(--lp-text);
+      padding: 6px 4px; transition: color 0.2s;
+    }
+    .lp-hero-menu a:hover { color: var(--lp-green); text-decoration: underline; }
+
+    /* Hero content split rows */
+    .lp-hero-content-top { grid-area: top; }
+    .lp-hero-content-bottom { grid-area: bottom; }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR (merged: offer + countdown) -->
+  <div class="lp-topbar">
+    <button class="lp-hero-burger lp-topbar-burger" aria-label="Open menu" aria-expanded="false" aria-controls="lp-hero-menu"><span></span><span></span><span></span></button>
+    <span class="lp-topbar-offer">🎁 Free Shipping + Bonus Recovery Guide</span>
+    <span class="lp-topbar-divider" aria-hidden="true"></span>
+    <span class="lp-topbar-label">⚡ Sale Ends In:</span>
+    <div class="lp-topbar-timer">
+      <span class="lp-topbar-timer-block"><span id="lp-topbar-h">23</span> <span class="lp-topbar-timer-label">Hours</span></span>
+      <span class="lp-topbar-timer-block"><span id="lp-topbar-m">59</span> <span class="lp-topbar-timer-label">Min</span></span>
+      <span class="lp-topbar-timer-block"><span id="lp-topbar-s">59</span> <span class="lp-topbar-timer-label">Sec</span></span>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section class="lp-hero">
+    <div class="lp-hero-inner">
+      <div class="lp-hero-navbar">
+        <a href="#" class="lp-hero-logo">{{BRAND_NAME}}<span class="lp-hero-logo-sub">{{PRODUCT_NAME}} Recovery Coffee</span></a>
+        <button class="lp-hero-burger" id="lp-burger-btn" aria-label="Open menu" aria-expanded="false" aria-controls="lp-hero-menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+      <nav class="lp-hero-menu" id="lp-hero-menu" aria-label="Main navigation">
+        <ul>
+          <li><a href="#lp-story">Our Story</a></li>
+          <li><a href="#lp-timeline">Timeline</a></li>
+          <li><a href="#lp-howto">How To Use</a></li>
+          <li><a href="#lp-founder">Founder</a></li>
+          <li><a href="#lp-pricing">Pricing</a></li>
+          <li><a href="#lp-reviews">Reviews</a></li>
+          <li><a href="#lp-faq-section">FAQs</a></li>
+          <li><a href="mailto:{{SUPPORT_EMAIL}}">Contact</a></li>
+          <li><a href="{{SHOPIFY_CART_PERMALINK}}">🛒 Cart</a></li>
+        </ul>
+      </nav>
+      <div class="lp-hero-content-top">
+        <h1>The Morning Drink Thousands Are Using To <em>Rebuild Movement, Cognition, And Independence</em> After Neurological Damage</h1>
+        <p class="lp-hero-sub">The simple morning blend that calms recovery-blocking inflammation and gives your brain the fuel it needs to rebuild itself.</p>
+      </div>
+      <div class="lp-hero-content-bottom">
+        <div class="lp-hero-proof">
+          <div class="lp-hero-avatars">
+            <div class="lp-img-ph lp-img-ph--avatar lp-img-ph--on-dark lp-img-ph--loaded"><img src="{{IMG_HERO_AVATAR_1}}" alt="" /></div>
+            <div class="lp-img-ph lp-img-ph--avatar lp-img-ph--on-dark lp-img-ph--loaded" style="margin-left:-10px"><img src="{{IMG_HERO_AVATAR_2}}" alt="" /></div>
+            <div class="lp-img-ph lp-img-ph--avatar lp-img-ph--on-dark lp-img-ph--loaded" style="margin-left:-10px"><img src="{{IMG_HERO_AVATAR_3}}" alt="" /></div>
+            <div class="lp-img-ph lp-img-ph--avatar lp-img-ph--on-dark lp-img-ph--loaded" style="margin-left:-10px"><img src="{{IMG_HERO_AVATAR_4}}" alt="" /></div>
+          </div>
+          <span class="lp-hero-stars">★★★★★</span>
+          <span class="lp-hero-rating-text">Rated {{RATING_SCORE}}/5 by {{CUSTOMER_COUNT}} Customers</span>
+        </div>
+        <div style="margin-bottom: 10px;">
+          <a href="{{SHOPIFY_CART_PERMALINK}}" class="lp-cta-primary">GET MY {{PRODUCT_NAME_UPPER}} →</a>
+        </div>
+        <div class="lp-hero-badges">
+          <span class="lp-hero-badge"><span class="lp-hero-badge-icon">✓</span> {{GUARANTEE_DAYS}}-Day Money Back Guarantee</span>
+          <span class="lp-hero-badge"><span class="lp-hero-badge-icon">✓</span> Free Shipping on Every Order</span>
+          <span class="lp-hero-badge"><span class="lp-hero-badge-icon">✓</span> Developed With Neurologists</span>
+        </div>
+
+        <!-- Rotating testimonial carousel (PQ-style) -->
+        <div class="lp-hero-carousel" aria-live="polite">
+          <div class="lp-hero-carousel-track" id="lp-hero-carousel-track">
+            <div class="lp-hero-carousel-item">
+              <div class="lp-img-ph lp-img-ph--small lp-img-ph--loaded"><img src="{{IMG_HERO_CAROUSEL_1}}" alt="" /></div>
+              <div>
+                <p class="lp-hero-carousel-quote">"This coffee actually works. My movement is improving day by day."</p>
+                <p class="lp-hero-carousel-name">Jonathan, USA <span class="lp-hero-carousel-stars">★★★★★</span></p>
+              </div>
+            </div>
+            <div class="lp-hero-carousel-item">
+              <div class="lp-img-ph lp-img-ph--small lp-img-ph--loaded"><img src="{{IMG_HERO_CAROUSEL_2}}" alt="" /></div>
+              <div>
+                <p class="lp-hero-carousel-quote">"After 8 months of plateau, {{PRODUCT_NAME}} got things moving again."</p>
+                <p class="lp-hero-carousel-name">Margaret, UK <span class="lp-hero-carousel-stars">★★★★★</span></p>
+              </div>
+            </div>
+            <div class="lp-hero-carousel-item">
+              <div class="lp-img-ph lp-img-ph--small lp-img-ph--loaded"><img src="{{IMG_HERO_CAROUSEL_3}}" alt="" /></div>
+              <div>
+                <p class="lp-hero-carousel-quote">"First time walking to the mailbox without a cane in over a year."</p>
+                <p class="lp-hero-carousel-name">David, USA <span class="lp-hero-carousel-stars">★★★★★</span></p>
+              </div>
+            </div>
+            <div class="lp-hero-carousel-item">
+              <div class="lp-img-ph lp-img-ph--small lp-img-ph--loaded"><img src="{{IMG_HERO_CAROUSEL_4}}" alt="" /></div>
+              <div>
+                <p class="lp-hero-carousel-quote">"Brain fog cleared. I'm reading books and holding conversations again."</p>
+                <p class="lp-hero-carousel-name">Susan, Canada <span class="lp-hero-carousel-stars">★★★★★</span></p>
+              </div>
+            </div>
+            <div class="lp-hero-carousel-item">
+              <div class="lp-img-ph lp-img-ph--small lp-img-ph--loaded"><img src="{{IMG_HERO_CAROUSEL_5}}" alt="" /></div>
+              <div>
+                <p class="lp-hero-carousel-quote">"My husband's speech improved so much. He's cracking jokes again."</p>
+                <p class="lp-hero-carousel-name">Karen, USA <span class="lp-hero-carousel-stars">★★★★★</span></p>
+              </div>
+            </div>
+          </div>
+          <div class="lp-hero-carousel-dots" id="lp-hero-carousel-dots">
+            <button class="lp-hero-carousel-dot lp-hero-carousel-dot--active" data-idx="0" aria-label="Slide 1"></button>
+            <button class="lp-hero-carousel-dot" data-idx="1" aria-label="Slide 2"></button>
+            <button class="lp-hero-carousel-dot" data-idx="2" aria-label="Slide 3"></button>
+            <button class="lp-hero-carousel-dot" data-idx="3" aria-label="Slide 4"></button>
+            <button class="lp-hero-carousel-dot" data-idx="4" aria-label="Slide 5"></button>
+          </div>
+        </div>
+      </div>
+      <div class="lp-hero-image-col">
+        <div class="lp-img-ph lp-img-ph--arch lp-img-ph--on-dark lp-img-ph--loaded">
+          <img src="{{IMG_HERO_PRODUCT}}" alt="{{PRODUCT_NAME}} {{KEY_INGREDIENT_LC}} coffee with ingredient burst" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE #1 -->
+  <div class="lp-marquee" aria-hidden="true">
+    <div class="lp-marquee-track">
+      <span class="lp-marquee-item">Limited Time — Free Shipping <span class="lp-marquee-dot"></span></span>
+      <span class="lp-marquee-item">{{GUARANTEE_DAYS}}-Day Guarantee <span class="lp-marquee-dot"></span></span>
+      <span class="lp-marquee-item">{{CUSTOMER_COUNT}} Happy Customers <span class="lp-marquee-dot"></span></span>
+      <span class="lp-marquee-item">Limited Time — Free Shipping <span class="lp-marquee-dot"></span></span>
+      <span class="lp-marquee-item">{{GUARANTEE_DAYS}}-Day Guarantee <span class="lp-marquee-dot"></span></span>
+      <span class="lp-marquee-item">{{CUSTOMER_COUNT}} Happy Customers <span class="lp-marquee-dot"></span></span>
+      <span class="lp-marquee-item">Limited Time — Free Shipping <span class="lp-marquee-dot"></span></span>
+      <span class="lp-marquee-item">{{GUARANTEE_DAYS}}-Day Guarantee <span class="lp-marquee-dot"></span></span>
+    </div>
+  </div>
+
+  <!-- PROBLEM -->
+  <section class="lp-problem" id="lp-story">
+    <div class="lp-problem-inner">
+      <h2 class="lp-section-heading lp-section-heading--light">Why Millions Are Stuck On A Recovery Plateau — And It's <em>Not Their Fault</em></h2>
+      <div class="lp-divider"></div>
+
+      <div class="lp-problem-row lp-problem-row--reverse">
+        <div>
+          <p>Every year, millions of people are left fighting their way back from a stroke, Parkinson's, MS, FND, or nerve damage.</p>
+          <p>The hospital saves your life. The therapist retrains your movement. The doctor writes the prescription.</p>
+          <p><em class="lp-problem-quote">But nobody is feeding your brain what it needs to actually rebuild.</em></p>
+        </div>
+        <div class="lp-img-ph lp-img-ph--on-dark lp-img-ph--square lp-img-ph--loaded">
+          <img src="{{IMG_PROBLEM_PLATEAU}}" alt="Recovery plateau — stuck between therapy and medication" loading="lazy" />
+        </div>
+      </div>
+
+      <div class="lp-problem-row">
+        <div>
+          <h3 style="color: var(--lp-navy); font-size: 1.6rem; font-weight: 700; margin: 0 0 14px; line-height: 1.25;">So why does everyone hit the same wall?</h3>
+          <p>Because rehabilitation teaches your brain what to do. Medication manages your symptoms. But neither of them gives your brain the raw materials it needs to grow new connections.</p>
+          <p>Without those raw materials, your therapy plateaus. Your meds stop feeling like they're doing anything. And every day starts to feel like an uphill battle you can't win.</p>
+        </div>
+        <div class="lp-img-ph lp-img-ph--on-dark lp-img-ph--square lp-img-ph--loaded">
+          <video autoplay muted loop playsinline preload="metadata" aria-label="Person living with MS struggling with movement loss">
+            <source src="{{VIDEO_PROBLEM_LIVED_EXPERIENCE}}" type="video/mp4">
+          </video>
+        </div>
+      </div>
+
+      <div style="max-width:780px; margin: 0 auto; text-align: center;">
+        <h3 style="color: var(--lp-navy); font-size: 1.5rem; font-weight: 700; line-height: 1.3; margin: 0 0 16px;">At {{BRAND_NAME}}, we believe your brain can still rebuild — <em>if you give it the fuel to do it.</em></h3>
+        <p>Your brain uses 20% of your body's total energy every single day. After a stroke, Parkinson's flare, MS episode, or nerve injury, that demand skyrockets. If you're not feeding it the specific compounds it needs to rebuild, <strong>you're recovering with the brakes on.</strong></p>
+        <p>That's exactly why we created {{PRODUCT_NAME}} — to give your brain what modern medicine keeps forgetting to.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BELIEF -->
+  <section class="lp-belief" id="lp-belief">
+    <div class="lp-belief-inner">
+      <div>
+        <h2 class="lp-section-heading" style="text-align: left; margin-top: 0;">Your Brain Doesn't Need More Pills. It Needs The Right <span class="lp-belief-scribble">Fuel</span> — <em>Every Single Day.</em></h2>
+        <div class="lp-divider lp-divider--left"></div>
+        <p>We believe recovery shouldn't feel like a second job.</p>
+        <p>That's why {{PRODUCT_NAME}} replaces a habit you already do every morning — your coffee — with one that actually helps your brain rebuild.</p>
+        <p>No pills to remember. No powders to mix. No complicated protocol to follow.</p>
+        <p>Just your morning cup, the way you always take it.</p>
+        <p><strong>Consistency is what rebuilds your brain.</strong> One cup, every morning, for 12 weeks. That's it.</p>
+      </div>
+      <div class="lp-belief-image-stack">
+        <div class="lp-img-ph lp-img-ph--main lp-img-ph--loaded">
+          <img src="{{IMG_FOUNDER_HOLDING_PRODUCT}}" alt="{{FOUNDER_FULL_NAME}} holding the {{BRAND_NAME}} {{PRODUCT_NAME}} box" />
+        </div>
+        <div class="lp-belief-image-accent">
+          <div class="lp-img-ph lp-img-ph--loaded">
+            <img src="{{IMG_PRODUCT_CLOSEUP}}" alt="{{PRODUCT_NAME}} product close-up" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARTICLE -->
+  <article class="lp-article">
+    <div class="lp-article-inner">
+      <h2 class="lp-section-heading">How {{PRODUCT_NAME}} Helps Your Brain <em>Rebuild</em></h2>
+      <div class="lp-divider"></div>
+      <p class="lp-article-byline">Reviewed by a <strong>Neurological Rehabilitation Specialist</strong></p>
+
+      <p>Strokes, Parkinson's, MS, and nerve damage all damage the same thing: the connections your brain uses to send signals to your muscles.</p>
+      <p>The good news? Your brain can still rebuild those connections — at any age. It just needs the right fuel to do it.</p>
+
+      <figure class="lp-article-inline-img">
+        <div class="lp-img-ph lp-img-ph--loaded">
+          <video autoplay muted loop playsinline preload="metadata" aria-label="Neuroplasticity visualisation">
+            <source src="{{VIDEO_ARTICLE_MECHANISM}}" type="video/mp4">
+          </video>
+        </div>
+        <span class="lp-article-inline-img-sticker">The Science</span>
+        <p class="lp-article-inline-img-caption">Neuroplasticity: how the adult brain forms new connections around damaged areas.</p>
+      </figure>
+
+      <h3>The Protein That Rebuilds Your Brain: NGF</h3>
+      <p><strong>NGF</strong> ({{MECHANISM_FULL}}) is the protein your brain uses to grow new connections. After a stroke or injury, your brain produces a burst of it — then it drops, fast. Once it drops, the rebuild stalls.</p>
+      <p><strong>Keeping NGF levels up is what keeps the rebuild going.</strong></p>
+
+      <figure class="lp-article-inline-img">
+        <div class="lp-img-ph lp-img-ph--loaded">
+          <video autoplay muted loop playsinline preload="metadata" aria-label="{{PRODUCT_NAME}} and its five ingredients in action">
+            <source src="{{VIDEO_ARTICLE_INGREDIENT}}" type="video/mp4">
+          </video>
+        </div>
+        <span class="lp-article-inline-img-sticker">The Mushroom</span>
+        <p class="lp-article-inline-img-caption">{{KEY_INGREDIENT}} — the only mushroom clinically shown to stimulate NGF.</p>
+      </figure>
+
+      <p>There's one natural ingredient scientists have documented as a direct NGF stimulator: <strong>{{KEY_INGREDIENT_FORMAL_LONG}}.</strong> Its two unique compounds — {{KEY_COMPOUNDS}} — cross the blood-brain barrier and tell your brain to keep producing NGF long after your body would normally stop.</p>
+
+      <div class="lp-article-stat lp-article-stat--inline">
+        <div class="lp-article-stat-number">4×</div>
+        <div class="lp-article-stat-label">Higher NGF production in studies using {{KEY_INGREDIENT_LC}} compounds versus controls.</div>
+      </div>
+
+      <h3>What Happened When 520 Patients Tried It</h3>
+      <p>In 2023, we sent {{PRODUCT_NAME}} to {{CLINIC_COUNT_LABEL}} and asked {{STUDY_PARTICIPANTS_LABEL}} — stroke, Parkinson's, nerve damage, MS — to add one cup to their routine. Here's what we saw after 3 months:</p>
+
+      <figure class="lp-article-inline-img">
+        <div class="lp-img-ph lp-img-ph--loaded">
+          <video autoplay muted loop playsinline preload="metadata" aria-label="Patients progressing through recovery">
+            <source src="{{VIDEO_ARTICLE_TRIAL}}" type="video/mp4">
+          </video>
+        </div>
+        <span class="lp-article-inline-img-sticker">The Trial</span>
+        <p class="lp-article-inline-img-caption">{{STUDY_PARTICIPANTS_LABEL}}. 40 clinics. One cup a day for three months.</p>
+      </figure>
+
+      <div class="lp-article-stats-panel">
+        <div class="lp-article-stats-panel-head">
+          <p>After three months of a single daily cup across {{CLINIC_COUNT_LABEL}}:</p>
+        </div>
+        <div class="lp-article-stats-panel-grid">
+          <div class="lp-article-stats-panel-item">
+            <div class="lp-article-stats-panel-num">89%</div>
+            <div class="lp-article-stats-panel-lbl">Reported major improvements in movement, control, and therapy effectiveness</div>
+          </div>
+          <div class="lp-article-stats-panel-item">
+            <div class="lp-article-stats-panel-num">82%</div>
+            <div class="lp-article-stats-panel-lbl">Were walking better within 2–3 weeks</div>
+          </div>
+          <div class="lp-article-stats-panel-item">
+            <div class="lp-article-stats-panel-num">75%</div>
+            <div class="lp-article-stats-panel-lbl">Reported less pain, stiffness, and tingling</div>
+          </div>
+          <div class="lp-article-stats-panel-item">
+            <div class="lp-article-stats-panel-num">72%</div>
+            <div class="lp-article-stats-panel-lbl">Felt more mobile and more independent</div>
+          </div>
+        </div>
+      </div>
+
+      <blockquote class="lp-article-pullquote">
+        The brain doesn't want more pills. It wants <em>fuel</em> — the right compounds, delivered every single day. When you give it that, the repair system it was born with comes back online.
+        <span class="lp-article-pullquote-cite">— Neurological Rehabilitation Specialist</span>
+      </blockquote>
+    </div>
+  </article>
+
+  <!-- TIMELINE -->
+  <section class="lp-timeline" id="lp-timeline">
+    <div class="lp-container" style="text-align: center;">
+      <h2 class="lp-section-heading">What Should I Expect From <em>Consistent Use</em> Of {{PRODUCT_NAME}}?</h2>
+      <p class="lp-section-heading-sub">Results build over time. Here's what {{CUSTOMER_COUNT}} customers have reported on their {{PRODUCT_NAME}} recovery.</p>
+    </div>
+    <div class="lp-timeline-list">
+      <div class="lp-timeline-item lp-timeline-item--left">
+        <div class="lp-timeline-card">
+          <span class="lp-timeline-badge">Week 1</span>
+          <h3>Sharper Mind, Clearer Head</h3>
+          <p>Less brain fog. Better focus. You start showing up to therapy with your head in the game.</p>
+        </div>
+      </div>
+      <div class="lp-timeline-item lp-timeline-item--right">
+        <div class="lp-timeline-card">
+          <span class="lp-timeline-badge">Week 2–3</span>
+          <h3>Early Movement Wins</h3>
+          <p>82% of users report steadier hands, better walking, and more control over small movements.</p>
+        </div>
+      </div>
+      <div class="lp-timeline-item lp-timeline-item--left">
+        <div class="lp-timeline-card">
+          <span class="lp-timeline-badge">Month 1</span>
+          <h3>Less Pain, Less Stiffness</h3>
+          <p>75% report less pain, stiffness, tingling, and numbness in the affected areas.</p>
+        </div>
+      </div>
+      <div class="lp-timeline-item lp-timeline-item--right">
+        <div class="lp-timeline-card">
+          <span class="lp-timeline-badge">Month 2</span>
+          <h3>Therapy Starts Working Again</h3>
+          <p>Your sessions feel more productive. Movements feel more natural. The plateau starts to break.</p>
+        </div>
+      </div>
+      <div class="lp-timeline-item lp-timeline-item--left">
+        <div class="lp-timeline-card">
+          <span class="lp-timeline-badge">Month 3</span>
+          <h3>Independence Milestones</h3>
+          <p>72% hit a personal win — dressing themselves, cooking, walking unassisted, or driving again.</p>
+        </div>
+      </div>
+      <div class="lp-timeline-item lp-timeline-item--right">
+        <div class="lp-timeline-card">
+          <span class="lp-timeline-badge">Month 6+</span>
+          <h3>The Rebuild Keeps Going</h3>
+          <p>Your brain keeps forming new connections long after most people give up on recovery.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW TO USE -->
+  <section class="lp-howto" id="lp-howto">
+    <div class="lp-container" style="text-align: center;">
+      <h2 class="lp-section-heading">Three Steps, <em>Two Minutes</em></h2>
+      <p class="lp-section-heading-sub">No pills. No powders. No protocol. If you can brew a cup of coffee, you can follow the {{PRODUCT_NAME}} recovery routine.</p>
+    </div>
+    <div class="lp-howto-steps">
+      <div class="lp-howto-step">
+        <div class="lp-img-ph lp-img-ph--square lp-img-ph--loaded">
+          <video autoplay muted loop playsinline preload="metadata" aria-label="Opening a {{PRODUCT_NAME}} sachet">
+            <source src="{{VIDEO_HOWTO_STEP_1}}" type="video/mp4">
+          </video>
+        </div>
+        <span class="lp-howto-step-number">1</span>
+        <h3>Open Your Packet</h3>
+        <p>Tear open a single-serve sachet and pour into your favorite mug.</p>
+      </div>
+      <div class="lp-howto-step">
+        <div class="lp-img-ph lp-img-ph--square lp-img-ph--loaded">
+          <video autoplay muted loop playsinline preload="metadata" aria-label="Adding hot water and stirring">
+            <source src="{{VIDEO_HOWTO_STEP_2}}" type="video/mp4">
+          </video>
+        </div>
+        <span class="lp-howto-step-number">2</span>
+        <h3>Add Hot Water & Stir</h3>
+        <p>Brew like instant coffee. Add milk or sweetener to taste.</p>
+      </div>
+      <div class="lp-howto-step">
+        <div class="lp-img-ph lp-img-ph--square lp-img-ph--loaded">
+          <video autoplay muted loop playsinline preload="metadata" aria-label="Drinking {{PRODUCT_NAME}} coffee">
+            <source src="{{VIDEO_HOWTO_STEP_3}}" type="video/mp4">
+          </video>
+        </div>
+        <span class="lp-howto-step-number">3</span>
+        <h3>Drink Daily, Recover Faster</h3>
+        <p>One cup each morning. First results in 2-3 weeks.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MECHANISM COMPARISON (PQ-style X MORE grid) -->
+  <section class="lp-comparison">
+    <div class="lp-comparison-inner">
+      <div style="text-align: center;">
+        <h2 class="lp-section-heading lp-section-heading--light">The Most <em style="color: var(--lp-coral);">Neurologically Active</em> Recovery Formula on the Market</h2>
+        <p class="lp-section-heading-sub lp-section-heading-sub--light">Here's why {{PRODUCT_NAME}} outperforms pills, powders, and over-the-counter alternatives.</p>
+      </div>
+      <div class="lp-comparison-grid">
+        <div class="lp-comparison-card">
+          <div class="lp-comparison-card-top">
+            <span class="lp-comparison-card-abbr">NGF</span>
+            <span class="lp-comparison-card-title">{{MECHANISM_FULL}}</span>
+          </div>
+          <div class="lp-comparison-card-mid">
+            <img src="{{IMG_STATS_CARD_1}}" alt="Brain with gold neural pathways illustration" loading="lazy" />
+          </div>
+          <div class="lp-comparison-card-bot">
+            <span class="lp-comparison-card-stat">4<span class="lp-comparison-card-stat-unit">×</span></span>
+            <span class="lp-comparison-card-claim">NGF Synthesis</span>
+          </div>
+        </div>
+        <div class="lp-comparison-card">
+          <div class="lp-comparison-card-top">
+            <span class="lp-comparison-card-abbr">BBB</span>
+            <span class="lp-comparison-card-title">Blood-Brain Barrier</span>
+          </div>
+          <div class="lp-comparison-card-mid">
+            <img src="{{IMG_STATS_CARD_2}}" alt="Droplet passing through cellular barrier illustration" loading="lazy" />
+          </div>
+          <div class="lp-comparison-card-bot">
+            <span class="lp-comparison-card-stat">92<span class="lp-comparison-card-stat-unit">%</span></span>
+            <span class="lp-comparison-card-claim">Barrier Crossing</span>
+          </div>
+        </div>
+        <div class="lp-comparison-card">
+          <div class="lp-comparison-card-top">
+            <span class="lp-comparison-card-abbr">ABS</span>
+            <span class="lp-comparison-card-title">Absorption Rate</span>
+          </div>
+          <div class="lp-comparison-card-mid">
+            <img src="{{IMG_STATS_CARD_3}}" alt="Droplet absorbed into bloodstream illustration" loading="lazy" />
+          </div>
+          <div class="lp-comparison-card-bot">
+            <span class="lp-comparison-card-stat">3<span class="lp-comparison-card-stat-unit">×</span></span>
+            <span class="lp-comparison-card-claim">Bioavailability</span>
+          </div>
+        </div>
+        <div class="lp-comparison-card">
+          <div class="lp-comparison-card-top">
+            <span class="lp-comparison-card-abbr">CAL</span>
+            <span class="lp-comparison-card-title">Daily Routine</span>
+          </div>
+          <div class="lp-comparison-card-mid">
+            <img src="{{IMG_STATS_CARD_4}}" alt="Calendar with daily checkmarks illustration" loading="lazy" />
+          </div>
+          <div class="lp-comparison-card-bot">
+            <span class="lp-comparison-card-stat">94<span class="lp-comparison-card-stat-unit">%</span></span>
+            <span class="lp-comparison-card-claim">Daily Adherence</span>
+          </div>
+        </div>
+        <div class="lp-comparison-card">
+          <div class="lp-comparison-card-top">
+            <span class="lp-comparison-card-abbr">C+M</span>
+            <span class="lp-comparison-card-title">Coffee + Mushroom</span>
+          </div>
+          <div class="lp-comparison-card-mid">
+            <img src="{{IMG_STATS_CARD_5}}" alt="Coffee bean and {{KEY_INGREDIENT_LC}} paired illustration" loading="lazy" />
+          </div>
+          <div class="lp-comparison-card-bot">
+            <span class="lp-comparison-card-stat">2<span class="lp-comparison-card-stat-unit">×</span></span>
+            <span class="lp-comparison-card-claim">Caffeine Synergy</span>
+          </div>
+        </div>
+        <div class="lp-comparison-card">
+          <div class="lp-comparison-card-top">
+            <span class="lp-comparison-card-abbr">β-G</span>
+            <span class="lp-comparison-card-title">Beta-Glucan Content</span>
+          </div>
+          <div class="lp-comparison-card-mid">
+            <img src="{{IMG_STATS_CARD_6}}" alt="Beta-glucan molecular structure with clinical stamp illustration" loading="lazy" />
+          </div>
+          <div class="lp-comparison-card-bot">
+            <span class="lp-comparison-card-stat">30<span class="lp-comparison-card-stat-unit">%</span></span>
+            <span class="lp-comparison-card-claim">Clinical Grade</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCARCITY -->
+  <section class="lp-scarcity">
+    <div class="lp-scarcity-box">
+      <span class="lp-scarcity-rule" aria-hidden="true"></span>
+      <div class="lp-scarcity-body">
+        <span class="lp-scarcity-chip">Limited</span>
+        <p>Due to high demand and specialized {{KEY_INGREDIENT_LC}} sourcing, {{PRODUCT_NAME}} inventory is allocated monthly. If this page is still live, stock is available for this cycle.</p>
+      </div>
+      <div class="lp-scarcity-thumb">
+        <img src="{{IMG_BUNDLE_SCARCITY}}" alt="{{PRODUCT_NAME}} bundle" loading="lazy" />
+      </div>
+    </div>
+  </section>
+
+  <!-- SOCIAL PROOF (Facebook comments / reviews) -->
+  <section class="lp-social-proof">
+    <div class="lp-container" style="text-align: center;">
+      <h2 class="lp-section-heading">Real Reviews From <em>Real People</em></h2>
+      <p class="lp-section-heading-sub">Thousands of comments, messages, and reviews from customers across Facebook, Instagram, and email.</p>
+    </div>
+    <div class="lp-social-proof-grid">
+      <div class="lp-social-proof-card"><img src="{{IMG_FB_REVIEW_1}}" alt="Real customer review" loading="lazy" /></div>
+      <div class="lp-social-proof-card"><img src="{{IMG_FB_REVIEW_2}}" alt="Real customer review" loading="lazy" /></div>
+      <div class="lp-social-proof-card"><img src="{{IMG_FB_REVIEW_3}}" alt="Real customer review" loading="lazy" /></div>
+      <div class="lp-social-proof-card"><img src="{{IMG_FB_REVIEW_4}}" alt="Real customer review" loading="lazy" /></div>
+    </div>
+  </section>
+
+  <!-- FOUNDER / WHY WE BUILT IT -->
+  <section class="lp-founder" id="lp-founder">
+    <div class="lp-founder-inner">
+      <div>
+        <div class="lp-img-ph lp-img-ph--on-dark lp-img-ph--square lp-img-ph--loaded" style="border-radius: 160px 160px 20px 20px; aspect-ratio: 1;">
+          <img src="{{IMG_FOUNDER_LIFESTYLE}}" alt="Customer holding {{PRODUCT_NAME}} coffee" loading="lazy" style="object-position: center;" />
+        </div>
+      </div>
+      <div>
+        <h2>Why We Built It</h2>
+        <div class="lp-divider lp-divider--left"></div>
+        <p>We started {{BRAND_NAME}} after watching someone we love fight their way back from a stroke — and run out of options that actually helped.</p>
+        <p>The pills didn't move the needle. The therapy plateaued. And nobody was putting the actual research — neuroplasticity, NGF, {{KEY_INGREDIENT_LC}} — into something simple enough to use every day.</p>
+        <p>So we built it ourselves.</p>
+        <p><strong>{{PRODUCT_NAME}} is a coffee because recovery shouldn't feel like another prescription.</strong> It's engineered because guessing isn't good enough. And it's guaranteed for a full {{GUARANTEE_DAYS}} days because we know what it does.</p>
+        <p>We built it for the people whose therapy has stalled. For the families still fighting five years in. For anyone modern medicine has run out of answers for.</p>
+        <p><em>That's who we built it for. Because nobody else was going to.</em></p>
+        <h3 style="font-size: 1.25rem; font-weight: 800; margin: 26px 0 14px; color: var(--lp-navy);">What's Inside Every Cup</h3>
+        <div class="lp-founder-ingredients">
+          <div class="lp-founder-ingredient">
+            <div class="lp-founder-ingredient-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11a8 8 0 0 1 16 0Z"/><path d="M9 11v7a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-7"/></svg></div>
+            <p class="lp-founder-ingredient-name">{{KEY_INGREDIENT_FORMAL}}</p>
+          </div>
+          <div class="lp-founder-ingredient">
+            <div class="lp-founder-ingredient-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="12" rx="5" ry="8"/><path d="M12 5c0 2 2 3 2 5s-2 3-2 5 2 3 2 5"/></svg></div>
+            <p class="lp-founder-ingredient-name">Premium Coffee</p>
+          </div>
+          <div class="lp-founder-ingredient">
+            <div class="lp-founder-ingredient-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4c-1 8-6 13-14 14 1-8 6-13 14-14Z"/><path d="M6 18 14 10"/></svg></div>
+            <p class="lp-founder-ingredient-name">Natural Adaptogens</p>
+          </div>
+          <div class="lp-founder-ingredient">
+            <div class="lp-founder-ingredient-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c-3 4-5 7-5 11a5 5 0 0 0 10 0c0-2-1-3-2-4 0 2-1 3-2 3 1-3 0-6-1-10Z"/></svg></div>
+            <p class="lp-founder-ingredient-name">Anti-Inflammatories</p>
+          </div>
+          <div class="lp-founder-ingredient">
+            <div class="lp-founder-ingredient-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3"/><path d="M15 5a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3"/><path d="M12 5v14"/></svg></div>
+            <p class="lp-founder-ingredient-name">Neuroprotective</p>
+          </div>
+          <div class="lp-founder-ingredient">
+            <div class="lp-founder-ingredient-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h4l2-5 4 10 2-5h6"/></svg></div>
+            <p class="lp-founder-ingredient-name">Circulation Boost</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BADGES -->
+  <section class="lp-badges">
+    <div class="lp-container" style="text-align: center;">
+      <h2 class="lp-section-heading">The {{PRODUCT_NAME}} <em>Promise</em></h2>
+      <div class="lp-divider"></div>
+    </div>
+    <div class="lp-badges-grid">
+      <div class="lp-badge-item">
+        <div class="lp-badge-icon"><img src="{{IMG_PROMISE_1}}" alt="" loading="lazy" /></div>
+        <span class="lp-badge-label">Clinically Backed Natural Ingredients</span>
+      </div>
+      <div class="lp-badge-item">
+        <div class="lp-badge-icon"><img src="{{IMG_PROMISE_2}}" alt="" loading="lazy" /></div>
+        <span class="lp-badge-label">Non-Invasive</span>
+      </div>
+      <div class="lp-badge-item">
+        <div class="lp-badge-icon"><img src="{{IMG_PROMISE_3}}" alt="" loading="lazy" /></div>
+        <span class="lp-badge-label">Pill-Free</span>
+      </div>
+      <div class="lp-badge-item">
+        <div class="lp-badge-icon"><img src="{{IMG_PROMISE_4}}" alt="" loading="lazy" /></div>
+        <span class="lp-badge-label">Side-Effect Free</span>
+      </div>
+    </div>
+    <div class="lp-container" style="max-width: 720px; text-align: center; margin-top: 40px;">
+      <p style="font-size: 1.05rem; line-height: 1.7; color: var(--lp-text-mid);">We've put {{PRODUCT_NAME}} in the hands of {{CUSTOMER_COUNT}} customers. Tested it across {{CLINIC_COUNT_LABEL}}. Tracked {{STUDY_PARTICIPANTS_LABEL}} through three months of recovery. The results are why we stand behind every cup with a full <strong>{{GUARANTEE_DAYS}}-day money-back guarantee</strong> — the longest in the industry.</p>
+      <p style="font-size: 1.1rem; font-weight: 700; color: var(--lp-navy); margin-top: 14px;">If {{PRODUCT_NAME}} doesn't help you rebuild, you don't pay. That's the deal.</p>
+    </div>
+  </section>
+
+  <!-- MARQUEE #2 -->
+  <div class="lp-marquee" aria-hidden="true">
+    <div class="lp-marquee-track">
+      <span class="lp-marquee-item">Sale Ends Tonight <span class="lp-marquee-dot"></span></span>
+      <span class="lp-marquee-item">Free Shipping Included <span class="lp-marquee-dot"></span></span>
+      <span class="lp-marquee-item">+ Free Recovery Guide <span class="lp-marquee-dot"></span></span>
+      <span class="lp-marquee-item">Sale Ends Tonight <span class="lp-marquee-dot"></span></span>
+      <span class="lp-marquee-item">Free Shipping Included <span class="lp-marquee-dot"></span></span>
+      <span class="lp-marquee-item">+ Free Recovery Guide <span class="lp-marquee-dot"></span></span>
+      <span class="lp-marquee-item">Sale Ends Tonight <span class="lp-marquee-dot"></span></span>
+      <span class="lp-marquee-item">Free Shipping Included <span class="lp-marquee-dot"></span></span>
+    </div>
+  </div>
+
+  <!-- PRICING -->
+  <section class="lp-pricing" id="lp-pricing">
+    <div class="lp-container" style="text-align: center;">
+      <h2 class="lp-section-heading lp-section-heading--light">Your <em>Recovery Plan</em></h2>
+      <div class="lp-divider"></div>
+    </div>
+    <div class="lp-pricing-timer">
+      <p class="lp-pricing-timer-label">Sale pricing expires in</p>
+      <div class="lp-pricing-countdown">
+        <div class="lp-pricing-countdown-block"><span class="lp-pricing-countdown-number" id="lp-cd-hours">23</span><span class="lp-pricing-countdown-label">Hours</span></div>
+        <div class="lp-pricing-countdown-block"><span class="lp-pricing-countdown-number" id="lp-cd-minutes">59</span><span class="lp-pricing-countdown-label">Minutes</span></div>
+        <div class="lp-pricing-countdown-block"><span class="lp-pricing-countdown-number" id="lp-cd-seconds">59</span><span class="lp-pricing-countdown-label">Seconds</span></div>
+      </div>
+      <p class="lp-pricing-counter"><strong>{{ORDERS_TODAY}}</strong> customers ordered today</p>
+    </div>
+    <div class="lp-pricing-cards">
+      <div class="lp-pricing-card lp-pricing-card--featured">
+        <span class="lp-pricing-card-banner lp-pricing-card-banner--popular">
+          <span class="lp-pricing-card-banner-main">3 Months Autoship</span>
+          <span class="lp-pricing-card-banner-sub">Buy 2 Get 1 Free</span>
+        </span>
+        <div class="lp-pricing-card-main">
+          <img class="lp-pricing-card-main-img" src="{{IMG_PRICING_3PACK}}" alt="{{PRODUCT_NAME}} 3-month autoship" />
+        </div>
+        <div class="lp-pricing-card-thumbs">
+          <button type="button" class="lp-pricing-card-thumb lp-pricing-card-thumb--active" data-src="{{IMG_PRICING_3PACK}}" aria-label="View: {{PRODUCT_NAME}} 3-pack"><img src="{{IMG_PRICING_3PACK}}" alt="" loading="lazy" /></button>
+          <button type="button" class="lp-pricing-card-thumb" data-src="{{IMG_HOWTO_DRINK}}" aria-label="View: Drinking {{PRODUCT_NAME}}"><img src="{{IMG_HOWTO_DRINK}}" alt="" loading="lazy" /></button>
+          <button type="button" class="lp-pricing-card-thumb" data-src="{{IMG_HOWTO_OPEN}}" aria-label="View: Opening {{PRODUCT_NAME}} sachet"><img src="{{IMG_HOWTO_OPEN}}" alt="" loading="lazy" /></button>
+          <button type="button" class="lp-pricing-card-thumb" data-src="{{IMG_PRICING_INGREDIENTS}}" aria-label="View: Ingredients"><img src="{{IMG_PRICING_INGREDIENTS}}" alt="" loading="lazy" /></button>
+        </div>
+        <div class="lp-pricing-card-price-wrap">
+          <span class="lp-pricing-card-price-old">{{PRICE_3MO_OLD}}</span>
+          <span class="lp-pricing-card-price-new">{{PRICE_3MO_NEW}}</span>
+          <span class="lp-pricing-card-price-per">= {{PRICE_3MO_PER_DAY}} · less than a gas-station coffee</span>
+        </div>
+        <ul class="lp-pricing-card-perks">
+          <li>12 weeks of {{PRODUCT_NAME}} (90 servings)</li>
+          <li>Free shipping on every order</li>
+          <li>Free recovery guide ({{BONUS_GUIDE_VALUE}} value)</li>
+          <li>Locked-in sale pricing on every refill</li>
+          <li>Cancel, skip, or pause anytime</li>
+        </ul>
+        <p class="lp-pricing-card-ships">Ships within 24 hours</p>
+        <a href="{{SHOPIFY_CART_PERMALINK}}" class="lp-cta-primary">GET MY 12-WEEK PROTOCOL →</a>
+        <div class="lp-pricing-card-trust">
+          <span class="lp-pricing-card-trust-item">{{GUARANTEE_DAYS}}-Day Money-Back Guarantee</span>
+          <span class="lp-pricing-card-trust-item">Free Shipping On Every Order</span>
+          <span class="lp-pricing-card-trust-item">Pause Or Cancel In 2 Clicks</span>
+        </div>
+      </div>
+      <div class="lp-pricing-card">
+        <span class="lp-pricing-card-banner lp-pricing-card-banner--save">
+          <span class="lp-pricing-card-banner-main">1 Month Autoship</span>
+          <span class="lp-pricing-card-banner-sub">& Save</span>
+        </span>
+        <div class="lp-pricing-card-main">
+          <img class="lp-pricing-card-main-img" src="{{IMG_PRICING_1PACK}}" alt="{{PRODUCT_NAME}} 1-month supply" />
+        </div>
+        <div class="lp-pricing-card-thumbs">
+          <button type="button" class="lp-pricing-card-thumb lp-pricing-card-thumb--active" data-src="{{IMG_PRICING_1PACK}}" aria-label="View: {{PRODUCT_NAME}} 1-box"><img src="{{IMG_PRICING_1PACK}}" alt="" loading="lazy" /></button>
+          <button type="button" class="lp-pricing-card-thumb" data-src="{{IMG_HOWTO_DRINK}}" aria-label="View: Drinking {{PRODUCT_NAME}}"><img src="{{IMG_HOWTO_DRINK}}" alt="" loading="lazy" /></button>
+          <button type="button" class="lp-pricing-card-thumb" data-src="{{IMG_HOWTO_OPEN}}" aria-label="View: Opening {{PRODUCT_NAME}} sachet"><img src="{{IMG_HOWTO_OPEN}}" alt="" loading="lazy" /></button>
+          <button type="button" class="lp-pricing-card-thumb" data-src="{{IMG_PRICING_INGREDIENTS}}" aria-label="View: Ingredients"><img src="{{IMG_PRICING_INGREDIENTS}}" alt="" loading="lazy" /></button>
+        </div>
+        <div class="lp-pricing-card-price-wrap">
+          <span class="lp-pricing-card-price-old">{{PRICE_1MO_OLD}}</span>
+          <span class="lp-pricing-card-price-new">{{PRICE_1MO_NEW}}</span>
+          <span class="lp-pricing-card-price-per">= {{PRICE_1MO_PER_DAY}} · per month</span>
+        </div>
+        <ul class="lp-pricing-card-perks">
+          <li>1 month of {{PRODUCT_NAME}} (30 servings)</li>
+          <li>Free shipping on every order</li>
+          <li>Sale pricing locked for life</li>
+          <li>Cancel, skip, or pause anytime</li>
+        </ul>
+        <p class="lp-pricing-card-ships">Ships within 24 hours</p>
+        <a href="{{SHOPIFY_CART_PERMALINK}}" class="lp-cta-secondary">TRY FOR 30 DAYS →</a>
+        <div class="lp-pricing-card-trust">
+          <span class="lp-pricing-card-trust-item">{{GUARANTEE_DAYS}}-Day Money-Back Guarantee</span>
+          <span class="lp-pricing-card-trust-item">Free Shipping On Every Order</span>
+          <span class="lp-pricing-card-trust-item">One-Tap Cancellation</span>
+        </div>
+      </div>
+    </div>
+    <p class="lp-pricing-guarantee"><strong>{{GUARANTEE_DAYS}}-Day Results Guarantee.</strong> No improvement? Full refund. Less than 0.5% ever return.</p>
+  </section>
+
+  <!-- TRUSTPILOT -->
+  <section class="lp-trustpilot" id="lp-reviews">
+    <div class="lp-container" style="text-align: center;">
+      <h2 class="lp-section-heading">What Customers <em>Actually Say</em></h2>
+      <div class="lp-divider"></div>
+    </div>
+    <div class="lp-trustpilot-summary">
+      <div class="lp-trustpilot-score">
+        <div>
+          <span class="lp-trustpilot-score-number">{{RATING_SCORE}}</span><span class="lp-trustpilot-score-number-sub"> / 5.0</span>
+        </div>
+        <div class="lp-trustpilot-score-stars">★★★★★</div>
+        <p class="lp-trustpilot-score-count">Based on {{REVIEW_COUNT}} verified reviews</p>
+      </div>
+      <div class="lp-trustpilot-bars">
+        <div class="lp-trustpilot-bar">
+          <span class="lp-trustpilot-bar-label">5 ★</span>
+          <div class="lp-trustpilot-bar-track"><div class="lp-trustpilot-bar-fill" style="width: 90%"></div></div>
+          <span class="lp-trustpilot-bar-pct">90%</span>
+        </div>
+        <div class="lp-trustpilot-bar">
+          <span class="lp-trustpilot-bar-label">4 ★</span>
+          <div class="lp-trustpilot-bar-track"><div class="lp-trustpilot-bar-fill" style="width: 7%"></div></div>
+          <span class="lp-trustpilot-bar-pct">7%</span>
+        </div>
+        <div class="lp-trustpilot-bar">
+          <span class="lp-trustpilot-bar-label">3 ★</span>
+          <div class="lp-trustpilot-bar-track"><div class="lp-trustpilot-bar-fill" style="width: 2%"></div></div>
+          <span class="lp-trustpilot-bar-pct">2%</span>
+        </div>
+        <div class="lp-trustpilot-bar">
+          <span class="lp-trustpilot-bar-label">2 ★</span>
+          <div class="lp-trustpilot-bar-track"><div class="lp-trustpilot-bar-fill" style="width: 0%"></div></div>
+          <span class="lp-trustpilot-bar-pct">0%</span>
+        </div>
+        <div class="lp-trustpilot-bar">
+          <span class="lp-trustpilot-bar-label">1 ★</span>
+          <div class="lp-trustpilot-bar-track"><div class="lp-trustpilot-bar-fill" style="width: 1%"></div></div>
+          <span class="lp-trustpilot-bar-pct">1%</span>
+        </div>
+      </div>
+    </div>
+    <div class="lp-trustpilot-tabs" role="tablist">
+      <button type="button" class="lp-trustpilot-tab lp-trustpilot-tab--active" data-tab="recent" role="tab">Most Recent</button>
+      <button type="button" class="lp-trustpilot-tab" data-tab="photos" role="tab">Highest Rated (With Photos)</button>
+      <button type="button" class="lp-trustpilot-tab" data-tab="helpful" role="tab">Most Helpful</button>
+    </div>
+    <div class="lp-trustpilot-reviews">
+
+      <!-- === TAB: Most Recent === -->
+      <article class="lp-trustpilot-review" data-tabs="recent">
+        <div class="lp-trustpilot-review-header">
+          <img class="lp-trustpilot-review-avatar" src="{{IMG_REVIEW_AVATAR_1}}" alt="Heather B." loading="lazy" />
+          <div class="lp-trustpilot-review-meta">
+            <p class="lp-trustpilot-review-name">Heather B.</p>
+            <p class="lp-trustpilot-review-subline">🇺🇸 United States · 3 days ago</p>
+          </div>
+          <span class="lp-trustpilot-review-stars">★★★★★</span>
+        </div>
+        <p class="lp-trustpilot-review-title">Balance work is finally clicking</p>
+        <p class="lp-trustpilot-review-body">Four months post-stroke. Started this at week three on my neurologist's nod. My OT noticed my left-side balance score jumped at our last session — she actually asked what I'd changed. One cup every morning, no skipping. The coffee is genuinely good, not medicinal.</p>
+        <div class="lp-trustpilot-review-actions">
+          <button type="button" class="lp-trustpilot-review-btn lp-trustpilot-review-btn--helpful" data-count="324">👍 Helpful (324)</button>
+          <button type="button" class="lp-trustpilot-review-btn lp-trustpilot-review-btn--expand">Read full review →</button>
+        </div>
+      </article>
+
+      <article class="lp-trustpilot-review" data-tabs="recent">
+        <div class="lp-trustpilot-review-header">
+          <img class="lp-trustpilot-review-avatar" src="{{IMG_REVIEW_AVATAR_2}}" alt="Linda R." loading="lazy" />
+          <div class="lp-trustpilot-review-meta">
+            <p class="lp-trustpilot-review-name">Linda R.</p>
+            <p class="lp-trustpilot-review-subline">🇺🇸 United States · 5 days ago</p>
+          </div>
+          <span class="lp-trustpilot-review-stars">★★★★★</span>
+        </div>
+        <p class="lp-trustpilot-review-title">My husband stood up from his recliner on his own</p>
+        <p class="lp-trustpilot-review-body">Eight months since his stroke. I've been stirring a scoop into his morning coffee for about ten weeks now. Yesterday he pushed up out of his recliner without reaching for the grab bar. First time. We both cried. Ordering the three-pack today so we don't ever run out.</p>
+        <div class="lp-trustpilot-review-actions">
+          <button type="button" class="lp-trustpilot-review-btn lp-trustpilot-review-btn--helpful" data-count="156">👍 Helpful (156)</button>
+          <button type="button" class="lp-trustpilot-review-btn lp-trustpilot-review-btn--expand">Read full review →</button>
+        </div>
+      </article>
+
+      <article class="lp-trustpilot-review" data-tabs="recent">
+        <div class="lp-trustpilot-review-header">
+          <img class="lp-trustpilot-review-avatar" src="{{IMG_REVIEW_AVATAR_3}}" alt="Gerald T." loading="lazy" />
+          <div class="lp-trustpilot-review-meta">
+            <p class="lp-trustpilot-review-name">Gerald T.</p>
+            <p class="lp-trustpilot-review-subline">🇺🇸 United States · 1 week ago</p>
+          </div>
+          <span class="lp-trustpilot-review-stars">★★★★★</span>
+        </div>
+        <p class="lp-trustpilot-review-title">Early weeks — cautious optimism</p>
+        <p class="lp-trustpilot-review-body">Three weeks post-discharge. Too early for dramatic wins, but I'll report what's real: I'm sleeping deeper, and my speech therapist said my word-finding felt noticeably faster at today's session. Will post an update at the six-week mark when there's more to tell.</p>
+        <div class="lp-trustpilot-review-actions">
+          <button type="button" class="lp-trustpilot-review-btn lp-trustpilot-review-btn--helpful" data-count="89">👍 Helpful (89)</button>
+          <button type="button" class="lp-trustpilot-review-btn lp-trustpilot-review-btn--expand">Read full review →</button>
+        </div>
+      </article>
+
+      <!-- === TAB: Highest Rated (With Photos) === -->
+      <article class="lp-trustpilot-review" data-tabs="photos">
+        <div class="lp-trustpilot-review-header">
+          <img class="lp-trustpilot-review-avatar" src="{{IMG_REVIEW_AVATAR_4}}" alt="Carol W." loading="lazy" />
+          <div class="lp-trustpilot-review-meta">
+            <p class="lp-trustpilot-review-name">Carol W.</p>
+            <p class="lp-trustpilot-review-subline">🇺🇸 United States · 2 weeks ago</p>
+          </div>
+          <span class="lp-trustpilot-review-stars">★★★★★</span>
+        </div>
+        <p class="lp-trustpilot-review-title">Twelve weeks — I buttoned my own shirt</p>
+        <p class="lp-trustpilot-review-body">Twelve weeks after my stroke. First time in months I buttoned my own shirt without help from my daughter. Whatever is in this, keep making it. My PT says I'm running ahead of the average curve she sees. Posting photos of my morning routine so folks see what this actually looks like at home.</p>
+        <div class="lp-trustpilot-review-actions">
+          <button type="button" class="lp-trustpilot-review-btn lp-trustpilot-review-btn--helpful" data-count="412">👍 Helpful (412)</button>
+          <button type="button" class="lp-trustpilot-review-btn lp-trustpilot-review-btn--expand">Read full review →</button>
+        </div>
+      </article>
+
+      <article class="lp-trustpilot-review" data-tabs="photos">
+        <div class="lp-trustpilot-review-header">
+          <img class="lp-trustpilot-review-avatar" src="{{IMG_REVIEW_AVATAR_5}}" alt="James P." loading="lazy" />
+          <div class="lp-trustpilot-review-meta">
+            <p class="lp-trustpilot-review-name">James P.</p>
+            <p class="lp-trustpilot-review-subline">🇺🇸 United States · 3 weeks ago</p>
+          </div>
+          <span class="lp-trustpilot-review-stars">★★★★★</span>
+        </div>
+        <p class="lp-trustpilot-review-title">Bought Dad's second box — he reminded ME</p>
+        <p class="lp-trustpilot-review-body">Dad had his stroke eighteen months ago. Plateaued hard on physical therapy the last six. Six weeks on this and he walked to the mailbox without his cane — then called to remind me to reorder his coffee before the next one ran out. That's two wins in one week.</p>
+        <div class="lp-trustpilot-review-actions">
+          <button type="button" class="lp-trustpilot-review-btn lp-trustpilot-review-btn--helpful" data-count="367">👍 Helpful (367)</button>
+          <button type="button" class="lp-trustpilot-review-btn lp-trustpilot-review-btn--expand">Read full review →</button>
+        </div>
+      </article>
+
+      <article class="lp-trustpilot-review" data-tabs="photos">
+        <div class="lp-trustpilot-review-header">
+          <img class="lp-trustpilot-review-avatar" src="{{IMG_REVIEW_AVATAR_6}}" alt="Patricia L." loading="lazy" />
+          <div class="lp-trustpilot-review-meta">
+            <p class="lp-trustpilot-review-name">Patricia L.</p>
+            <p class="lp-trustpilot-review-subline">🇬🇧 United Kingdom · 1 month ago</p>
+          </div>
+          <span class="lp-trustpilot-review-stars">★★★★★</span>
+        </div>
+        <p class="lp-trustpilot-review-title">My handwriting came back</p>
+        <p class="lp-trustpilot-review-body">Five months since my stroke. Started this at month two. Two weeks ago I wrote a full birthday card for my granddaughter in my own handwriting — something my OT said might take a year or more. I have photos of that card I'll treasure forever. Attaching a couple of my morning routine.</p>
+        <div class="lp-trustpilot-review-actions">
+          <button type="button" class="lp-trustpilot-review-btn lp-trustpilot-review-btn--helpful" data-count="298">👍 Helpful (298)</button>
+          <button type="button" class="lp-trustpilot-review-btn lp-trustpilot-review-btn--expand">Read full review →</button>
+        </div>
+      </article>
+
+      <!-- === TAB: Most Helpful === -->
+      <article class="lp-trustpilot-review" data-tabs="helpful">
+        <div class="lp-trustpilot-review-header">
+          <img class="lp-trustpilot-review-avatar" src="{{IMG_REVIEW_AVATAR_7}}" alt="Deborah M." loading="lazy" />
+          <div class="lp-trustpilot-review-meta">
+            <p class="lp-trustpilot-review-name">Deborah M.</p>
+            <p class="lp-trustpilot-review-subline">🇬🇧 United Kingdom · 2 weeks ago</p>
+          </div>
+          <span class="lp-trustpilot-review-stars">★★★★★</span>
+        </div>
+        <p class="lp-trustpilot-review-title">My mum is 74 and it's actually working</p>
+        <p class="lp-trustpilot-review-body">Bought this for my mum after her stroke last year. She loves the taste — says it's real coffee, not supplement water. Six weeks in, her speech therapist booked her OUT from weekly visits because she no longer needs them. Worth every penny and then some.</p>
+        <div class="lp-trustpilot-review-actions">
+          <button type="button" class="lp-trustpilot-review-btn lp-trustpilot-review-btn--helpful" data-count="241">👍 Helpful (241)</button>
+          <button type="button" class="lp-trustpilot-review-btn lp-trustpilot-review-btn--expand">Read full review →</button>
+        </div>
+      </article>
+
+      <article class="lp-trustpilot-review" data-tabs="helpful">
+        <div class="lp-trustpilot-review-header">
+          <img class="lp-trustpilot-review-avatar" src="{{IMG_REVIEW_AVATAR_8}}" alt="Bryce K." loading="lazy" />
+          <div class="lp-trustpilot-review-meta">
+            <p class="lp-trustpilot-review-name">Bryce K.</p>
+            <p class="lp-trustpilot-review-subline">🇨🇦 Canada · 1 week ago</p>
+          </div>
+          <span class="lp-trustpilot-review-stars">★★★★★</span>
+        </div>
+        <p class="lp-trustpilot-review-title">Plateau — broken</p>
+        <p class="lp-trustpilot-review-body">Thirteen months post-stroke. My PT and I had hit the same wall for four months straight. Five weeks on this and my grip strength measurement jumped 6 kg on my affected side. Objective number from the dynamometer, not a vibe. First real progress in nearly half a year.</p>
+        <div class="lp-trustpilot-review-actions">
+          <button type="button" class="lp-trustpilot-review-btn lp-trustpilot-review-btn--helpful" data-count="187">👍 Helpful (187)</button>
+          <button type="button" class="lp-trustpilot-review-btn lp-trustpilot-review-btn--expand">Read full review →</button>
+        </div>
+      </article>
+
+      <article class="lp-trustpilot-review" data-tabs="helpful">
+        <div class="lp-trustpilot-review-header">
+          <img class="lp-trustpilot-review-avatar" src="{{IMG_REVIEW_AVATAR_9}}" alt="Mark S." loading="lazy" />
+          <div class="lp-trustpilot-review-meta">
+            <p class="lp-trustpilot-review-name">Mark S.</p>
+            <p class="lp-trustpilot-review-subline">🇦🇺 Australia · 3 weeks ago</p>
+          </div>
+          <span class="lp-trustpilot-review-stars">★★★★☆</span>
+        </div>
+        <p class="lp-trustpilot-review-title">Slower start for me — but real gains</p>
+        <p class="lp-trustpilot-review-body">Took me closer to eight weeks to notice anything, versus the two-to-three weeks some reviewers report. But I walked unassisted from the bedroom to the kitchen this week for the first time since my stroke fourteen months ago. Docking a star for the slow onset, not for the product itself.</p>
+        <div class="lp-trustpilot-review-actions">
+          <button type="button" class="lp-trustpilot-review-btn lp-trustpilot-review-btn--helpful" data-count="98">👍 Helpful (98)</button>
+          <button type="button" class="lp-trustpilot-review-btn lp-trustpilot-review-btn--expand">Read full review →</button>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="lp-faq" id="lp-faq-section">
+    <div class="lp-container" style="text-align: center;">
+      <h2 class="lp-section-heading">Frequently Asked <em>Questions</em></h2>
+      <div class="lp-divider"></div>
+    </div>
+    <div class="lp-faq-list">
+      <div class="lp-faq-item"><button class="lp-faq-question" aria-expanded="false">What does {{PRODUCT_NAME}} actually do?<span class="lp-faq-toggle">+</span></button><div class="lp-faq-answer"><p>{{PRODUCT_NAME}} stimulates {{MECHANISM_FULL}} ({{MECHANISM_ABBR}}) production via {{KEY_INGREDIENT_LC}} bioactive compounds, signaling your brain to grow new neurons and forge new connections for stroke recovery.</p></div></div>
+      <div class="lp-faq-item"><button class="lp-faq-question" aria-expanded="false">Who is this for?<span class="lp-faq-toggle">+</span></button><div class="lp-faq-answer"><p>Stroke survivors at any stage—acute phase, active rehabilitation, or years post-stroke looking to break through a plateau. Also for caregivers supporting recovery.</p></div></div>
+      <div class="lp-faq-item"><button class="lp-faq-question" aria-expanded="false">Will I feel side effects?<span class="lp-faq-toggle">+</span></button><div class="lp-faq-answer"><p>100% natural ingredients. Zero significant side effects across {{STUDY_PARTICIPANTS_CLINICAL_LABEL}}. {{KEY_INGREDIENT}} has centuries of safe consumption history.</p></div></div>
+      <div class="lp-faq-item"><button class="lp-faq-question" aria-expanded="false">Do I need a doctor?<span class="lp-faq-toggle">+</span></button><div class="lp-faq-answer"><p>No prescription needed. Simple as instant coffee. We recommend continuing your rehabilitation program—{{PRODUCT_NAME}} amplifies therapy, doesn't replace it.</p></div></div>
+      <div class="lp-faq-item"><button class="lp-faq-question" aria-expanded="false">What does it taste like?<span class="lp-faq-toggle">+</span></button><div class="lp-faq-answer"><p>Regular coffee. {{KEY_INGREDIENT}} extract is virtually tasteless in the blend. Add milk, cream, or sugar as normal.</p></div></div>
+      <div class="lp-faq-item"><button class="lp-faq-question" aria-expanded="false">How often should I drink it?<span class="lp-faq-toggle">+</span></button><div class="lp-faq-answer"><p>One cup daily, morning preferred. Results compound with consistency—initial improvements in 2-3 weeks, significant changes at 6 and 12 weeks.</p></div></div>
+      <div class="lp-faq-item"><button class="lp-faq-question" aria-expanded="false">Safe for seniors?<span class="lp-faq-toggle">+</span></button><div class="lp-faq-answer"><p>Yes. Most customers are 55+. Consult your doctor if on blood thinners, immunosuppressants, or with kidney disease.</p></div></div>
+      <div class="lp-faq-item"><button class="lp-faq-question" aria-expanded="false">Does this replace rehab?<span class="lp-faq-toggle">+</span></button><div class="lp-faq-answer"><p>No. PT provides repetitive stimulus; {{PRODUCT_NAME}} provides neurological raw materials. Synergistic together.</p></div></div>
+      <div class="lp-faq-item"><button class="lp-faq-question" aria-expanded="false">Compatible with my medications?<span class="lp-faq-toggle">+</span></button><div class="lp-faq-answer"><p>No known drug interactions. Check with your physician if on blood thinners, anti-seizure, or immunosuppressant medication.</p></div></div>
+      <div class="lp-faq-item"><button class="lp-faq-question" aria-expanded="false">Different from other {{KEY_INGREDIENT_LC}}?<span class="lp-faq-toggle">+</span></button><div class="lp-faq-answer"><p>Formulated for stroke recovery (not general wellness), coffee format for compliance, clinically evaluated with published outcome data.</p></div></div>
+      <div class="lp-faq-item"><button class="lp-faq-question" aria-expanded="false">What if it doesn't work?<span class="lp-faq-toggle">+</span></button><div class="lp-faq-answer"><p>Full {{GUARANTEE_DAYS}}-day money-back guarantee, no questions. Under 0.5% return rate.</p></div></div>
+      <div class="lp-faq-item"><button class="lp-faq-question" aria-expanded="false">Shipping time?<span class="lp-faq-toggle">+</span></button><div class="lp-faq-answer"><p>US: 3-5 business days. International: 7-14 days. Tracked and insured. Same-day ship before 2 PM ET.</p></div></div>
+      <div class="lp-faq-item"><button class="lp-faq-question" aria-expanded="false">Can I cancel?<span class="lp-faq-toggle">+</span></button><div class="lp-faq-answer"><p>Anytime. Online portal or email {{SUPPORT_EMAIL}}. No fees, no minimums.</p></div></div>
+    </div>
+  </section>
+
+  
+  <!-- MARQUEE #3 (guarantee strip, before final CTA) -->
+  <div class="lp-marquee" aria-hidden="true">
+    <div class="lp-marquee-track">
+      <span class="lp-marquee-item">{{GUARANTEE_DAYS}}-Day Money-Back Guarantee <span class="lp-marquee-dot"></span></span>
+      <span class="lp-marquee-item">Free Shipping on Every Order <span class="lp-marquee-dot"></span></span>
+      <span class="lp-marquee-item">Developed With Neurologists <span class="lp-marquee-dot"></span></span>
+      <span class="lp-marquee-item">{{GUARANTEE_DAYS}}-Day Money-Back Guarantee <span class="lp-marquee-dot"></span></span>
+      <span class="lp-marquee-item">Free Shipping on Every Order <span class="lp-marquee-dot"></span></span>
+      <span class="lp-marquee-item">Developed With Neurologists <span class="lp-marquee-dot"></span></span>
+      <span class="lp-marquee-item">{{GUARANTEE_DAYS}}-Day Money-Back Guarantee <span class="lp-marquee-dot"></span></span>
+      <span class="lp-marquee-item">Free Shipping on Every Order <span class="lp-marquee-dot"></span></span>
+    </div>
+  </div>
+
+  <!-- FINAL CTA -->
+  <section class="lp-final-cta">
+    <div class="lp-final-cta-inner">
+      <div class="lp-final-cta-image">
+        <div class="lp-img-ph lp-img-ph--loaded">
+          <img src="{{IMG_PRODUCT_CLOSEUP}}" alt="{{PRODUCT_NAME}} product" />
+        </div>
+        <div class="lp-final-cta-image-badge">{{GUARANTEE_DAYS}}-Day<br>Guarantee</div>
+      </div>
+      <h2>Your Brain Can Rebuild. <span>Start Today.</span></h2>
+      <p>Join {{CUSTOMER_COUNT}} stroke survivors who stopped waiting. Risk-free {{GUARANTEE_DAYS}}-day guarantee.</p>
+      <a href="{{SHOPIFY_CART_PERMALINK}}" class="lp-cta-primary">⚡ Start Your Recovery</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="lp-footer">
+    <div class="lp-footer-inner">
+      <p class="lp-footer-logo">{{BRAND_NAME}}</p>
+      <p class="lp-footer-disclaimer">These statements have not been evaluated by the FDA. This product is not intended to diagnose, treat, cure, or prevent any disease. Results may vary. Consult your physician before beginning any new supplement. Testimonials reflect individual experiences.</p>
+      <p class="lp-footer-disclaimer" style="margin-top: 8px;">© 2026 {{BRAND_NAME}}. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <!-- STICKY BOTTOM BAR (desktop + mobile, appears after hero) -->
+  <div class="lp-sticky-bar" id="lp-sticky-bar" aria-hidden="true">
+    <div class="lp-sticky-bar-inner">
+      <div class="lp-sticky-bar-copy">
+        <div class="lp-sticky-bar-line1">Sale Ends Tonight</div>
+        <div class="lp-sticky-bar-line2">Free shipping + bonus guide included</div>
+      </div>
+      <a href="{{SHOPIFY_CART_PERMALINK}}" class="lp-cta-primary">Claim Offer</a>
+    </div>
+  </div>
+
+  <script>
+    /* Hero burger menu (binds all burgers — hero + topbar) */
+    (function(){
+      var btns = document.querySelectorAll('.lp-hero-burger');
+      var menu = document.getElementById('lp-hero-menu');
+      if(!btns.length || !menu) return;
+      function setExpanded(open){
+        btns.forEach(function(b){ b.setAttribute('aria-expanded', open ? 'true' : 'false'); });
+      }
+      btns.forEach(function(btn){
+        btn.addEventListener('click', function(){
+          var open = menu.classList.toggle('lp-hero-menu--open');
+          setExpanded(open);
+        });
+      });
+      menu.querySelectorAll('a').forEach(function(a){
+        a.addEventListener('click', function(){
+          menu.classList.remove('lp-hero-menu--open');
+          setExpanded(false);
+        });
+      });
+    })();
+
+    /* FAQ accordion */
+    (function(){
+      var items = document.querySelectorAll('.lp-faq-item');
+      items.forEach(function(item){
+        var btn = item.querySelector('.lp-faq-question');
+        btn.addEventListener('click', function(){
+          var open = item.classList.contains('lp-faq-item--open');
+          items.forEach(function(o){
+            o.classList.remove('lp-faq-item--open');
+            o.querySelector('.lp-faq-question').setAttribute('aria-expanded','false');
+          });
+          if(!open){
+            item.classList.add('lp-faq-item--open');
+            btn.setAttribute('aria-expanded','true');
+          }
+        });
+      });
+    })();
+
+    /* Countdown timers (topbar + pricing, synced) */
+    (function(){
+      var total = 86400;
+      var topH = document.getElementById('lp-topbar-h');
+      var topM = document.getElementById('lp-topbar-m');
+      var topS = document.getElementById('lp-topbar-s');
+      var pH = document.getElementById('lp-cd-hours');
+      var pM = document.getElementById('lp-cd-minutes');
+      var pS = document.getElementById('lp-cd-seconds');
+      function pad(n){ return n < 10 ? '0' + n : '' + n; }
+      function render(){
+        var h = Math.floor(total / 3600);
+        var m = Math.floor((total % 3600) / 60);
+        var s = total % 60;
+        if (topH) topH.textContent = pad(h);
+        if (topM) topM.textContent = pad(m);
+        if (topS) topS.textContent = pad(s);
+        if (pH) pH.textContent = pad(h);
+        if (pM) pM.textContent = pad(m);
+        if (pS) pS.textContent = pad(s);
+      }
+      render();
+      setInterval(function(){
+        if (total <= 0) return;
+        total--;
+        render();
+      }, 1000);
+    })();
+
+    /* Hero testimonial carousel — auto-rotate + click */
+    (function(){
+      var track = document.getElementById('lp-hero-carousel-track');
+      var dots = document.querySelectorAll('#lp-hero-carousel-dots .lp-hero-carousel-dot');
+      if (!track || dots.length === 0) return;
+      var current = 0;
+      var total = dots.length;
+      function go(i){
+        current = ((i % total) + total) % total;
+        track.style.transform = 'translateX(-' + (current * 100) + '%)';
+        dots.forEach(function(d, idx){
+          d.classList.toggle('lp-hero-carousel-dot--active', idx === current);
+        });
+      }
+      dots.forEach(function(d, idx){
+        d.addEventListener('click', function(){ go(idx); restart(); });
+      });
+      var interval = setInterval(function(){ go(current + 1); }, 4500);
+      function restart(){
+        clearInterval(interval);
+        interval = setInterval(function(){ go(current + 1); }, 4500);
+      }
+    })();
+
+    /* Mobile sticky bar — show only on mobile after scrolling past hero */
+    (function(){
+      var bar = document.getElementById('lp-sticky-bar');
+      var hero = document.querySelector('.lp-hero');
+      if (!bar || !hero) return;
+      var heroBottom = 0;
+      function measure(){ heroBottom = hero.offsetTop + hero.offsetHeight; }
+      function isMobile(){ return window.matchMedia('(max-width: 768px)').matches; }
+      function onScroll(){
+        if (!isMobile()) {
+          bar.classList.remove('lp-sticky-bar--visible');
+          document.body.classList.remove('lp-sticky-active');
+          return;
+        }
+        var scrolled = window.scrollY || window.pageYOffset;
+        var footer = document.querySelector('.lp-footer');
+        var nearFooter = footer && (scrolled + window.innerHeight > footer.offsetTop + 60);
+        if (scrolled > heroBottom && !nearFooter) {
+          bar.classList.add('lp-sticky-bar--visible');
+          document.body.classList.add('lp-sticky-active');
+        } else {
+          bar.classList.remove('lp-sticky-bar--visible');
+          document.body.classList.remove('lp-sticky-active');
+        }
+      }
+      measure();
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', function(){ measure(); onScroll(); });
+      onScroll();
+    })();
+
+    /* Timeline scroll-in reveal */
+    (function(){
+      var items = document.querySelectorAll('.lp-timeline-item');
+      if (!items.length) return;
+      if (!('IntersectionObserver' in window)) {
+        items.forEach(function(el){ el.classList.add('is-visible'); });
+        return;
+      }
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.18, rootMargin: '0px 0px -40px 0px' });
+      items.forEach(function(el){ io.observe(el); });
+    })();
+
+    /* Pricing card thumbnail gallery — click to swap main */
+    (function(){
+      document.querySelectorAll('.lp-pricing-card').forEach(function(card){
+        var mainImg = card.querySelector('.lp-pricing-card-main-img');
+        var thumbs = card.querySelectorAll('.lp-pricing-card-thumb');
+        if(!mainImg || !thumbs.length) return;
+        thumbs.forEach(function(t){
+          t.addEventListener('click', function(){
+            thumbs.forEach(function(o){ o.classList.remove('lp-pricing-card-thumb--active'); });
+            t.classList.add('lp-pricing-card-thumb--active');
+            var src = t.getAttribute('data-src');
+            if(src) mainImg.src = src;
+          });
+        });
+      });
+    })();
+
+/* Trustpilot reviews — tab switching + helpful vote + expand/collapse */
+    (function(){
+      var tabs = document.querySelectorAll('.lp-trustpilot-tab');
+      var reviews = document.querySelectorAll('.lp-trustpilot-review');
+      if (!tabs.length || !reviews.length) return;
+
+      function activate(target){
+        tabs.forEach(function(t){
+          t.classList.toggle('lp-trustpilot-tab--active', t.getAttribute('data-tab') === target);
+        });
+        reviews.forEach(function(r){
+          r.style.display = r.getAttribute('data-tabs') === target ? '' : 'none';
+        });
+      }
+
+      tabs.forEach(function(tab){
+        tab.addEventListener('click', function(){
+          activate(tab.getAttribute('data-tab'));
+        });
+      });
+
+      /* Helpful vote — visual-only increment + lock */
+      document.querySelectorAll('.lp-trustpilot-review-btn--helpful').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          if (btn.classList.contains('is-voted')) return;
+          var count = parseInt(btn.getAttribute('data-count') || '0', 10) + 1;
+          btn.classList.add('is-voted');
+          btn.textContent = '✓ Thanks (' + count + ')';
+        });
+      });
+
+      /* Read full review — toggle line-clamp on the body */
+      document.querySelectorAll('.lp-trustpilot-review-btn--expand').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          var card = btn.closest('.lp-trustpilot-review');
+          if (!card) return;
+          var expanded = card.classList.toggle('lp-trustpilot-review--expanded');
+          btn.textContent = expanded ? 'Show less ↑' : 'Read full review →';
+        });
+      });
+
+      /* Run filter on load so non-matching cards hide immediately */
+      var initial = document.querySelector('.lp-trustpilot-tab--active');
+      if (initial) activate(initial.getAttribute('data-tab'));
+    })();
+
+  </script>
+
+  <!--
+  IMAGE PLACEHOLDERS:
+    {{IMG_hero-product-lifestyle}} — Hero arch photo of customer with {{PRODUCT_NAME}} mug
+    {{IMG_problem-rehab}} — Stroke survivor in rehabilitation
+    {{IMG_problem-brain}} — Brain neural pathway illustration
+    {{IMG_belief-mug}} — Belief section main: mug in hands / morning scene
+    {{IMG_belief-product}} — Belief section accent: product close-up
+    {{IMG_article-neurons}} — Article inline: neural pathways / brain illustration
+    {{IMG_article-lions-mane}} — Article inline: {{KEY_INGREDIENT_LC}} mushroom close-up
+    {{IMG_article-coffee-lifestyle}} — Article inline: morning coffee scene
+    {{IMG_facility-video}} — GMP facility video still or photo
+    {{IMG_whofor-hero}} — Wide lifestyle: caregiver and stroke survivor
+    {{IMG_founder-portrait}} — Founder portrait photo (arch-topped)
+    {{IMG_magic-banner}} — Full-width "here's where the magic happens" banner image
+    {{IMG_pricing-3mo}} — 3-month bundle product shot
+    {{IMG_pricing-1mo}} — 1-month starter product shot
+    {{IMG_final-cta-product}} — Product hero shot (final CTA)
+    {{IMG_step-1}} — Opening a sachet
+    {{IMG_step-2}} — Adding hot water and stirring
+    {{IMG_step-3}} — Drinking {{PRODUCT_NAME}} coffee
+    Timeline circle images — lifestyle/product shots for each milestone
+    Testimonial photos — customer headshots (all placeholders)
+
+  LINK PLACEHOLDERS:
+    {{SHOPIFY_CART_PERMALINK}} — All CTA buttons
+    {{URL_PRIVACY/TERMS/SHIPPING/RETURNS/TRACK}} — Footer links
+
+  PRICE PLACEHOLDERS:
+    {{PRICE_3MO_ORIGINAL}} / {{PRICE_3MO_SALE}}
+    {{PRICE_1MO_ORIGINAL}} / {{PRICE_1MO_SALE}}
+    {{PRICE_GUIDE_VALUE}}
+
+  COPY TO REPLACE (flagged):
+    Founder section — [PLACEHOLDER: ...] blocks (3x) — user importing own copy
+    All testimonial names, quotes, and review text — placeholder customer stories
+    "{{ORDERS_TODAY}} customers ordered today" — live counter number, swap if dynamic feed available
+
+  INTENTIONAL DEVIATIONS from Primal Queen:
+    - Swapped PQ magenta/purple/yellow palette for {{BRAND_NAME}}-matched navy/green/gold/coral medical-authority system
+    - Removed Playfair Display serif in favor of Poppins sans (brand standard)
+    - Removed references list at end of article (per user direction)
+    - Sticky bottom bar is MOBILE ONLY (appears after hero), not desktop
+    - Subtle dot patterns on dark and cream sections instead of PQ's loud speckle/star graphics
+    - Dropped emoji decoration from timeline (PQ uses 🛌😌⚡️🌺🧘‍♀️🔥) in favor of clean markers
+    - Swapped PQ's "cost-vs-therapy" omission for a proper mechanism comparison grid (X MORE/% format) on dark bg
+    - "Magic happens" is a full-width photo banner with overlay, cleaner than PQ's pink graphic variant
+  -->
+</body>
+</html>
