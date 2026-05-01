@@ -183,21 +183,27 @@
 /* SOCIAL SHARE */
 #or-root .or-social-share {
     display: flex;
-    gap: 10px;
+    gap: 8px;
     align-items: center;
 }
 #or-root .or-social-share .or-social-icon {
-    width: 44px;
-    height: 44px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
-    background: #e0e0e0;
-    color: #888;
-    font-family: var(--or-ui-font);
-    font-size: 10px;
+    background: #e8eaed;
+    color: #5f6368;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    transition: background 0.15s ease;
+}
+#or-root .or-social-share .or-social-icon:hover { background: #d2d6db; }
+#or-root .or-social-share .or-social-icon svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+    display: block;
 }
 
 /* HERO IMAGE */
@@ -224,30 +230,54 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 24px;
+    gap: 28px;
     flex-wrap: wrap;
 }
-#or-root .or-media-logos .or-press-logo {
-    height: 32px;
-    width: auto;
-    max-width: 120px;
-    object-fit: contain;
-    filter: grayscale(100%);
-    opacity: 0.7;
-    mix-blend-mode: multiply;
-}
-#or-root .or-media-logos .or-logo-placeholder {
-    height: 32px;
-    min-width: 80px;
-    background: #e0e0e0;
-    color: #888;
-    font-family: var(--or-ui-font);
-    font-size: 11px;
-    display: flex;
+#or-root .or-press-name {
+    font-family: var(--or-heading-font);
+    font-weight: 800;
+    line-height: 1;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    border-radius: 4px;
-    padding: 0 12px;
+}
+#or-root .or-press-name--nbc { color: #000; font-weight: 800; letter-spacing: 0.06em; font-size: 24px; }
+#or-root .or-press-name--abc {
+    background: #000;
+    color: #fff;
+    border-radius: 50%;
+    width: 46px;
+    height: 46px;
+    font-family: var(--or-ui-font);
+    font-weight: 700;
+    font-size: 15px;
+    text-transform: lowercase;
+    letter-spacing: 0;
+    font-style: italic;
+}
+#or-root .or-press-name--cbs { color: #000; font-weight: 800; letter-spacing: 0.06em; font-size: 24px; }
+#or-root .or-press-name--fox {
+    color: #C8102E;
+    font-weight: 900;
+    font-style: italic;
+    letter-spacing: -0.02em;
+    font-size: 32px;
+    text-transform: uppercase;
+}
+#or-root .or-press-name--usa {
+    color: #0091CD;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    font-size: 15px;
+    text-transform: uppercase;
+}
+#or-root .or-press-name--forbes {
+    color: #A1051E;
+    font-weight: 700;
+    font-style: italic;
+    letter-spacing: -0.01em;
+    font-size: 26px;
+    font-family: var(--or-heading-font);
 }
 
 /* ARTICLE BODY */
@@ -296,14 +326,20 @@
 }
 
 /* WARNING BOX */
-#or-root .or-warning-box { margin-bottom: 24px; }
+#or-root .or-warning-box {
+    margin-bottom: 24px;
+    background: #FFF8E1;
+    border-left: 4px solid var(--or-red);
+    padding: 14px 18px;
+    border-radius: 2px;
+}
 #or-root .or-warning-box .or-warning-h2 {
     font-family: var(--or-heading-font);
     font-size: 16px;
     font-weight: 400;
-    line-height: 1.8;
+    line-height: 1.7;
     color: var(--or-text-dark);
-    margin-bottom: 16px;
+    margin-bottom: 0;
 }
 #or-root .or-warning-box .or-warning-red {
     color: var(--or-red);
@@ -438,6 +474,53 @@
     color: var(--or-white);
     text-decoration: none;
 }
+#or-root .or-st-readmore {
+    display: inline-block;
+    margin-top: 8px;
+    font-family: var(--or-ui-font);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--or-accent);
+    text-decoration: none;
+}
+#or-root .or-st-readmore:hover { text-decoration: underline; color: var(--or-accent); }
+
+/* In-flow sidebar CTA, sits below the first product image (desktop only) */
+#or-root .or-sidebar-anchor {
+    margin-bottom: 18px;
+}
+#or-root .or-sidebar-anchor .or-btn-cta {
+    margin: 0;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(71, 145, 26, 0.2);
+}
+
+/* Mobile sticky bottom CTA bar (advertorial) */
+#or-root .or-mobile-cta {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255,255,255,0.97);
+    border-top: 1px solid #e5e7eb;
+    padding: 10px 14px;
+    z-index: 100;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 -2px 14px rgba(0,0,0,0.06);
+}
+#or-root .or-mobile-cta .or-btn-cta {
+    margin: 0;
+    border-radius: 8px;
+    padding: 14px 18px;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+}
+@media (max-width: 960px) {
+    #or-root .or-mobile-cta { display: block; }
+    #or-root .or-sidebar-anchor { display: none; }
+}
 
 /* P.S. */
 #or-root .or-ps-section { margin: 24px 0; }
@@ -540,6 +623,38 @@
     height: 32px;
 }
 
+/* FOOTER */
+#or-root .or-footer {
+    border-top: 1px solid #e5e7eb;
+    background: #fafafa;
+    margin-top: 32px;
+    padding: 24px 16px;
+    font-family: var(--or-ui-font);
+    font-size: 12px;
+    line-height: 1.6;
+    color: #666;
+}
+#or-root .or-footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+#or-root .or-footer-disclosure {
+    font-style: italic;
+    margin-bottom: 12px;
+    color: #888;
+}
+#or-root .or-footer-fda {
+    margin-bottom: 12px;
+    color: #666;
+}
+#or-root .or-footer-meta {
+    border-top: 1px solid #e5e7eb;
+    padding-top: 12px;
+    font-size: 11px;
+    color: #999;
+}
+#or-root .or-footer-meta a { color: #666; text-decoration: underline; }
+
 /* RESPONSIVE */
 @media (max-width: 960px) {
     #or-root .or-page-wrapper {
@@ -610,11 +725,21 @@
                     </div>
                 </div>
                 <div class="or-social-share">
-                    <div class="or-social-icon">FB</div>
-                    <div class="or-social-icon">TW</div>
-                    <div class="or-social-icon">PIN</div>
-                    <div class="or-social-icon">WA</div>
-                    <div class="or-social-icon">EMAIL</div>
+                    <a href="#" class="or-social-icon" aria-label="Share on Facebook">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22.675 0H1.325C.593 0 0 .593 0 1.326v21.348C0 23.407.593 24 1.325 24H12.82v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116c.73 0 1.323-.593 1.323-1.326V1.326C24 .593 23.407 0 22.675 0z"/></svg>
+                    </a>
+                    <a href="#" class="or-social-icon" aria-label="Share on X/Twitter">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                    </a>
+                    <a href="#" class="or-social-icon" aria-label="Share on Pinterest">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C5.373 0 0 5.372 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738.098.119.112.224.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.631-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12 0-6.628-5.373-12-12-12z"/></svg>
+                    </a>
+                    <a href="#" class="or-social-icon" aria-label="Share on WhatsApp">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413"/></svg>
+                    </a>
+                    <a href="#" class="or-social-icon" aria-label="Share via email">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M0 3v18h24V3H0zm21.518 2L12 12.713 2.482 5h19.036zM2 19V7.183l10 8.104 10-8.104V19H2z"/></svg>
+                    </a>
                 </div>
             </div>
 
@@ -627,12 +752,12 @@
             <div class="or-as-seen-on">
                 <div class="or-as-seen-label">AS SEEN ON</div>
                 <div class="or-media-logos">
-                    <img src="assets/press/press-nbc.png" alt="NBC" class="or-press-logo">
-                    <img src="assets/press/press-abc.png" alt="ABC" class="or-press-logo">
-                    <img src="assets/press/press-cbs.png" alt="CBS" class="or-press-logo">
-                    <img src="assets/press/press-fox.png" alt="FOX" class="or-press-logo">
-                    <img src="assets/press/press-usa-today.png" alt="USA Today" class="or-press-logo">
-                    <img src="assets/press/press-forbes.png" alt="Forbes" class="or-press-logo">
+                    <span class="or-press-name or-press-name--nbc">NBC</span>
+                    <span class="or-press-name or-press-name--abc">abc</span>
+                    <span class="or-press-name or-press-name--cbs">CBS</span>
+                    <span class="or-press-name or-press-name--fox">FOX</span>
+                    <span class="or-press-name or-press-name--usa">USA TODAY</span>
+                    <span class="or-press-name or-press-name--forbes">Forbes</span>
                 </div>
             </div>
 
@@ -646,7 +771,6 @@
 
             <!-- BODY 1: Opening hook -->
             <p>The thing about your liver is, <strong>it doesn't tell you when something's wrong.</strong></p>
-            <p>The thing about your liver is, <strong>it doesn't tell you when something's wrong.</strong></p>
             <p>I work hard.</p>
             <p>I run my own roofing business. <strong>60-plus hour weeks.</strong> On a roof at 6am, on the phone with a supplier at 8pm.</p>
             <p>And I like a little bourbon at the end of the day.</p>
@@ -656,7 +780,7 @@
             <p>I'm not a hardcore drinker. I'm a guy who has a couple after work.</p>
 
             <!-- BODY 2: The doctor visit -->
-            <h2>BUT I'M NOT STUPID EITHER</h2>
+            <h2>But I'm not stupid either</h2>
             <p>You hear the podcasts. The Hubermans, the Rogans. <strong>14 units a week is the limit.</strong> Past that, you're doing damage you can't see.</p>
             <p>I'd been past it. Most weeks. <em>By a lot.</em></p>
             <p>So last March I booked the physical I'd been putting off for three years.</p>
@@ -670,7 +794,7 @@
             </div>
 
             <!-- BODY 3: What's actually happening in there -->
-            <h2>WHAT'S ACTUALLY HAPPENING IN THERE</h2>
+            <h2>What's actually happening in there</h2>
             <p>I asked him what "creeping up" actually meant.</p>
             <p>He pointed at one number on the chart. <strong>ALT.</strong> An enzyme your liver releases when liver cells are under stress.</p>
             <p>Then he scrolled back. <strong>Three years of numbers. Each one a little higher than the last.</strong></p>
@@ -685,8 +809,13 @@
                 <video src="assets/video/liver-decline.mp4" poster="assets/video/liver-decline-frame.png" autoplay loop muted playsinline disablepictureinpicture style="width:100%; height:100%; object-fit:cover; display:block;"></video>
             </div>
 
+            <!-- ARTICLE IMAGE 2B — product anchor before "What he told me next" -->
+            <div class="or-article-img" style="overflow:hidden;">
+                <img src="assets/aesthetic/01-foliage-morning.png" alt="Standardised milk thistle bottle on slate among green foliage" style="width:100%; height:100%; object-fit:cover; display:block;">
+            </div>
+
             <!-- BODY 4: What he told me next -->
-            <h2>WHAT HE TOLD ME NEXT</h2>
+            <h2>What he told me next</h2>
             <p>I asked him what I should actually do. If I wasn't quitting.</p>
             <p>He looked at me like he was deciding whether to say the next part.</p>
             <p><em>"Have you ever heard of milk thistle?"</em></p>
@@ -699,13 +828,13 @@
             <p>In nine years of seeing this man for annual physicals, this was the first time he'd told me what he <em>personally</em> did. Not what the literature recommends. Not what he tells his patients. <strong>What he does.</strong></p>
             <p>He didn't write it down. He didn't have a brand to recommend. He just answered a question I hadn't quite asked.</p>
 
-            <!-- ARTICLE IMAGE 3 — supplement facts panel + back of bottle (proof of 80% standardisation) -->
-            <div class="or-article-img" style="height:auto; background:#fff; padding:0;">
-                <img src="assets/ingredients.png" alt="LiverZen supplement facts — 300mg milk thistle extract standardised to 80% silymarin, plus inositol, pueraria, L-methionine, and turmeric extract" style="width:100%; height:auto;">
+            <!-- ARTICLE IMAGE 3 — doctor consultation (replaces supplement facts panel) -->
+            <div class="or-article-img" style="overflow:hidden;">
+                <img src="assets/generated/article-3-doctor-consult.png" alt="A patient in his fifties consulting with his family doctor about a supplement on the desk between them" style="width:100%; height:100%; object-fit:cover; display:block;">
             </div>
 
             <!-- BODY 5: Why I almost didn't bother -->
-            <h2>WHY I ALMOST DIDN'T BOTHER</h2>
+            <h2>Why I almost didn't bother</h2>
             <p>I'd tried all the BS supplements before… it's snake oil!</p>
             <p>I had a cabinet full of half-empty bottles already. <strong>Multivitamin. Fish oil. Glucosamine.</strong> The CVS milk thistle I'd written off three years earlier.</p>
             <p>Here's what I thought about supplements. And I'd guess you think it too.</p>
@@ -718,14 +847,14 @@
             <p>I called CVS. The pharmacist looked it up. <strong>30%.</strong></p>
 
             <!-- BODY 6: I'd never actually tried milk thistle -->
-            <h2>I'D NEVER ACTUALLY TRIED MILK THISTLE</h2>
+            <h2>I'd never actually tried milk thistle</h2>
             <p>I'd taken <strong>a third of the active concentration</strong> the research was run on, for less than two weeks, and concluded that "milk thistle doesn't work."</p>
             <p>I hadn't tried milk thistle.</p>
             <p><strong>I'd never tried milk thistle.</strong></p>
             <p>I ordered the 80% version that night.</p>
 
             <!-- BODY 7: My 7 weeks -->
-            <h2>MY 7 WEEKS</h2>
+            <h2>My 7 weeks</h2>
             <p>What I felt, what I didn't feel, and what showed up on the bloodwork.</p>
             <p>I'm going to tell you exactly what happened. <strong>No dressing it up.</strong></p>
             <p><strong>First two weeks:</strong> Nothing. The work is internal. Your liver doesn't do showy.</p>
@@ -738,7 +867,7 @@
             </div>
 
             <!-- BODY 8: Week 7 bloodwork -->
-            <h2>WEEK 7: BACK FOR BLOODWORK</h2>
+            <h2>Week 7: back for bloodwork</h2>
             <p>I went back for follow-up bloodwork.</p>
             <p><strong>My ALT was back to normal.</strong></p>
             <p>My doctor pulled up the new number, then the previous one, then the one from a year before. Looked at me. Said <em>"whatever you're doing, keep doing it."</em></p>
@@ -759,7 +888,7 @@
             </div>
 
             <!-- BODY 9: Why the skeptics convert hardest -->
-            <h2>WHY THE SKEPTICS CONVERT HARDEST</h2>
+            <h2>Why the skeptics convert hardest</h2>
             <p>The voice in your head telling you this won't work for you is the symptom, not the diagnosis.</p>
             <p>After my numbers came back, I started reading the comment sections. Not the brand testimonials. <strong>The Reddit threads.</strong> The Amazon reviews where guys leave one-star reviews and come back six weeks later to update.</p>
             <p>The pattern is the same every time.</p>
@@ -776,7 +905,7 @@
             <p><strong>You tried something. You didn't try this.</strong></p>
 
             <!-- BODY 13: Guarantee -->
-            <h2>60 DAYS. EMPTY BOTTLES. NO QUESTIONS.</h2>
+            <h2>60 days. Empty bottles. No questions.</h2>
             <p>The guarantee is <strong>60 days.</strong> Take it for two months. If you don't feel a difference, send the bottles back. <strong>Empty.</strong> They refund you anyway.</p>
             <p>No survey. No upsell. <em>No questions.</em></p>
             <p>I have never seen a supplement company offer that and stay in business unless the product was actually doing something.</p>
@@ -798,25 +927,20 @@
             <p>The choice is yours. <strong>But you have to make it now.</strong></p>
 
             <!-- GREEN CTA BUTTON -->
-            <a href="#order" class="or-btn-cta">CHECK AVAILABILITY NOW</a>
-
-            <!-- TEXT CTA -->
-            <p>
-                <a href="#order" class="or-text-cta">→ CHECK AVAILABILITY NOW — 80% STANDARDISED SILYMARIN</a>
-            </p>
+            <a href="pdp.html#offer" class="or-btn-cta">CHECK AVAILABILITY NOW</a>
 
             <!-- SIGN-OFF -->
             <p>— Mike R.<br>54, Roofing Contractor<br><em>25 years of bourbon. 7 weeks of milk thistle. Different conversation with my doctor.</em></p>
 
             <!-- TEXT CTA — final -->
             <p>
-                <a href="#order" class="or-text-cta">→ CHECK AVAILABILITY NOW — 60-DAY EMPTY-BOTTLE GUARANTEE</a>
+                <a href="pdp.html#offer" class="or-text-cta">→ CHECK AVAILABILITY NOW — 60-DAY EMPTY-BOTTLE GUARANTEE</a>
             </p>
 
             <!-- COMMENTS -->
             <div class="or-comments-section">
                 <div class="or-comment-input-row">
-                    <input type="text" placeholder="Add a comment ..." disabled>
+                    <input type="text" placeholder="Add a comment ..." aria-label="Add a comment">
                 </div>
 
                 <ul class="or-comment-list">
@@ -982,7 +1106,12 @@
             <div class="or-sidebar-heading">A standardised 80% silymarin milk thistle extract is helping bourbon drinkers, weekend wine guys, and shift workers bring elevated ALT enzymes back into normal range — without quitting their evening drink.</div>
 
             <div style="margin-bottom:14px; overflow:hidden;">
-                <img src="assets/aesthetic/01-foliage-morning.png" alt="LiverZen bottle on slate among green foliage" style="width:100%; height:auto; display:block;">
+                <img src="assets/pdp/hero1-blueprint.png" alt="LiverZen bottle with mechanism diagram" style="width:100%; height:auto; display:block;">
+            </div>
+
+            <!-- Anchored sidebar CTA — sits below the main product image, in-flow on desktop -->
+            <div class="or-sidebar-anchor">
+                <a href="pdp.html#offer" class="or-btn-cta">CHECK AVAILABILITY NOW</a>
             </div>
 
             <div class="or-sidebar-heading">The clinical research on milk thistle was run on extract standardised to 80% silymarin. Most over-the-counter bottles are 30 to 50%. Some aren't standardised at all.</div>
@@ -1003,7 +1132,7 @@
                     <span class="or-st-name">Mark T.</span><span class="or-st-location">, Denver, Colorado</span>
                 </div>
                 <div class="or-st-quote">"Two fingers of bourbon every night for 30 years. My doctor flagged my enzymes in January. Started 80% silymarin in February. April bloodwork looked like a different person."</div>
-                <a href="#order" class="or-btn-sidebar">Learn more</a>
+                <a href="pdp.html#offer" class="or-st-readmore">Read his full story →</a>
             </div>
 
             <!-- Sidebar Testimonial 2 -->
@@ -1016,7 +1145,7 @@
                     <span class="or-st-name">Dave H.</span><span class="or-st-location">, Atlanta, Georgia</span>
                 </div>
                 <div class="or-st-quote">"I'd written off every supplement on the shelf. The 30% stuff at CVS doesn't do anything. The 80% standardised version is a different product entirely."</div>
-                <a href="#order" class="or-btn-sidebar">Learn more</a>
+                <a href="pdp.html#offer" class="or-st-readmore">Read his full story →</a>
             </div>
 
             <!-- Sidebar Testimonial 3 -->
@@ -1029,12 +1158,28 @@
                     <span class="or-st-name">Greg M.</span><span class="or-st-location">, Houston, Texas</span>
                 </div>
                 <div class="or-st-quote">"Wife noticed before I did. The afternoon fog stopped around week three. The bloodwork caught up at week seven."</div>
-                <a href="#order" class="or-btn-sidebar">Learn more</a>
+                <a href="pdp.html#offer" class="or-st-readmore">Read his full story →</a>
             </div>
 
         </div><!-- / .or-sidebar-col -->
 
     </div><!-- / .or-page-wrapper -->
+
+    <!-- MOBILE STICKY CTA -->
+    <div class="or-mobile-cta">
+        <a href="pdp.html#offer" class="or-btn-cta">CHECK AVAILABILITY NOW →</a>
+    </div>
+
+    <!-- FOOTER / FDA DISCLAIMER -->
+    <footer class="or-footer">
+        <div class="or-footer-inner">
+            <p class="or-footer-disclosure"><strong>Advertising disclosure:</strong> This page contains promotional content. The author may receive compensation for purchases made through links on this page. Individual results vary.</p>
+            <p class="or-footer-fda">These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease. Always consult your physician before adding any supplement to your routine, especially if you take prescription medication.</p>
+            <div class="or-footer-meta">
+                © 2026 Men's Liver Health Report · <a href="pdp.html">Visit product page</a> · <a href="mailto:support@liverzen.com">Customer support</a>
+            </div>
+        </div>
+    </footer>
 
 </div><!-- / #or-root -->
 

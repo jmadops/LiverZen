@@ -22,10 +22,11 @@
 
 <style>
 :root {
-    /* Colors — pulled from French source */
-    --color-bg:           #FAF8F8;
-    --color-bg-cool:      #F2FCFF;
-    --color-bg-cream:     #F1F4F8;
+    /* Colors — consolidated to 2 distinct surfaces:
+       warm cream (--color-bg) and cool grey (--color-bg-cool / --color-bg-cream alias). */
+    --color-bg:           #FAF8F2;
+    --color-bg-cool:      #ECF1F8;
+    --color-bg-cream:     #ECF1F8;
     --color-bg-soft:      #F9FCFF;
     --color-ink:          #020817;
     --color-ink-soft:     #2f2f2f;
@@ -203,6 +204,21 @@ a { color: inherit; }
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 8px;
+}
+@media (max-width: 480px) {
+    .lz-gallery__thumbs {
+        display: flex;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        gap: 8px;
+        padding-bottom: 4px;
+    }
+    .lz-gallery__thumbs::-webkit-scrollbar { display: none; }
+    .lz-gallery__thumbs .lz-gallery__thumb {
+        flex: 0 0 22%;
+        min-width: 70px;
+    }
 }
 .lz-gallery__thumb {
     aspect-ratio: 1 / 1;
@@ -499,7 +515,51 @@ a { color: inherit; }
 }
 
 /* ========== Comparison ========== */
-.lz-compare { padding: var(--space-lg) 0; background: var(--color-bg-cream); }
+.lz-compare {
+    padding: var(--space-lg) 0 var(--space-xl);
+    background: var(--color-bg-cream);
+}
+.lz-compare__intro {
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto var(--space-md);
+}
+.lz-compare-card {
+    position: relative;
+    margin: 90px auto 0;
+    max-width: 880px;
+    background: #fff;
+    border-radius: var(--radius-lg);
+    box-shadow: 0 18px 50px rgba(2, 8, 23, 0.10);
+    overflow: visible;
+}
+.lz-compare-bottle {
+    position: absolute;
+    top: -100px;
+    right: 12%;
+    width: 110px;
+    height: 145px;
+    z-index: 2;
+    transform: rotate(-5deg);
+    pointer-events: none;
+    filter:
+        drop-shadow(0 22px 28px rgba(36, 125, 67, 0.30))
+        drop-shadow(0 8px 10px rgba(0, 0, 0, 0.20));
+    transition: transform 0.4s ease;
+}
+.lz-compare-card:hover .lz-compare-bottle {
+    transform: rotate(-5deg) translateY(-4px);
+}
+.lz-compare-bottle img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+@media (max-width: 600px) {
+    .lz-compare-bottle { right: 8%; width: 78px; height: 100px; top: -72px; }
+    .lz-compare-card { margin-top: 64px; }
+}
 .lz-h2 {
     font-family: var(--font-heading);
     font-weight: 800;
@@ -527,47 +587,82 @@ a { color: inherit; }
 
 .lz-table {
     width: 100%;
-    border-collapse: collapse;
-    font-size: 14px;
-    background: #fff;
-    border-radius: var(--radius-md);
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 16px;
+    background: transparent;
+    border-radius: var(--radius-lg);
     overflow: hidden;
-    box-shadow: 0 2px 12px rgba(2, 8, 23, 0.04);
 }
 .lz-table th, .lz-table td {
-    padding: 12px;
+    padding: 18px 22px;
     text-align: left;
     border-bottom: 1px solid var(--color-rule);
-    vertical-align: top;
+    vertical-align: middle;
     font-family: var(--font-body);
 }
 .lz-table thead th {
     font-family: var(--font-ui);
     font-weight: 700;
-    font-size: 11px;
-    letter-spacing: 0.08em;
+    font-size: 12px;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--color-ink-mute);
-    background: var(--color-bg-cool);
+    background: #F1F4F8;
+    padding: 24px 22px;
+    border-bottom: 2px solid var(--color-rule);
 }
-.lz-table thead th:last-child { color: var(--color-accent-deep); }
+.lz-table thead th:first-child {
+    border-top-left-radius: var(--radius-lg);
+}
+.lz-table thead th:last-child {
+    color: #fff;
+    background: linear-gradient(180deg, var(--color-accent) 0%, var(--color-accent-deep) 100%);
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: 0;
+    text-transform: none;
+    text-align: center;
+    padding: 24px 22px;
+    border-top-right-radius: var(--radius-lg);
+    border-bottom: 2px solid var(--color-accent-deep);
+}
 .lz-table tbody th {
-    font-weight: 600;
+    font-weight: 700;
+    color: var(--color-ink);
+    width: 32%;
+    background: #FAF8F2;
+    font-family: var(--font-heading);
+    font-size: 15px;
+}
+.lz-table tbody td {
+    font-size: 16px;
     color: var(--color-ink-soft);
-    width: 38%;
+}
+.lz-table tbody td:nth-child(2) {
+    color: var(--color-ink-mute);
 }
 .lz-table tbody td:last-child {
     color: var(--color-accent-deep);
     font-weight: 700;
+    background: rgba(40, 163, 82, 0.06);
+    border-left: 1px solid rgba(40, 163, 82, 0.18);
+    text-align: center;
+    font-size: 17px;
 }
 .lz-table tbody tr:last-child th,
 .lz-table tbody tr:last-child td { border-bottom: none; }
-
-/* ========== Supplement facts panel ========== */
-.lz-supp-facts {
-    margin-top: var(--space-md);
-    text-align: center;
+.lz-table tbody tr:last-child th { border-bottom-left-radius: var(--radius-lg); }
+.lz-table tbody tr:last-child td:last-child { border-bottom-right-radius: var(--radius-lg); }
+@media (max-width: 600px) {
+    .lz-table th, .lz-table td { padding: 14px 14px; font-size: 14px; }
+    .lz-table thead th { font-size: 10px; padding: 18px 14px; }
+    .lz-table thead th:last-child { font-size: 14px; padding: 18px 14px; }
+    .lz-table tbody td:last-child { font-size: 15px; }
 }
+
+/* ========== Supplement facts panel (legacy — no longer in compare) ========== */
+.lz-supp-facts { margin-top: var(--space-md); text-align: center; }
 .lz-supp-facts img {
     max-width: 720px;
     width: 100%;
@@ -578,11 +673,123 @@ a { color: inherit; }
 .lz-supp-facts__caption {
     margin-top: 12px;
     font-size: 14px;
-    color: var(--color-muted, #6b7280);
+    color: #6b7280;
     font-style: italic;
     max-width: 560px;
     margin-left: auto;
     margin-right: auto;
+}
+
+/* ========== What's actually inside ========== */
+.lz-inside {
+    background:
+        radial-gradient(circle at 80% 20%, rgba(40, 163, 82, 0.08), transparent 55%),
+        linear-gradient(135deg, #FAF8F2 0%, #E9F1E2 100%);
+    padding: var(--space-xl) 0 var(--space-lg);
+}
+.lz-inside__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+    align-items: center;
+}
+.lz-inside__media {
+    text-align: center;
+    position: relative;
+}
+.lz-inside__supp {
+    max-width: 440px;
+    width: 100%;
+    margin: 0 auto;
+    border-radius: 6px;
+    box-shadow: 0 18px 40px rgba(2, 8, 23, 0.10);
+}
+.lz-inside__bottle {
+    position: absolute;
+    top: -18px;
+    right: 8%;
+    width: 110px;
+    height: 145px;
+    z-index: 2;
+    transform: rotate(-6deg);
+    pointer-events: none;
+    filter:
+        drop-shadow(0 22px 28px rgba(36, 125, 67, 0.30))
+        drop-shadow(0 8px 10px rgba(0, 0, 0, 0.18));
+}
+.lz-inside__bottle img { width: 100%; height: 100%; object-fit: contain; }
+.lz-inside__copy { padding: 0 4px; }
+.lz-inside__copy h2 {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 30px;
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    color: var(--color-ink);
+    margin-bottom: 12px;
+}
+.lz-inside__copy h2 em {
+    font-style: italic;
+    color: var(--color-accent-deep);
+}
+.lz-inside__lede {
+    font-family: var(--font-heading);
+    font-style: italic;
+    font-size: 16px;
+    color: var(--color-ink-soft);
+    margin-bottom: var(--space-md);
+    line-height: 1.5;
+    border-left: 3px solid var(--color-accent);
+    padding-left: 14px;
+}
+.lz-inside__list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 var(--space-md);
+}
+.lz-inside__list li {
+    padding: 14px 0 14px 36px;
+    border-top: 1px solid rgba(36, 125, 67, 0.18);
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--color-ink);
+    position: relative;
+}
+.lz-inside__list li:last-child {
+    border-bottom: 1px solid rgba(36, 125, 67, 0.18);
+}
+.lz-inside__list li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    top: 14px;
+    width: 22px;
+    height: 22px;
+    background: var(--color-accent);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+.lz-inside__list li strong {
+    color: var(--color-accent-deep);
+    font-weight: 700;
+}
+.lz-inside__list li em {
+    font-style: normal;
+    color: var(--color-ink-mute);
+    font-size: 14px;
+}
+.lz-inside__footnote {
+    font-family: var(--font-ui);
+    font-size: 12px;
+    color: var(--color-ink-mute);
+    line-height: 1.5;
+    letter-spacing: 0.02em;
 }
 
 /* ========== Mechanism cards ========== */
@@ -621,6 +828,7 @@ a { color: inherit; }
     font-size: 14px;
     color: var(--color-ink-soft);
     line-height: 1.55;
+    min-height: 92px;
 }
 
 /* ========== Testimonials ========== */
@@ -644,8 +852,8 @@ a { color: inherit; }
     margin-bottom: 10px;
 }
 .lz-testimonial__avatar {
-    width: 44px;
-    height: 44px;
+    width: 58px;
+    height: 58px;
     border-radius: 50%;
     background: var(--color-bg-cream);
     flex-shrink: 0;
@@ -732,16 +940,18 @@ a { color: inherit; }
     border-radius: var(--radius-md);
     overflow: hidden;
     box-shadow: 0 1px 6px rgba(0,0,0,0.06);
-    height: 540px;
+    aspect-ratio: 9 / 16;
+    max-width: 340px;
+    margin: 0 auto;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 .lz-featured-videos__card video {
+    width: 100%;
     height: 100%;
-    width: auto;
-    max-width: 100%;
-    object-fit: contain;
+    object-fit: cover;
     display: block;
     background: #000;
 }
@@ -779,18 +989,57 @@ a { color: inherit; }
     height: 26px;
     width: auto;
     max-width: 100%;
-    filter: grayscale(100%);
-    opacity: 0.65;
     object-fit: contain;
 }
 .lz-press__name {
     font-family: var(--font-heading);
     font-weight: 800;
-    font-size: 18px;
+    font-size: 22px;
     letter-spacing: 0.04em;
-    color: var(--color-ink-mute);
     text-transform: uppercase;
     line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.lz-press__name--nbc { color: #000; font-weight: 800; letter-spacing: 0.06em; font-size: 22px; }
+.lz-press__name--abc {
+    background: #000;
+    color: #fff;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 14px;
+    text-transform: lowercase;
+    letter-spacing: 0;
+    font-style: italic;
+}
+.lz-press__name--cbs { color: #000; font-weight: 800; letter-spacing: 0.06em; font-size: 22px; }
+.lz-press__name--fox {
+    color: #C8102E;
+    font-weight: 900;
+    font-style: italic;
+    letter-spacing: -0.02em;
+    font-size: 30px;
+    text-transform: uppercase;
+}
+.lz-press__name--usa {
+    color: #0091CD;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+.lz-press__name--forbes {
+    color: #A1051E;
+    font-weight: 700;
+    font-style: italic;
+    letter-spacing: -0.01em;
+    font-size: 24px;
+    text-transform: none;
+    font-family: 'Bitter', 'Georgia', serif;
 }
 
 /* ========== Guarantee ========== */
@@ -1187,6 +1436,14 @@ a { color: inherit; }
 
     .lz-mech-grid { grid-template-columns: repeat(3, 1fr); }
 
+    .lz-inside__grid {
+        grid-template-columns: 1fr 1.05fr;
+        gap: var(--space-xl);
+    }
+    .lz-inside__copy h2 { font-size: 38px; }
+    .lz-inside__lede { font-size: 19px; }
+    .lz-inside__list li { font-size: 16px; padding-left: 40px; }
+
     .lz-testimonials__grid {
         grid-template-columns: repeat(3, 1fr);
         gap: var(--space-md);
@@ -1304,7 +1561,7 @@ a { color: inherit; }
                 </div>
                 <div class="lz-trustbar__cell">
                     <strong>7 weeks</strong>
-                    <span>Avg. to in-range bloodwork</span>
+                    <span>To in-range bloodwork</span>
                 </div>
                 <div class="lz-trustbar__cell">
                     <strong>80%</strong>
@@ -1339,7 +1596,7 @@ a { color: inherit; }
     <section class="lz-videos">
         <div class="lz-container lz-container--wide">
             <div class="lz-videos__head">
-                <span class="lz-eyebrow">See it for yourself</span>
+                <span class="lz-eyebrow">How it fits your day</span>
                 <h2 class="lz-h2 lz-h2--center">One capsule, with breakfast. <em>The rest of your day, unchanged.</em></h2>
             </div>
             <div class="lz-videos__grid">
@@ -1359,30 +1616,31 @@ a { color: inherit; }
     <!-- ============ Comparison ============ -->
     <section class="lz-compare">
         <div class="lz-container">
-            <h2 class="lz-h2">Why this works when the pharmacy version <em>didn't.</em></h2>
-            <p class="lz-section-lede">The active compound in milk thistle is silymarin. The clinical research is run on extract standardised to 80%. Most pharmacy and supermarket bottles use 30–50%, or aren't standardised at all.</p>
+            <div class="lz-compare__intro">
+                <h2 class="lz-h2 lz-h2--center">Why this works when the pharmacy version <em>didn't.</em></h2>
+                <p class="lz-section-lede">The active compound in milk thistle is silymarin. The clinical research is run on extract standardised to 80%. Most pharmacy and supermarket bottles use 30–50%, or aren't standardised at all.</p>
+            </div>
 
-            <table class="lz-table">
-                <thead>
-                    <tr>
-                        <th scope="col"></th>
-                        <th scope="col">Typical pharmacy bottle</th>
-                        <th scope="col">LiverZen</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><th scope="row">Silymarin %</th><td>30–50% (or unstated)</td><td>80%</td></tr>
-                    <tr><th scope="row">Standardised</th><td>Often no</td><td>Yes</td></tr>
-                    <tr><th scope="row">Extract per capsule</th><td>175mg average</td><td>240mg</td></tr>
-                    <tr><th scope="row">Form</th><td>Powder or unspecified</td><td>Standardised extract</td></tr>
-                    <tr><th scope="row">3rd-party tested</th><td>Rarely</td><td>Every batch</td></tr>
-                </tbody>
-            </table>
-
-            <!-- Supplement facts panel — visible proof of standardisation -->
-            <div class="lz-supp-facts">
-                <img src="assets/ingredients.png" alt="LiverZen Supplement Facts: 300mg milk thistle extract standardised to 80% silymarin, 200mg inositol, 68mg pueraria extract (10% puerarin), 10mg L-methionine, 4mg turmeric extract (95% curcuminoids), 10mg vitamin C">
-                <p class="lz-supp-facts__caption">Read the panel. The 80% silymarin standardisation is printed on the bottle, not just claimed in the marketing.</p>
+            <div class="lz-compare-card">
+                <div class="lz-compare-bottle">
+                    <img src="assets/product-transparent.png" alt="LiverZen bottle">
+                </div>
+                <table class="lz-table">
+                    <thead>
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col">Typical pharmacy bottle</th>
+                            <th scope="col">LiverZen</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><th scope="row">Silymarin %</th><td>30–50% (or unstated)</td><td>80%</td></tr>
+                        <tr><th scope="row">Standardised</th><td>Often no</td><td>Yes</td></tr>
+                        <tr><th scope="row">Extract per capsule</th><td>175mg average</td><td>240mg</td></tr>
+                        <tr><th scope="row">Form</th><td>Powder or unspecified</td><td>Standardised extract</td></tr>
+                        <tr><th scope="row">3rd-party tested</th><td>Rarely</td><td>Every batch</td></tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </section>
@@ -1438,13 +1696,13 @@ a { color: inherit; }
     <section class="lz-press">
         <div class="lz-container lz-container--wide">
             <div class="lz-press__label">As featured in</div>
-            <div class="lz-press__logos lz-press__logos--text">
-                <span class="lz-press__name">NBC</span>
-                <span class="lz-press__name">ABC</span>
-                <span class="lz-press__name">CBS</span>
-                <span class="lz-press__name">FOX</span>
-                <span class="lz-press__name">USA TODAY</span>
-                <span class="lz-press__name">FORBES</span>
+            <div class="lz-press__logos">
+                <span class="lz-press__name lz-press__name--nbc">NBC</span>
+                <span class="lz-press__name lz-press__name--abc">abc</span>
+                <span class="lz-press__name lz-press__name--cbs">CBS</span>
+                <span class="lz-press__name lz-press__name--fox">FOX</span>
+                <span class="lz-press__name lz-press__name--usa">USA TODAY</span>
+                <span class="lz-press__name lz-press__name--forbes">Forbes</span>
             </div>
         </div>
     </section>
@@ -1543,6 +1801,33 @@ a { color: inherit; }
         </div>
     </section>
 
+    <!-- ============ What's actually inside ============ -->
+    <section class="lz-inside">
+        <div class="lz-container lz-container--wide">
+            <div class="lz-inside__grid">
+                <div class="lz-inside__media">
+                    <img class="lz-inside__supp" src="assets/ingredients.png" alt="LiverZen Supplement Facts: 300mg milk thistle extract standardised to 80% silymarin, 200mg inositol, 68mg pueraria extract (10% puerarin), 10mg L-methionine, 4mg turmeric extract (95% curcuminoids), 10mg vitamin C">
+                    <div class="lz-inside__bottle">
+                        <img src="assets/product-transparent.png" alt="">
+                    </div>
+                </div>
+                <div class="lz-inside__copy">
+                    <span class="lz-eyebrow">What's actually inside</span>
+                    <h2>Five ingredients. <em>One job.</em></h2>
+                    <p class="lz-inside__lede">Supporting your liver while it does the daily work — and printed on the panel, not just claimed in the marketing.</p>
+                    <ul class="lz-inside__list">
+                        <li><strong>300mg milk thistle extract</strong> — standardised to 80% silymarin, the active compound the clinical research is run on.</li>
+                        <li><strong>200mg inositol</strong> — supports normal lipid metabolism in the liver.</li>
+                        <li><strong>68mg pueraria extract</strong> — 10% puerarin, traditional liver tonic.</li>
+                        <li><strong>10mg L-methionine</strong> — amino acid your liver uses in detox pathways.</li>
+                        <li><strong>4mg turmeric extract</strong> — 95% curcuminoids, anti-inflammatory support.</li>
+                    </ul>
+                    <p class="lz-inside__footnote">Plus 10mg vitamin C · vegetarian capsules · 3rd-party tested every batch.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- ============ FAQ ============ -->
     <section class="lz-faq">
         <div class="lz-container">
@@ -1595,7 +1880,7 @@ a { color: inherit; }
                 <div class="lz-tier">
                     <div class="lz-tier__topbadge">Try It</div>
                     <div class="lz-tier__media">
-                        <img src="assets/product.png" alt="LiverZen — 1 bottle, 30-day supply">
+                        <img src="assets/pdp/hero1-blueprint.png" alt="LiverZen — 1 bottle, 30-day supply">
                     </div>
                     <div class="lz-tier__body">
                         <div class="lz-tier__qty">1 Bottle <span>30-day supply</span></div>
