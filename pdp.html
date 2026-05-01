@@ -189,6 +189,19 @@ a { color: inherit; }
 }
 .lz-hero__media { width: 100%; }
 
+/* Mobile: surface headline + bullets close to fold; image follows. */
+@media (max-width: 759px) {
+    .lz-hero { padding: var(--space-sm) 0 var(--space-md); }
+    .lz-hero__body { order: 1; }
+    .lz-hero__media { order: 2; }
+    .lz-hero__grid { gap: var(--space-sm); }
+    .lz-h1 { font-size: 26px; line-height: 1.18; }
+    .lz-subhead { font-size: 15px; margin-bottom: var(--space-sm); }
+    .lz-specs li { padding: 10px 0; font-size: 14px; }
+    .lz-gallery__main { aspect-ratio: 4 / 3; }
+    .lz-gallery__thumbs { display: none; }
+}
+
 /* ========== Hero gallery (main + thumb strip) ========== */
 .lz-gallery { display: flex; flex-direction: column; gap: 10px; }
 .lz-gallery__main {
@@ -1232,8 +1245,17 @@ a { color: inherit; }
     justify-content: center;
     aspect-ratio: 4 / 3;
     position: relative;
+    text-align: center;
 }
-.lz-tier__media img { max-height: 100%; width: auto; max-width: 100%; object-fit: contain; }
+.lz-tier__media img {
+    max-height: 100%;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    margin: auto;
+    display: block;
+}
 .lz-tier__media .lz-img-placeholder { aspect-ratio: 4 / 3; background: transparent; border: none; }
 
 .lz-tier__body {
@@ -1306,28 +1328,30 @@ a { color: inherit; }
     border-top: 1px solid var(--color-rule);
     padding-top: 12px;
     margin-top: 4px;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
 }
 .lz-tier__bonuses li {
     font-family: var(--font-body);
     font-size: 13px;
     color: var(--color-ink);
-    display: flex;
-    align-items: flex-start;
-    gap: 8px;
-    line-height: 1.4;
+    line-height: 1.45;
+    padding: 6px 0 6px 22px;
+    position: relative;
 }
 .lz-tier__bonuses li::before {
     content: "✓";
+    position: absolute;
+    left: 0;
+    top: 6px;
     color: var(--color-accent);
     font-weight: 700;
-    flex-shrink: 0;
+    line-height: 1.45;
 }
 .lz-tier__bonuses .lz-bonus-gift {
     color: var(--color-accent-deep);
     font-weight: 700;
+}
+.lz-tier__bonuses em {
+    font-style: italic;
 }
 
 .lz-tier__cta {
@@ -1769,7 +1793,6 @@ a { color: inherit; }
                 <!-- Reassigned 2026-05-01: review1 + review3 are women, kept out. -->
                 <div class="lz-testimonial">
                     <div class="lz-testimonial__head">
-                        <div class="lz-testimonial__avatar"><img src="assets/pdp/avatar-tom.png" alt="Tom B. avatar"></div>
                         <div class="lz-testimonial__meta">
                             <div class="lz-testimonial__name">Tom B., 56
                                 <span class="lz-testimonial__verified">✓ Verified</span>
@@ -1786,7 +1809,6 @@ a { color: inherit; }
 
                 <div class="lz-testimonial">
                     <div class="lz-testimonial__head">
-                        <div class="lz-testimonial__avatar"><img src="assets/pdp/avatar-dave.png" alt="Dave R. avatar"></div>
                         <div class="lz-testimonial__meta">
                             <div class="lz-testimonial__name">Dave R., 51
                                 <span class="lz-testimonial__verified">✓ Verified</span>
@@ -1803,7 +1825,6 @@ a { color: inherit; }
 
                 <div class="lz-testimonial">
                     <div class="lz-testimonial__head">
-                        <div class="lz-testimonial__avatar"><img src="assets/pdp/avatar-mike.png" alt="Mike R. avatar"></div>
                         <div class="lz-testimonial__meta">
                             <div class="lz-testimonial__name">Mike R., 54
                                 <span class="lz-testimonial__verified">✓ Verified</span>
