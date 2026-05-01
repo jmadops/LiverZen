@@ -227,6 +227,15 @@
     gap: 24px;
     flex-wrap: wrap;
 }
+#or-root .or-media-logos .or-press-logo {
+    height: 32px;
+    width: auto;
+    max-width: 120px;
+    object-fit: contain;
+    filter: grayscale(100%);
+    opacity: 0.7;
+    mix-blend-mode: multiply;
+}
 #or-root .or-media-logos .or-logo-placeholder {
     height: 32px;
     min-width: 80px;
@@ -468,7 +477,7 @@
 #or-root .or-comment-avatar {
     width: 40px;
     height: 40px;
-    border-radius: 4px;
+    border-radius: 50%;
     background: #e0e0e0;
     color: #888;
     font-family: var(--or-ui-font);
@@ -477,6 +486,13 @@
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    overflow: hidden;
+}
+#or-root .or-comment-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
 #or-root .or-comment-body { flex: 1; min-width: 0; }
 #or-root .or-comment-name {
@@ -602,19 +618,21 @@
                 </div>
             </div>
 
-            <!-- HERO IMAGE PLACEHOLDER -->
-            <div class="or-hero-img or-img-placeholder">[HERO IMAGE — bourbon glass on a kitchen counter at night, or contractor in work clothes on a roof at sunset — 830×420]</div>
+            <!-- HERO IMAGE -->
+            <div class="or-hero-img" style="overflow:hidden;">
+                <img src="assets/generated/hero.png" alt="Bourbon glass on a kitchen counter at night" style="width:100%; height:100%; object-fit:cover; display:block;">
+            </div>
 
             <!-- AS SEEN ON -->
             <div class="or-as-seen-on">
                 <div class="or-as-seen-label">AS SEEN ON</div>
                 <div class="or-media-logos">
-                    <div class="or-logo-placeholder">[NBC LOGO]</div>
-                    <div class="or-logo-placeholder">[ABC LOGO]</div>
-                    <div class="or-logo-placeholder">[CBS LOGO]</div>
-                    <div class="or-logo-placeholder">[FOX LOGO]</div>
-                    <div class="or-logo-placeholder">[USA TODAY]</div>
-                    <div class="or-logo-placeholder">[FORBES]</div>
+                    <img src="assets/press/press-nbc.png" alt="NBC" class="or-press-logo">
+                    <img src="assets/press/press-abc.png" alt="ABC" class="or-press-logo">
+                    <img src="assets/press/press-cbs.png" alt="CBS" class="or-press-logo">
+                    <img src="assets/press/press-fox.png" alt="FOX" class="or-press-logo">
+                    <img src="assets/press/press-usa-today.png" alt="USA Today" class="or-press-logo">
+                    <img src="assets/press/press-forbes.png" alt="Forbes" class="or-press-logo">
                 </div>
             </div>
 
@@ -647,7 +665,9 @@
             <p>I drove home knowing two things. <strong>I wasn't going to quit. And I needed another way.</strong></p>
 
             <!-- ARTICLE IMAGE 1 -->
-            <div class="or-article-img or-img-placeholder">[ARTICLE IMAGE 1 — bloodwork results page with one number circled, or a shot of a doctor's clipboard — 830×320]</div>
+            <div class="or-article-img" style="overflow:hidden;">
+                <img src="assets/generated/article-1-bloodwork.png" alt="Liver function bloodwork results on a clipboard with ALT enzyme circled" style="width:100%; height:100%; object-fit:cover; display:block;">
+            </div>
 
             <!-- BODY 3: What's actually happening in there -->
             <h2>WHAT'S ACTUALLY HAPPENING IN THERE</h2>
@@ -660,8 +680,10 @@
             <p>I'd been treating <em>I feel fine</em> as proof I was fine.</p>
             <p><strong>He'd just told me that's exactly backwards.</strong></p>
 
-            <!-- ARTICLE IMAGE 2 -->
-            <div class="or-article-img or-img-placeholder">[ARTICLE IMAGE 2 — anatomical liver diagram with ALT enzyme labeled, or a 3-year line chart showing creeping numbers — 830×320]</div>
+            <!-- ARTICLE IMAGE 2 — silent medical animation: healthy liver gradually deteriorating -->
+            <div class="or-article-img" style="overflow:hidden; background:#000;">
+                <video src="assets/video/liver-decline.mp4" poster="assets/video/liver-decline-frame.png" autoplay loop muted playsinline disablepictureinpicture style="width:100%; height:100%; object-fit:cover; display:block;"></video>
+            </div>
 
             <!-- BODY 4: What he told me next -->
             <h2>WHAT HE TOLD ME NEXT</h2>
@@ -677,8 +699,10 @@
             <p>In nine years of seeing this man for annual physicals, this was the first time he'd told me what he <em>personally</em> did. Not what the literature recommends. Not what he tells his patients. <strong>What he does.</strong></p>
             <p>He didn't write it down. He didn't have a brand to recommend. He just answered a question I hadn't quite asked.</p>
 
-            <!-- ARTICLE IMAGE 3 -->
-            <div class="or-article-img or-img-placeholder">[ARTICLE IMAGE 3 — milk thistle plant in bloom, or capsule next to a pile of seeds — 830×320]</div>
+            <!-- ARTICLE IMAGE 3 — supplement facts panel + back of bottle (proof of 80% standardisation) -->
+            <div class="or-article-img" style="height:auto; background:#fff; padding:0;">
+                <img src="assets/ingredients.png" alt="LiverZen supplement facts — 300mg milk thistle extract standardised to 80% silymarin, plus inositol, pueraria, L-methionine, and turmeric extract" style="width:100%; height:auto;">
+            </div>
 
             <!-- BODY 5: Why I almost didn't bother -->
             <h2>WHY I ALMOST DIDN'T BOTHER</h2>
@@ -708,8 +732,10 @@
             <p><strong>Weeks three to five:</strong> The afternoon fog quietly stopped. The 3pm wall I'd been hitting for years, the one I blamed on my desk and my age and my coffee, just wasn't there anymore.</p>
             <p><strong>Weeks five to seven:</strong> My wife said I looked like myself in the mornings again. She didn't say <em>you look better</em>. She said <em>you look like you</em>. <strong>That's a different sentence.</strong></p>
 
-            <!-- ARTICLE IMAGE 4 -->
-            <div class="or-article-img or-img-placeholder">[ARTICLE IMAGE 4 — product shot: LiverZen bottle on a counter beside a glass of water and breakfast — 830×320]</div>
+            <!-- ARTICLE IMAGE 4 — aesthetic product shot (kitchen, milk thistle, breakfast vibe) -->
+            <div class="or-article-img" style="overflow:hidden;">
+                <img src="assets/aesthetic/02-milk-thistle-companion.png" alt="LiverZen bottle on a wooden kitchen table with a milk thistle flower and seeds beside it" style="width:100%; height:100%; object-fit:cover; display:block;">
+            </div>
 
             <!-- BODY 8: Week 7 bloodwork -->
             <h2>WEEK 7: BACK FOR BLOODWORK</h2>
@@ -796,7 +822,7 @@
                 <ul class="or-comment-list">
 
                     <li class="or-comment-item">
-                        <div class="or-comment-avatar">[AV]</div>
+                        <div class="or-comment-avatar"><img src="assets/avatars/tom-w.png" alt=""></div>
                         <div class="or-comment-body">
                             <a class="or-comment-name" href="#">Tom W.</a>
                             <div class="or-comment-text">Anyone else's doctor just casually drop "I take 80% silymarin myself"? That's the line that got me.</div>
@@ -807,7 +833,7 @@
                                 <span class="or-time">47 min</span>
                             </div>
                             <div class="or-comment-reply">
-                                <div class="or-comment-avatar">[AV]</div>
+                                <div class="or-comment-avatar"><img src="assets/avatars/ben-k.png" alt=""></div>
                                 <div class="or-comment-body">
                                     <a class="or-comment-name" href="#">Ben K.</a>
                                     <div class="or-comment-text">Mine did the exact same thing — and only after I asked. It's like they're not allowed to volunteer it.</div>
@@ -823,7 +849,7 @@
                     </li>
 
                     <li class="or-comment-item">
-                        <div class="or-comment-avatar">[AV]</div>
+                        <div class="or-comment-avatar"><img src="assets/avatars/dave-h.png" alt=""></div>
                         <div class="or-comment-body">
                             <a class="or-comment-name" href="#">Dave H.</a>
                             <div class="or-comment-text">Spent years buying every brand at CVS thinking they were all the same. They aren't. Standardisation matters more than the price tag.</div>
@@ -837,7 +863,7 @@
                     </li>
 
                     <li class="or-comment-item">
-                        <div class="or-comment-avatar">[AV]</div>
+                        <div class="or-comment-avatar"><img src="assets/avatars/greg-m.png" alt=""></div>
                         <div class="or-comment-body">
                             <a class="or-comment-name" href="#">Greg M.</a>
                             <div class="or-comment-text">How long until you actually feel something? Asking for myself.</div>
@@ -848,7 +874,7 @@
                                 <span class="or-time">1 h</span>
                             </div>
                             <div class="or-comment-reply">
-                                <div class="or-comment-avatar">[AV]</div>
+                                <div class="or-comment-avatar"><img src="assets/avatars/ron-p.png" alt=""></div>
                                 <div class="or-comment-body">
                                     <a class="or-comment-name" href="#">Ron P.</a>
                                     <div class="or-comment-text">Three weeks for the afternoon fog. Seven weeks for the bloodwork. Mike's timeline was almost identical to mine.</div>
@@ -864,7 +890,7 @@
                     </li>
 
                     <li class="or-comment-item">
-                        <div class="or-comment-avatar">[AV]</div>
+                        <div class="or-comment-avatar"><img src="assets/avatars/carl-s.png" alt=""></div>
                         <div class="or-comment-body">
                             <a class="or-comment-name" href="#">Carl S.</a>
                             <div class="or-comment-text">My wife flagged it before I did. Said I "looked like myself" again. Same exact line as in the article. Spooky.</div>
@@ -878,7 +904,7 @@
                     </li>
 
                     <li class="or-comment-item">
-                        <div class="or-comment-avatar">[AV]</div>
+                        <div class="or-comment-avatar"><img src="assets/avatars/eric-t.png" alt=""></div>
                         <div class="or-comment-body">
                             <a class="or-comment-name" href="#">Eric T.</a>
                             <div class="or-comment-text">If you're still drinking like a normal person — couple after work, weekends — this is the answer most doctors won't give you outright.</div>
@@ -889,7 +915,7 @@
                                 <span class="or-time">2 h</span>
                             </div>
                             <div class="or-comment-reply">
-                                <div class="or-comment-avatar">[AV]</div>
+                                <div class="or-comment-avatar"><img src="assets/avatars/frank-l.png" alt=""></div>
                                 <div class="or-comment-body">
                                     <a class="or-comment-name" href="#">Frank L.</a>
                                     <div class="or-comment-text">Mine literally said "I'm not allowed to recommend supplements but here's what I personally take." Same energy.</div>
@@ -905,7 +931,7 @@
                     </li>
 
                     <li class="or-comment-item">
-                        <div class="or-comment-avatar">[AV]</div>
+                        <div class="or-comment-avatar"><img src="assets/avatars/steve-m.png" alt=""></div>
                         <div class="or-comment-body">
                             <a class="or-comment-name" href="#">Steve M.</a>
                             <div class="or-comment-text">60 day money back, empty bottles? That's the only kind of guarantee that means anything.</div>
@@ -919,7 +945,7 @@
                     </li>
 
                     <li class="or-comment-item">
-                        <div class="or-comment-avatar">[AV]</div>
+                        <div class="or-comment-avatar"><img src="assets/avatars/jerry-w.png" alt=""></div>
                         <div class="or-comment-body">
                             <a class="or-comment-name" href="#">Jerry W.</a>
                             <div class="or-comment-text">My son sent me this article. I'm 58, run a contracting business, evening bourbon for 30 years. Reads like it was written about me.</div>
@@ -930,7 +956,7 @@
                                 <span class="or-time">3 h</span>
                             </div>
                             <div class="or-comment-reply">
-                                <div class="or-comment-avatar">[AV]</div>
+                                <div class="or-comment-avatar"><img src="assets/avatars/pete-r.png" alt=""></div>
                                 <div class="or-comment-body">
                                     <a class="or-comment-name" href="#">Pete R.</a>
                                     <div class="or-comment-text">Same. Showed it to my brother. He's already ordered.</div>
@@ -955,17 +981,23 @@
 
             <div class="or-sidebar-heading">A standardised 80% silymarin milk thistle extract is helping bourbon drinkers, weekend wine guys, and shift workers bring elevated ALT enzymes back into normal range — without quitting their evening drink.</div>
 
-            <div class="or-img-placeholder" style="height:240px;">[SIDEBAR IMAGE 1 — product bottle on white background — 277×240]</div>
+            <div style="margin-bottom:14px; overflow:hidden;">
+                <img src="assets/aesthetic/01-foliage-morning.png" alt="LiverZen bottle on slate among green foliage" style="width:100%; height:auto; display:block;">
+            </div>
 
             <div class="or-sidebar-heading">The clinical research on milk thistle was run on extract standardised to 80% silymarin. Most over-the-counter bottles are 30 to 50%. Some aren't standardised at all.</div>
 
-            <div class="or-img-placeholder" style="height:200px;">[SIDEBAR IMAGE 2 — comparison chart: 30% vs 50% vs 80% silymarin — 277×200]</div>
+            <div style="margin-bottom:14px; overflow:hidden;">
+                <img src="assets/generated/sidebar-comparison.png" alt="Three milk thistle bottles compared: 30% vs 50% vs 80% silymarin" style="width:100%; height:auto; display:block;">
+            </div>
 
             <div class="or-sidebar-heading">Mike R. brought his ALT back into normal range in 7 weeks. Same bourbon. Same 60-hour weeks. One capsule a day with breakfast.</div>
 
             <!-- Sidebar Testimonial 1 -->
             <div class="or-sidebar-testimonial">
-                <div class="or-img-placeholder" style="height:180px;">[TESTIMONIAL 1 PHOTO — 277×180]</div>
+                <div style="height:180px; overflow:hidden; margin-bottom:8px;">
+                    <img src="assets/generated/testimonial-mark.png" alt="Mark T., Denver" style="width:100%; height:100%; object-fit:cover; display:block;">
+                </div>
                 <div class="or-st-disclaimer">Individual results may vary</div>
                 <div>
                     <span class="or-st-name">Mark T.</span><span class="or-st-location">, Denver, Colorado</span>
@@ -976,7 +1008,9 @@
 
             <!-- Sidebar Testimonial 2 -->
             <div class="or-sidebar-testimonial">
-                <div class="or-img-placeholder" style="height:180px;">[TESTIMONIAL 2 PHOTO — 277×180]</div>
+                <div style="height:180px; overflow:hidden; margin-bottom:8px;">
+                    <img src="assets/generated/testimonial-dave.png" alt="Dave H., Atlanta" style="width:100%; height:100%; object-fit:cover; display:block;">
+                </div>
                 <div class="or-st-disclaimer">Individual results may vary</div>
                 <div>
                     <span class="or-st-name">Dave H.</span><span class="or-st-location">, Atlanta, Georgia</span>
@@ -987,7 +1021,9 @@
 
             <!-- Sidebar Testimonial 3 -->
             <div class="or-sidebar-testimonial">
-                <div class="or-img-placeholder" style="height:180px;">[TESTIMONIAL 3 PHOTO — 277×180]</div>
+                <div style="height:180px; overflow:hidden; margin-bottom:8px;">
+                    <img src="assets/generated/testimonial-greg.png" alt="Greg M., Houston" style="width:100%; height:100%; object-fit:cover; display:block;">
+                </div>
                 <div class="or-st-disclaimer">Individual results may vary</div>
                 <div>
                     <span class="or-st-name">Greg M.</span><span class="or-st-location">, Houston, Texas</span>

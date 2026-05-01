@@ -183,6 +183,45 @@ a { color: inherit; }
 }
 .lz-hero__media { width: 100%; }
 
+/* ========== Hero gallery (main + thumb strip) ========== */
+.lz-gallery { display: flex; flex-direction: column; gap: 10px; }
+.lz-gallery__main {
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border-radius: 12px;
+    background: var(--color-bg-cool);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+.lz-gallery__main img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: opacity 0.18s ease;
+}
+.lz-gallery__thumbs {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+}
+.lz-gallery__thumb {
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    background: var(--color-bg-cool);
+    transition: border-color 0.15s ease, transform 0.15s ease;
+}
+.lz-gallery__thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+.lz-gallery__thumb:hover { border-color: var(--color-accent); transform: translateY(-1px); }
+.lz-gallery__thumb--active { border-color: var(--color-accent-deep); }
+
 .lz-eyebrow {
     font-family: var(--font-ui);
     font-size: 11px;
@@ -524,6 +563,28 @@ a { color: inherit; }
 .lz-table tbody tr:last-child th,
 .lz-table tbody tr:last-child td { border-bottom: none; }
 
+/* ========== Supplement facts panel ========== */
+.lz-supp-facts {
+    margin-top: var(--space-md);
+    text-align: center;
+}
+.lz-supp-facts img {
+    max-width: 720px;
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+    border-radius: 4px;
+}
+.lz-supp-facts__caption {
+    margin-top: 12px;
+    font-size: 14px;
+    color: var(--color-muted, #6b7280);
+    font-style: italic;
+    max-width: 560px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 /* ========== Mechanism cards ========== */
 .lz-mechanism { padding: var(--space-lg) 0; background: var(--color-bg); }
 .lz-mech-grid {
@@ -641,6 +702,51 @@ a { color: inherit; }
     margin-top: 12px;
     border-radius: var(--radius-sm);
     overflow: hidden;
+    background: #000;
+    height: 360px;
+    display: flex;
+    justify-content: center;
+}
+.lz-testimonial__photo video {
+    height: 100%;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+    background: #000;
+    display: block;
+}
+
+/* ========== Featured customer videos ========== */
+.lz-featured-videos { padding: var(--space-lg) 0; background: var(--color-bg); }
+.lz-featured-videos__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+    margin-top: var(--space-md);
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.lz-featured-videos__card {
+    background: #000;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+    height: 540px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.lz-featured-videos__card video {
+    height: 100%;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+    display: block;
+    background: #000;
+}
+@media (min-width: 700px) {
+    .lz-featured-videos__grid { grid-template-columns: 1fr 1fr; }
 }
 
 /* ========== Press logos ========== */
@@ -676,6 +782,15 @@ a { color: inherit; }
     filter: grayscale(100%);
     opacity: 0.65;
     object-fit: contain;
+}
+.lz-press__name {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 18px;
+    letter-spacing: 0.04em;
+    color: var(--color-ink-mute);
+    text-transform: uppercase;
+    line-height: 1;
 }
 
 /* ========== Guarantee ========== */
@@ -1130,15 +1245,24 @@ a { color: inherit; }
             <div class="lz-hero__grid">
 
                 <div class="lz-hero__media">
-                    <div class="lz-src-img" style="aspect-ratio: 1/1;">
-                        <img src="https://img.funnelish.com/95804/0/1770308868-LiverZen%20NLBE.gif" alt="LiverZen bottle (FR source asset — replace with US shot)">
+                    <div class="lz-gallery">
+                        <div class="lz-gallery__main">
+                            <img id="lz-gallery-main-img" src="assets/pdp/hero0-headline.png" alt="LiverZen — save your liver without quitting drinking">
+                        </div>
+                        <div class="lz-gallery__thumbs" id="lz-gallery-thumbs">
+                            <div class="lz-gallery__thumb lz-gallery__thumb--active" data-img="assets/pdp/hero0-headline.png"><img src="assets/pdp/hero0-headline.png" alt=""></div>
+                            <div class="lz-gallery__thumb" data-img="assets/pdp/hero1-blueprint.png"><img src="assets/pdp/hero1-blueprint.png" alt=""></div>
+                            <div class="lz-gallery__thumb" data-img="assets/pdp/hero2-vs-them.png"><img src="assets/pdp/hero2-vs-them.png" alt=""></div>
+                            <div class="lz-gallery__thumb" data-img="assets/pdp/hero3-supp-facts.png"><img src="assets/pdp/hero3-supp-facts.png" alt=""></div>
+                            <div class="lz-gallery__thumb" data-img="assets/pdp/hero4-breakfast.png"><img src="assets/pdp/hero4-breakfast.png" alt=""></div>
+                        </div>
                     </div>
                 </div>
 
                 <div class="lz-hero__body">
                     <span class="lz-eyebrow lz-eyebrow--badge">Daily Liver Support</span>
-                    <h1 class="lz-h1">The <em>80% silymarin</em> milk thistle most pharmacies don't carry.</h1>
-                    <p class="lz-subhead">Standardised to the concentration used in published clinical research. The version your doctor probably takes.</p>
+                    <h1 class="lz-h1">LiverZen. Save your liver — <em>without quitting drinking.</em></h1>
+                    <p class="lz-subhead">LiverZen is the daily milk thistle formula for guys who want their liver supported without giving up their evening drink.</p>
 
                     <div class="lz-stars">
                         <span class="lz-stars__icons">★★★★★</span>
@@ -1146,10 +1270,10 @@ a { color: inherit; }
                     </div>
 
                     <ul class="lz-specs">
-                        <li>80% silymarin standardisation</li>
-                        <li>240mg extract per capsule</li>
-                        <li>60 capsules · 30-day supply</li>
-                        <li>Made in a US GMP-certified facility</li>
+                        <li>Lowers elevated liver enzymes — verified by bloodwork</li>
+                        <li>Stops the 3pm afternoon fog by week three</li>
+                        <li>Designed around your evening drink, not against it</li>
+                        <li>60-day empty-bottle refund — no questions, no upsell call</li>
                     </ul>
 
                     <div class="lz-hero-price">
@@ -1176,19 +1300,19 @@ a { color: inherit; }
             <div class="lz-trustbar__grid">
                 <div class="lz-trustbar__cell">
                     <strong>9,897+</strong>
-                    <span>Bottles delivered</span>
+                    <span>Verified buyers</span>
+                </div>
+                <div class="lz-trustbar__cell">
+                    <strong>7 weeks</strong>
+                    <span>Avg. to in-range bloodwork</span>
                 </div>
                 <div class="lz-trustbar__cell">
                     <strong>80%</strong>
-                    <span>Silymarin standardised</span>
+                    <span>Clinical-grade silymarin</span>
                 </div>
                 <div class="lz-trustbar__cell">
                     <strong>60 days</strong>
                     <span>Empty-bottle refund</span>
-                </div>
-                <div class="lz-trustbar__cell">
-                    <strong>USA</strong>
-                    <span>GMP-certified facility</span>
                 </div>
             </div>
         </div>
@@ -1196,17 +1320,17 @@ a { color: inherit; }
 
     <!-- ============ Bridge quote ============ -->
     <section class="lz-bridge">
-        <p class="lz-bridge__quote">If you've read this far, you already know why most milk thistle does nothing. This is the version that does.</p>
+        <p class="lz-bridge__quote">Most milk thistle from the pharmacy doesn't move the needle. This is the standardised version that does — built for the way you actually live.</p>
     </section>
 
     <!-- ============ Proof row ============ -->
     <section class="lz-proof">
         <div class="lz-container lz-container--wide">
             <div class="lz-proof__grid">
-                <div class="lz-proof__cell"><span class="lz-check" aria-hidden="true">✓</span><span>80% silymarin standardisation</span></div>
-                <div class="lz-proof__cell"><span class="lz-check" aria-hidden="true">✓</span><span>Concentration used in research</span></div>
-                <div class="lz-proof__cell"><span class="lz-check" aria-hidden="true">✓</span><span>Third-party tested</span></div>
-                <div class="lz-proof__cell"><span class="lz-check" aria-hidden="true">✓</span><span>Made in a US GMP-certified facility</span></div>
+                <div class="lz-proof__cell"><span class="lz-check" aria-hidden="true">✓</span><span>Liver numbers back in range</span></div>
+                <div class="lz-proof__cell"><span class="lz-check" aria-hidden="true">✓</span><span>Sharper afternoons, less fog</span></div>
+                <div class="lz-proof__cell"><span class="lz-check" aria-hidden="true">✓</span><span>You don't have to quit drinking</span></div>
+                <div class="lz-proof__cell"><span class="lz-check" aria-hidden="true">✓</span><span>60-day empty-bottle refund</span></div>
             </div>
         </div>
     </section>
@@ -1216,20 +1340,17 @@ a { color: inherit; }
         <div class="lz-container lz-container--wide">
             <div class="lz-videos__head">
                 <span class="lz-eyebrow">See it for yourself</span>
-                <h2 class="lz-h2 lz-h2--center">A capsule, with breakfast. <em>That's it.</em></h2>
+                <h2 class="lz-h2 lz-h2--center">One capsule, with breakfast. <em>The rest of your day, unchanged.</em></h2>
             </div>
             <div class="lz-videos__grid">
                 <div class="lz-video-card">
-                    <video src="https://videos.funnelish.com/70722/1772643358-2ca635e7-d1f3-4f6b-bef0-ddda33926247.mp4" autoplay loop muted playsinline disablepictureinpicture></video>
-                    <div class="lz-video-card__caption">The bottle (FR source)</div>
+                    <img src="assets/lifestyle/life-1-morning.png" alt="Holding the LiverZen bottle at a breakfast table" style="width:100%; height:100%; object-fit:cover; display:block;">
                 </div>
                 <div class="lz-video-card">
-                    <video src="https://videos.funnelish.com/70722/1772643363-85f56fcc-2761-49f7-8e13-2ed77d705410.mp4" autoplay loop muted playsinline disablepictureinpicture></video>
-                    <div class="lz-video-card__caption">80% silymarin extract</div>
+                    <img src="assets/lifestyle/life-2-counter.png" alt="LiverZen on a kitchen counter" style="width:100%; height:100%; object-fit:cover; display:block;">
                 </div>
                 <div class="lz-video-card">
-                    <video src="https://videos.funnelish.com/70722/1772643369-6fe0570f-4ce1-4153-a025-e21cac7e8b56.mp4" autoplay loop muted playsinline disablepictureinpicture></video>
-                    <div class="lz-video-card__caption">Daily routine</div>
+                    <img src="assets/lifestyle/life-3-evening.png" alt="Pouring a drink in the evening with LiverZen on the counter" style="width:100%; height:100%; object-fit:cover; display:block;">
                 </div>
             </div>
         </div>
@@ -1257,6 +1378,12 @@ a { color: inherit; }
                     <tr><th scope="row">3rd-party tested</th><td>Rarely</td><td>Every batch</td></tr>
                 </tbody>
             </table>
+
+            <!-- Supplement facts panel — visible proof of standardisation -->
+            <div class="lz-supp-facts">
+                <img src="assets/ingredients.png" alt="LiverZen Supplement Facts: 300mg milk thistle extract standardised to 80% silymarin, 200mg inositol, 68mg pueraria extract (10% puerarin), 10mg L-methionine, 4mg turmeric extract (95% curcuminoids), 10mg vitamin C">
+                <p class="lz-supp-facts__caption">Read the panel. The 80% silymarin standardisation is printed on the bottle, not just claimed in the marketing.</p>
+            </div>
         </div>
     </section>
 
@@ -1269,8 +1396,8 @@ a { color: inherit; }
             <div class="lz-mech-grid">
                 <div class="lz-mech-card">
                     <div class="lz-mech-card__media">
-                        <div class="lz-src-img" style="height:100%;">
-                            <img src="https://img.funnelish.com/70722/0/1767345121-Process%20Template%20%2830%29.png" alt="Step 1 (FR source)">
+                        <div style="height:100%; overflow:hidden;">
+                            <img src="assets/pdp/mech-1-internal.png" alt="Healthy liver — internal repair" style="width:100%; height:100%; object-fit:cover; display:block;">
                         </div>
                     </div>
                     <div class="lz-mech-card__body">
@@ -1281,8 +1408,8 @@ a { color: inherit; }
                 </div>
                 <div class="lz-mech-card">
                     <div class="lz-mech-card__media">
-                        <div class="lz-src-img" style="height:100%;">
-                            <img src="https://img.funnelish.com/86918/0/1766990879-Process%20Template%20%2814%29.png" alt="Step 2 (FR source)">
+                        <div style="height:100%; overflow:hidden;">
+                            <img src="assets/pdp/mech-2-clear-mind.png" alt="Mid-afternoon, clear-headed at the desk" style="width:100%; height:100%; object-fit:cover; display:block;">
                         </div>
                     </div>
                     <div class="lz-mech-card__body">
@@ -1293,8 +1420,8 @@ a { color: inherit; }
                 </div>
                 <div class="lz-mech-card">
                     <div class="lz-mech-card__media">
-                        <div class="lz-src-img" style="height:100%;">
-                            <img src="https://img.funnelish.com/70722/0/1773852583-image%20%284%29.webp" alt="Step 3 (FR source)">
+                        <div style="height:100%; overflow:hidden;">
+                            <img src="assets/pdp/mech-3-bloodwork-improved.png" alt="ALT bloodwork back into normal range" style="width:100%; height:100%; object-fit:cover; display:block;">
                         </div>
                     </div>
                     <div class="lz-mech-card__body">
@@ -1311,13 +1438,29 @@ a { color: inherit; }
     <section class="lz-press">
         <div class="lz-container lz-container--wide">
             <div class="lz-press__label">As featured in</div>
-            <div class="lz-press__logos">
-                <img src="https://img.funnelish.com/58288/774370/1744732675-BA_logo.png" alt="BA (FR source)">
-                <img src="https://img.funnelish.com/58288/774370/1744732680-Fugues.png" alt="Fugues (FR source)">
-                <img src="https://img.funnelish.com/58288/774370/1744732692-Coup_de_pouce_logo.jpg" alt="Coup de Pouce (FR source)">
-                <img src="https://img.funnelish.com/58288/774370/1744732662-images%20%2839%29.jpg" alt="Press logo (FR source)">
-                <img src="https://img.funnelish.com/58288/774370/1744732686-images%20%2838%29.jpg" alt="Press logo (FR source)">
-                <img src="https://img.funnelish.com/58288/774370/1744732697-images%20%2819%29.png" alt="Press logo (FR source)">
+            <div class="lz-press__logos lz-press__logos--text">
+                <span class="lz-press__name">NBC</span>
+                <span class="lz-press__name">ABC</span>
+                <span class="lz-press__name">CBS</span>
+                <span class="lz-press__name">FOX</span>
+                <span class="lz-press__name">USA TODAY</span>
+                <span class="lz-press__name">FORBES</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ Featured customer videos ============ -->
+    <section class="lz-featured-videos">
+        <div class="lz-container lz-container--wide">
+            <span class="lz-eyebrow" style="display:block;text-align:center;">Customer videos</span>
+            <h2 class="lz-h2 lz-h2--center">Listen to a couple of guys who took it.</h2>
+            <div class="lz-featured-videos__grid">
+                <div class="lz-featured-videos__card">
+                    <video src="assets/videos/reviews/LiverZen_english_review4.mp4" controls playsinline preload="metadata"></video>
+                </div>
+                <div class="lz-featured-videos__card">
+                    <video src="assets/videos/reviews/LiverZen_english_review5.mp4" controls playsinline preload="metadata"></video>
+                </div>
             </div>
         </div>
     </section>
@@ -1332,7 +1475,7 @@ a { color: inherit; }
 
                 <div class="lz-testimonial">
                     <div class="lz-testimonial__head">
-                        <div class="lz-testimonial__avatar">[AVATAR]</div>
+                        <div class="lz-testimonial__avatar"><img src="assets/pdp/avatar-tom.png" alt="Tom B. avatar"></div>
                         <div class="lz-testimonial__meta">
                             <div class="lz-testimonial__name">Tom B., 56
                                 <span class="lz-testimonial__verified">✓ Verified</span>
@@ -1343,15 +1486,13 @@ a { color: inherit; }
                     </div>
                     <p class="lz-testimonial__text">"Doc flagged my numbers in March. Started this in May. Numbers were back in normal range by my July follow-up. Same evening drink, nothing else changed."</p>
                     <div class="lz-testimonial__photo">
-                        <div class="lz-src-img" style="aspect-ratio: 16/9;">
-                            <img src="https://img.funnelish.com/41389/818791/1748268350-1735550075-1732552829-1712330420-review%20%2814%29-2.webp" alt="Tom B. review (FR source placeholder)">
-                        </div>
+                        <video src="assets/videos/reviews/LiverZen_english_review1.mp4" controls playsinline preload="metadata"></video>
                     </div>
                 </div>
 
                 <div class="lz-testimonial">
                     <div class="lz-testimonial__head">
-                        <div class="lz-testimonial__avatar">[AVATAR]</div>
+                        <div class="lz-testimonial__avatar"><img src="assets/pdp/avatar-dave.png" alt="Dave R. avatar"></div>
                         <div class="lz-testimonial__meta">
                             <div class="lz-testimonial__name">Dave R., 51
                                 <span class="lz-testimonial__verified">✓ Verified</span>
@@ -1362,13 +1503,13 @@ a { color: inherit; }
                     </div>
                     <p class="lz-testimonial__text">"I'd been writing off milk thistle for years because the CVS bottle did nothing. The standardisation thing nobody told me about. Different product entirely."</p>
                     <div class="lz-testimonial__photo">
-                        <div class="lz-img-placeholder lz-img-placeholder--ratio-16-9">[VERIFIED REVIEW SCREENSHOT — 16:9]</div>
+                        <video src="assets/videos/reviews/LiverZen_english_review2.mp4" controls playsinline preload="metadata"></video>
                     </div>
                 </div>
 
                 <div class="lz-testimonial">
                     <div class="lz-testimonial__head">
-                        <div class="lz-testimonial__avatar">[AVATAR]</div>
+                        <div class="lz-testimonial__avatar"><img src="assets/pdp/avatar-mike.png" alt="Mike R. avatar"></div>
                         <div class="lz-testimonial__meta">
                             <div class="lz-testimonial__name">Mike R., 54
                                 <span class="lz-testimonial__verified">✓ Verified</span>
@@ -1379,7 +1520,7 @@ a { color: inherit; }
                     </div>
                     <p class="lz-testimonial__text">"I'm not the supplement guy in my house. My wife is. But this is the one I take without her reminding me."</p>
                     <div class="lz-testimonial__photo">
-                        <div class="lz-img-placeholder lz-img-placeholder--ratio-16-9">[VERIFIED REVIEW SCREENSHOT — 16:9]</div>
+                        <video src="assets/videos/reviews/LiverZen_english_review3.mp4" controls playsinline preload="metadata"></video>
                     </div>
                 </div>
 
@@ -1454,7 +1595,7 @@ a { color: inherit; }
                 <div class="lz-tier">
                     <div class="lz-tier__topbadge">Try It</div>
                     <div class="lz-tier__media">
-                        <img src="https://img.funnelish.com/95497/0/1768871460-Product.png" alt="LiverZen 1 bottle (FR source)">
+                        <img src="assets/product.png" alt="LiverZen — 1 bottle, 30-day supply">
                     </div>
                     <div class="lz-tier__body">
                         <div class="lz-tier__qty">1 Bottle <span>30-day supply</span></div>
@@ -1481,7 +1622,7 @@ a { color: inherit; }
                     <div class="lz-tier__ribbon">Most Popular</div>
                     <div class="lz-tier__topbadge">Best Results</div>
                     <div class="lz-tier__media">
-                        <img src="https://img.funnelish.com/95497/0/1768871458-Product%20%281%29.png" alt="LiverZen 3 bottles (FR source)">
+                        <img src="assets/pdp/tier-3-bottles.png" alt="LiverZen — 3 bottles, 90-day supply">
                     </div>
                     <div class="lz-tier__body">
                         <div class="lz-tier__qty">3 Bottles <span>90-day supply</span></div>
@@ -1494,7 +1635,7 @@ a { color: inherit; }
                         <ul class="lz-tier__bonuses">
                             <li>60-day empty-bottle guarantee</li>
                             <li>Free US shipping</li>
-                            <li class="lz-bonus-gift">+ Free e-book: <em>The Bourbon Drinker's Liver Manual</em> ($19 value)</li>
+                            <li class="lz-bonus-gift">+ Free e-book: <em>The Daily Drinker's Liver Manual</em> ($19 value)</li>
                             <li>Priority delivery</li>
                         </ul>
                         <div class="lz-tier__cta">
@@ -1509,7 +1650,7 @@ a { color: inherit; }
                     <div class="lz-tier__ribbon" style="background:var(--color-accent);color:#fff;">Best Value</div>
                     <div class="lz-tier__topbadge lz-tier__topbadge--gold">Save Most</div>
                     <div class="lz-tier__media">
-                        <img src="https://img.funnelish.com/95497/0/1768871457-Product%20%282%29.png" alt="LiverZen 6 bottles (FR source)">
+                        <img src="assets/pdp/tier-6-bottles.png" alt="LiverZen — 6 bottles, 180-day supply">
                     </div>
                     <div class="lz-tier__body">
                         <div class="lz-tier__qty">6 Bottles <span>180-day supply</span></div>
@@ -1522,7 +1663,7 @@ a { color: inherit; }
                         <ul class="lz-tier__bonuses">
                             <li>60-day empty-bottle guarantee</li>
                             <li>Free US shipping</li>
-                            <li class="lz-bonus-gift">+ Free e-book: <em>The Bourbon Drinker's Liver Manual</em></li>
+                            <li class="lz-bonus-gift">+ Free e-book: <em>The Daily Drinker's Liver Manual</em></li>
                             <li class="lz-bonus-gift">+ Free wallet card: <em>Doctor's Bloodwork Tracker</em></li>
                             <li>Priority delivery</li>
                         </ul>
@@ -1597,6 +1738,26 @@ document.querySelectorAll('[data-tier]').forEach(function (btn) {
         console.log('Add to cart:', tier, 'bottle(s)');
     });
 });
+
+// Hero gallery: click-to-swap thumb -> main image
+(function () {
+    var mainImg = document.getElementById('lz-gallery-main-img');
+    var thumbs = document.querySelectorAll('#lz-gallery-thumbs .lz-gallery__thumb');
+    if (!mainImg || !thumbs.length) return;
+    thumbs.forEach(function (t) {
+        t.addEventListener('click', function () {
+            var src = t.getAttribute('data-img');
+            if (!src || src === mainImg.getAttribute('src')) return;
+            mainImg.style.opacity = '0';
+            setTimeout(function () {
+                mainImg.setAttribute('src', src);
+                mainImg.style.opacity = '1';
+            }, 120);
+            thumbs.forEach(function (x) { x.classList.remove('lz-gallery__thumb--active'); });
+            t.classList.add('lz-gallery__thumb--active');
+        });
+    });
+})();
 </script>
 
 </body>
