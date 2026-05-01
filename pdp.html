@@ -72,6 +72,11 @@ body {
     background: var(--color-bg);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    /* leave room for sticky mobile CTA so the footer isn't covered */
+    padding-bottom: 80px;
+}
+@media (min-width: 760px) {
+    body { padding-bottom: 0; }
 }
 img, video { max-width: 100%; height: auto; display: block; }
 a { color: inherit; }
@@ -490,9 +495,12 @@ a { color: inherit; }
     border-radius: var(--radius-lg);
     overflow: hidden;
     background: #000;
-    aspect-ratio: 9 / 16;
+    aspect-ratio: 4 / 5;
     position: relative;
     box-shadow: 0 6px 24px rgba(2, 8, 23, 0.08);
+}
+@media (min-width: 760px) {
+    .lz-video-card { aspect-ratio: 3 / 4; }
 }
 .lz-video-card video {
     width: 100%;
@@ -534,13 +542,16 @@ a { color: inherit; }
     overflow: visible;
 }
 .lz-compare-bottle {
+    /* Centered on the LiverZen column (rightmost third of the card).
+       LiverZen-column center sits at 83% from the left edge of the card,
+       so we anchor at 83% and translate back by half its own width. */
     position: absolute;
     top: -100px;
-    right: 12%;
+    left: 83%;
     width: 110px;
     height: 145px;
     z-index: 2;
-    transform: rotate(-5deg);
+    transform: translateX(-50%) rotate(-5deg);
     pointer-events: none;
     filter:
         drop-shadow(0 22px 28px rgba(36, 125, 67, 0.30))
@@ -548,7 +559,7 @@ a { color: inherit; }
     transition: transform 0.4s ease;
 }
 .lz-compare-card:hover .lz-compare-bottle {
-    transform: rotate(-5deg) translateY(-4px);
+    transform: translateX(-50%) rotate(-5deg) translateY(-4px);
 }
 .lz-compare-bottle img {
     width: 100%;
@@ -557,8 +568,12 @@ a { color: inherit; }
     display: block;
 }
 @media (max-width: 600px) {
-    .lz-compare-bottle { right: 8%; width: 78px; height: 100px; top: -72px; }
-    .lz-compare-card { margin-top: 64px; }
+    .lz-compare-bottle {
+        width: 70px;
+        height: 92px;
+        top: -64px;
+    }
+    .lz-compare-card { margin-top: 56px; }
 }
 .lz-h2 {
     font-family: var(--font-heading);
@@ -655,10 +670,13 @@ a { color: inherit; }
 .lz-table tbody tr:last-child th { border-bottom-left-radius: var(--radius-lg); }
 .lz-table tbody tr:last-child td:last-child { border-bottom-right-radius: var(--radius-lg); }
 @media (max-width: 600px) {
-    .lz-table th, .lz-table td { padding: 14px 14px; font-size: 14px; }
-    .lz-table thead th { font-size: 10px; padding: 18px 14px; }
-    .lz-table thead th:last-child { font-size: 14px; padding: 18px 14px; }
-    .lz-table tbody td:last-child { font-size: 15px; }
+    .lz-table th, .lz-table td { padding: 12px 10px; font-size: 13px; }
+    .lz-table tbody th { font-size: 13px; }
+    .lz-table thead th { font-size: 10px; padding: 16px 8px; letter-spacing: 0.06em; }
+    .lz-table thead th:first-child { padding: 16px 8px; }
+    .lz-table thead th:last-child { font-size: 13px; padding: 16px 8px; }
+    .lz-table tbody td:last-child { font-size: 14px; }
+    .lz-table tbody th { width: 36%; }
 }
 
 /* ========== Supplement facts panel (legacy — no longer in compare) ========== */
@@ -695,19 +713,22 @@ a { color: inherit; }
 }
 .lz-inside__media {
     text-align: center;
+}
+.lz-inside__supp-wrap {
     position: relative;
+    max-width: 440px;
+    margin: 0 auto;
 }
 .lz-inside__supp {
-    max-width: 440px;
     width: 100%;
-    margin: 0 auto;
+    height: auto;
     border-radius: 6px;
     box-shadow: 0 18px 40px rgba(2, 8, 23, 0.10);
 }
 .lz-inside__bottle {
     position: absolute;
-    top: -18px;
-    right: 8%;
+    top: -28px;
+    right: -54px;
     width: 110px;
     height: 145px;
     z-index: 2;
@@ -718,6 +739,14 @@ a { color: inherit; }
         drop-shadow(0 8px 10px rgba(0, 0, 0, 0.18));
 }
 .lz-inside__bottle img { width: 100%; height: 100%; object-fit: contain; }
+@media (max-width: 600px) {
+    .lz-inside__bottle {
+        width: 78px;
+        height: 102px;
+        right: -16px;
+        top: -32px;
+    }
+}
 .lz-inside__copy { padding: 0 4px; }
 .lz-inside__copy h2 {
     font-family: var(--font-heading);
@@ -1478,7 +1507,7 @@ a { color: inherit; }
 
 <!-- ============ Promo strip ============ -->
 <div class="lz-promo-strip">
-    Free US shipping · <strong>60-day empty-bottle guarantee</strong> · Save up to 43%
+    Free US shipping · <strong>60-day empty-bottle guarantee</strong> · Save up to 41%
 </div>
 
 <!-- ============ Header ============ -->
@@ -1534,9 +1563,9 @@ a { color: inherit; }
                     </ul>
 
                     <div class="lz-hero-price">
-                        <span class="lz-hero-price__now">$49</span>
-                        <span class="lz-hero-price__was">$69</span>
-                        <span class="lz-hero-price__save">Save 29%</span>
+                        <span class="lz-hero-price__now">$29</span>
+                        <span class="lz-hero-price__was">$39</span>
+                        <span class="lz-hero-price__save">Save 26%</span>
                     </div>
 
                     <a href="#offer" class="lz-cta lz-cta--block">Add to Cart — Free US Shipping</a>
@@ -1707,7 +1736,11 @@ a { color: inherit; }
         </div>
     </section>
 
-    <!-- ============ Featured customer videos ============ -->
+    <!--
+        ============ Featured customer videos ============
+        Hidden 2026-05-01: only women videos are left after reassigning
+        review2/4/5 to the 3 testimonial cards. Re-enable when we have
+        additional male customer videos that match the brand audience.
     <section class="lz-featured-videos">
         <div class="lz-container lz-container--wide">
             <span class="lz-eyebrow" style="display:block;text-align:center;">Customer videos</span>
@@ -1722,6 +1755,8 @@ a { color: inherit; }
             </div>
         </div>
     </section>
+    -->
+
 
     <!-- ============ Testimonials ============ -->
     <section class="lz-testimonials">
@@ -1731,6 +1766,7 @@ a { color: inherit; }
 
             <div class="lz-testimonials__grid">
 
+                <!-- Reassigned 2026-05-01: review1 + review3 are women, kept out. -->
                 <div class="lz-testimonial">
                     <div class="lz-testimonial__head">
                         <div class="lz-testimonial__avatar"><img src="assets/pdp/avatar-tom.png" alt="Tom B. avatar"></div>
@@ -1744,7 +1780,7 @@ a { color: inherit; }
                     </div>
                     <p class="lz-testimonial__text">"Doc flagged my numbers in March. Started this in May. Numbers were back in normal range by my July follow-up. Same evening drink, nothing else changed."</p>
                     <div class="lz-testimonial__photo">
-                        <video src="assets/videos/reviews/LiverZen_english_review1.mp4" controls playsinline preload="metadata"></video>
+                        <video src="assets/videos/reviews/LiverZen_english_review2.mp4" controls playsinline preload="metadata"></video>
                     </div>
                 </div>
 
@@ -1761,7 +1797,7 @@ a { color: inherit; }
                     </div>
                     <p class="lz-testimonial__text">"I'd been writing off milk thistle for years because the CVS bottle did nothing. The standardisation thing nobody told me about. Different product entirely."</p>
                     <div class="lz-testimonial__photo">
-                        <video src="assets/videos/reviews/LiverZen_english_review2.mp4" controls playsinline preload="metadata"></video>
+                        <video src="assets/videos/reviews/LiverZen_english_review4.mp4" controls playsinline preload="metadata"></video>
                     </div>
                 </div>
 
@@ -1778,7 +1814,7 @@ a { color: inherit; }
                     </div>
                     <p class="lz-testimonial__text">"I'm not the supplement guy in my house. My wife is. But this is the one I take without her reminding me."</p>
                     <div class="lz-testimonial__photo">
-                        <video src="assets/videos/reviews/LiverZen_english_review3.mp4" controls playsinline preload="metadata"></video>
+                        <video src="assets/videos/reviews/LiverZen_english_review5.mp4" controls playsinline preload="metadata"></video>
                     </div>
                 </div>
 
@@ -1806,9 +1842,11 @@ a { color: inherit; }
         <div class="lz-container lz-container--wide">
             <div class="lz-inside__grid">
                 <div class="lz-inside__media">
-                    <img class="lz-inside__supp" src="assets/ingredients.png" alt="LiverZen Supplement Facts: 300mg milk thistle extract standardised to 80% silymarin, 200mg inositol, 68mg pueraria extract (10% puerarin), 10mg L-methionine, 4mg turmeric extract (95% curcuminoids), 10mg vitamin C">
-                    <div class="lz-inside__bottle">
-                        <img src="assets/product-transparent.png" alt="">
+                    <div class="lz-inside__supp-wrap">
+                        <img class="lz-inside__supp" src="assets/ingredients.png" alt="LiverZen Supplement Facts: 300mg milk thistle extract standardised to 80% silymarin, 200mg inositol, 68mg pueraria extract (10% puerarin), 10mg L-methionine, 4mg turmeric extract (95% curcuminoids), 10mg vitamin C">
+                        <div class="lz-inside__bottle">
+                            <img src="assets/product-transparent.png" alt="">
+                        </div>
                     </div>
                 </div>
                 <div class="lz-inside__copy">
@@ -1851,7 +1889,7 @@ a { color: inherit; }
                 </details>
                 <details>
                     <summary>How many bottles should I order?</summary>
-                    <div class="lz-faq__answer"><p>The 3-bottle option is what most men start with. A noticeable response usually takes 6–8 weeks, and ordering one bottle puts you in the position of running out right when things are starting to work. The 3-bottle option also works out to $20 less per bottle.</p></div>
+                    <div class="lz-faq__answer"><p>The 3-bottle option is what most men start with. A noticeable response usually takes 6–8 weeks, and ordering one bottle puts you in the position of running out right when things are starting to work. The 3-bottle option also works out to $6 less per bottle.</p></div>
                 </details>
                 <details>
                     <summary>When should I take it?</summary>
@@ -1870,8 +1908,8 @@ a { color: inherit; }
         <div class="lz-container lz-container--wide">
             <div class="lz-offer-cb__head">
                 <div class="lz-offer-cb__pretitle">⏱ Limited inventory · today's allocation</div>
-                <h2 class="lz-offer-cb__title">Choose your supply. <em>Save up to 43%.</em></h2>
-                <p class="lz-offer-cb__sub">A noticeable response usually takes <strong>6–8 weeks</strong>. The 3-bottle option is what most men start with — and it works out to $20 less per bottle.</p>
+                <h2 class="lz-offer-cb__title">Choose your supply. <em>Save up to 41%.</em></h2>
+                <p class="lz-offer-cb__sub">A noticeable response usually takes <strong>6–8 weeks</strong>. The 3-bottle option is what most men start with — and it works out to $6 less per bottle.</p>
             </div>
 
             <div class="lz-tiers">
@@ -1885,11 +1923,11 @@ a { color: inherit; }
                     <div class="lz-tier__body">
                         <div class="lz-tier__qty">1 Bottle <span>30-day supply</span></div>
                         <div class="lz-tier__price-row">
-                            <span class="lz-tier__price">$69</span>
-                            <span class="lz-tier__price-was">$89</span>
+                            <span class="lz-tier__price">$29</span>
+                            <span class="lz-tier__price-was">$39</span>
                         </div>
-                        <div class="lz-tier__per">$69 / bottle</div>
-                        <span class="lz-tier__save">Save 22%</span>
+                        <div class="lz-tier__per">$29 / bottle</div>
+                        <span class="lz-tier__save">Save 26%</span>
                         <ul class="lz-tier__bonuses">
                             <li>60-day empty-bottle guarantee</li>
                             <li>Free US shipping</li>
@@ -1902,21 +1940,21 @@ a { color: inherit; }
                     </div>
                 </div>
 
-                <!-- Tier 2: 3 Bottles - MOST POPULAR -->
+                <!-- Tier 2: 2 Bottles - MOST POPULAR -->
                 <div class="lz-tier lz-tier--popular">
                     <div class="lz-tier__ribbon">Most Popular</div>
                     <div class="lz-tier__topbadge">Best Results</div>
                     <div class="lz-tier__media">
-                        <img src="assets/pdp/tier-3-bottles.png" alt="LiverZen — 3 bottles, 90-day supply">
+                        <img src="assets/pdp/tier-3-bottles.png" alt="LiverZen — 2 bottles, 60-day supply">
                     </div>
                     <div class="lz-tier__body">
-                        <div class="lz-tier__qty">3 Bottles <span>90-day supply</span></div>
+                        <div class="lz-tier__qty">2 Bottles <span>60-day supply</span></div>
                         <div class="lz-tier__price-row">
-                            <span class="lz-tier__price">$147</span>
-                            <span class="lz-tier__price-was">$267</span>
+                            <span class="lz-tier__price">$49</span>
+                            <span class="lz-tier__price-was">$78</span>
                         </div>
-                        <div class="lz-tier__per"><strong>$49</strong> / bottle</div>
-                        <span class="lz-tier__save">Save $120</span>
+                        <div class="lz-tier__per"><strong>$24.50</strong> / bottle</div>
+                        <span class="lz-tier__save">Save $29</span>
                         <ul class="lz-tier__bonuses">
                             <li>60-day empty-bottle guarantee</li>
                             <li>Free US shipping</li>
@@ -1924,27 +1962,27 @@ a { color: inherit; }
                             <li>Priority delivery</li>
                         </ul>
                         <div class="lz-tier__cta">
-                            <button type="button" class="lz-cta lz-cta--block" data-tier="3">Add to Cart</button>
+                            <button type="button" class="lz-cta lz-cta--block" data-tier="2">Add to Cart</button>
                             <div class="lz-tier__shipping">Ships within 24 hrs · USPS Priority</div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Tier 3: 6 Bottles - BEST VALUE -->
+                <!-- Tier 3: 3 Bottles - BEST VALUE -->
                 <div class="lz-tier">
                     <div class="lz-tier__ribbon" style="background:var(--color-accent);color:#fff;">Best Value</div>
                     <div class="lz-tier__topbadge lz-tier__topbadge--gold">Save Most</div>
                     <div class="lz-tier__media">
-                        <img src="assets/pdp/tier-6-bottles.png" alt="LiverZen — 6 bottles, 180-day supply">
+                        <img src="assets/pdp/tier-6-bottles.png" alt="LiverZen — 3 bottles, 90-day supply">
                     </div>
                     <div class="lz-tier__body">
-                        <div class="lz-tier__qty">6 Bottles <span>180-day supply</span></div>
+                        <div class="lz-tier__qty">3 Bottles <span>90-day supply</span></div>
                         <div class="lz-tier__price-row">
-                            <span class="lz-tier__price">$234</span>
-                            <span class="lz-tier__price-was">$534</span>
+                            <span class="lz-tier__price">$69</span>
+                            <span class="lz-tier__price-was">$117</span>
                         </div>
-                        <div class="lz-tier__per"><strong>$39</strong> / bottle</div>
-                        <span class="lz-tier__save">Save $300</span>
+                        <div class="lz-tier__per"><strong>$23</strong> / bottle</div>
+                        <span class="lz-tier__save">Save $48</span>
                         <ul class="lz-tier__bonuses">
                             <li>60-day empty-bottle guarantee</li>
                             <li>Free US shipping</li>
@@ -1953,7 +1991,7 @@ a { color: inherit; }
                             <li>Priority delivery</li>
                         </ul>
                         <div class="lz-tier__cta">
-                            <button type="button" class="lz-cta lz-cta--block" data-tier="6">Add to Cart</button>
+                            <button type="button" class="lz-cta lz-cta--block" data-tier="3">Add to Cart</button>
                             <div class="lz-tier__shipping">Ships within 24 hrs · USPS Priority</div>
                         </div>
                     </div>
@@ -2008,7 +2046,7 @@ a { color: inherit; }
 <!-- ============ Sticky mobile CTA ============ -->
 <div class="lz-sticky-cta">
     <div class="lz-sticky-cta__price">
-        $49<small>/bottle · 3-pack</small>
+        $23<small>/bottle · 3-pack</small>
     </div>
     <a href="#offer" class="lz-cta">Add to Cart</a>
 </div>
